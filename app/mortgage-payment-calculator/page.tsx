@@ -45,7 +45,7 @@ export default function MortgagePaymentCalculator() {
     return 25;
   });
   
-  const [paymentFrequency, setPaymentFrequency] = useState(() => {
+  const [paymentFrequency, setPaymentFrequency] = useState<string>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('mortgageCalc_paymentFrequency');
       return saved ? JSON.parse(saved) : 'monthly';
@@ -78,9 +78,9 @@ export default function MortgagePaymentCalculator() {
   });
   
   const [showAmortization, setShowAmortization] = useState(false);
-  const [amortizationData, setAmortizationData] = useState([]);
+  const [amortizationData, setAmortizationData] = useState<any[]>([]);
   const [showComparison, setShowComparison] = useState(false);
-  const [comparisonScenarios, setComparisonScenarios] = useState([]);
+  const [comparisonScenarios, setComparisonScenarios] = useState<any[]>([]);
   
   const [monthlyPayment, setMonthlyPayment] = useState(0);
   const [principalAndInterest, setPrincipalAndInterest] = useState(0);
@@ -141,7 +141,7 @@ export default function MortgagePaymentCalculator() {
     const cmhcFee = calculateCMHCPremium(loanAmount, purchasePrice);
     const totalLoanAmount = loanAmount + cmhcFee;
     
-    const frequency = paymentFrequencies[paymentFrequency];
+    const frequency = paymentFrequencies[paymentFrequency as keyof typeof paymentFrequencies];
     const periodicRate = interestRate / 100 / frequency.compoundingPeriods;
     const numberOfPayments = loanTerm * frequency.multiplier;
     
@@ -177,7 +177,7 @@ export default function MortgagePaymentCalculator() {
     setShowResults(true);
   };
 
-  const calculateAmortizationSchedule = (principal, rate, numPayments, payment) => {
+  const calculateAmortizationSchedule = (principal: number, rate: number, numPayments: number, payment: number) => {
     const schedule = [];
     let remainingBalance = principal;
     let totalInterest = 0;
@@ -192,7 +192,7 @@ export default function MortgagePaymentCalculator() {
       totalInterest += interestPayment;
       
       // Store every 12th payment for yearly summary, or all for detailed view
-      if (paymentNumber % Math.ceil(paymentFrequencies[paymentFrequency].multiplier / 12) === 0 || schedule.length < 60) {
+      if (paymentNumber % Math.ceil(paymentFrequencies[paymentFrequency as keyof typeof paymentFrequencies].multiplier / 12) === 0 || schedule.length < 60) {
         schedule.push({
           payment: paymentNumber,
           principalPayment: principalPayment,
@@ -282,12 +282,17 @@ export default function MortgagePaymentCalculator() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
             <Link href="/" className="flex items-center group">
-              <h1 className={`text-2xl font-bold transition-colors duration-300 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                Mortgage with Ford
-              </h1>
-              <span className={`ml-3 text-sm transition-colors duration-300 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                Andreina Ford - Licensed Mortgage Agent Level 2
-              </span>
+              <div className="w-10 h-10 bg-gradient-to-r from-slate-600 to-slate-800 rounded-lg flex items-center justify-center mr-3">
+                <span className="text-white font-bold text-xl">B</span>
+              </div>
+              <div>
+                <h1 className={`text-2xl font-bold transition-colors duration-300 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                  Boring Mortgages Ontario
+                </h1>
+                <span className={`text-sm transition-colors duration-300 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                  Making complex mortgages boringly simple
+                </span>
+              </div>
             </Link>
             <div className="flex items-center space-x-4">
               {/* Settings/Reset Button */}
@@ -481,7 +486,7 @@ export default function MortgagePaymentCalculator() {
               {/* Payment Frequency */}
               <div>
                 <label className={`block text-lg font-semibold mb-4 transition-colors duration-300 ${darkMode ? 'text-gray-200' : 'text-gray-700'}`}>
-                  Payment Frequency: <span className="text-blue-600 font-bold">{paymentFrequencies[paymentFrequency].label}</span>
+                  Payment Frequency: <span className="text-blue-600 font-bold">{paymentFrequencies[paymentFrequency as keyof typeof paymentFrequencies].label}</span>
                 </label>
                 <div className="grid grid-cols-2 gap-3">
                   {Object.entries(paymentFrequencies).map(([key, freq]) => (
@@ -540,7 +545,7 @@ export default function MortgagePaymentCalculator() {
               {/* Extra Payment */}
               <div>
                 <label className={`block text-lg font-semibold mb-4 transition-colors duration-300 ${darkMode ? 'text-gray-200' : 'text-gray-700'}`}>
-                  Extra Payment ({paymentFrequencies[paymentFrequency].label}): <span className="text-blue-600 font-bold">${formatCurrency(extraPayment)}</span>
+                  Extra Payment ({paymentFrequencies[paymentFrequency as keyof typeof paymentFrequencies].label}): <span className="text-blue-600 font-bold">${formatCurrency(extraPayment)}</span>
                 </label>
                 <input
                   type="range"
@@ -602,7 +607,7 @@ export default function MortgagePaymentCalculator() {
             <div className={`rounded-2xl shadow-2xl p-8 text-center transition-all duration-500 ${
               showResults ? 'scale-100 opacity-100' : 'scale-95 opacity-80'
             } ${darkMode ? 'bg-gradient-to-br from-blue-900 to-indigo-900' : 'bg-gradient-to-br from-blue-600 to-indigo-600'}`}>
-              <h3 className="text-2xl font-bold text-white mb-4">Your {paymentFrequencies[paymentFrequency].label} Payment</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">Your {paymentFrequencies[paymentFrequency as keyof typeof paymentFrequencies].label} Payment</h3>
               <div className="text-6xl font-bold text-white mb-2">
                 ${formatCurrency(monthlyPayment)}
               </div>
@@ -640,7 +645,7 @@ export default function MortgagePaymentCalculator() {
                 </div>
                 <hr className={`transition-colors duration-300 ${darkMode ? 'border-gray-700' : 'border-gray-200'}`} />
                 <div className="flex justify-between items-center text-lg">
-                  <span className={`font-bold transition-colors duration-300 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Total {paymentFrequencies[paymentFrequency].label}</span>
+                  <span className={`font-bold transition-colors duration-300 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Total {paymentFrequencies[paymentFrequency as keyof typeof paymentFrequencies].label}</span>
                   <span className="font-bold text-blue-600">${formatCurrency(monthlyPayment)}</span>
                 </div>
               </div>
@@ -710,7 +715,7 @@ export default function MortgagePaymentCalculator() {
                   <div className="border-t pt-4">
                     <div className="text-green-600 font-semibold mb-2">Extra Payment Benefits:</div>
                     <div className="text-sm space-y-1">
-                      <div>Time Saved: ~{Math.max(0, (loanTerm * paymentFrequencies[paymentFrequency].multiplier) - amortizationData.length)} payments</div>
+                      <div>Time Saved: ~{Math.max(0, (loanTerm * paymentFrequencies[paymentFrequency as keyof typeof paymentFrequencies].multiplier) - amortizationData.length)} payments</div>
                       <div>Interest Saved: Significant savings with extra payments!</div>
                     </div>
                   </div>
@@ -812,7 +817,7 @@ export default function MortgagePaymentCalculator() {
                   </div>
                   {amortizationData.length > 12 && (
                     <p className="text-center text-sm text-gray-500 mt-3">
-                      ... and {amortizationData.length - 12} more payments • Total loan term: {Math.ceil(amortizationData.length / paymentFrequencies[paymentFrequency].multiplier)} years
+                      ... and {amortizationData.length - 12} more payments • Total loan term: {Math.ceil(amortizationData.length / paymentFrequencies[paymentFrequency as keyof typeof paymentFrequencies].multiplier)} years
                     </p>
                   )}
                 </div>
@@ -823,24 +828,24 @@ export default function MortgagePaymentCalculator() {
             {paymentFrequency !== 'monthly' && (
               <div className={`rounded-2xl shadow-xl p-6 transition-colors duration-300 ${darkMode ? 'bg-gray-800' : 'bg-white'} border-l-4 border-green-500`}>
                 <h4 className={`text-xl font-bold mb-4 text-green-600`}>
-                  💰 {paymentFrequencies[paymentFrequency].label} Payment Benefits
+                  💰 {paymentFrequencies[paymentFrequency as keyof typeof paymentFrequencies].label} Payment Benefits
                 </h4>
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
                     <span className={`transition-colors duration-300 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>Payments per year:</span>
                     <span className={`font-bold transition-colors duration-300 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                      {paymentFrequencies[paymentFrequency].multiplier} vs 12 (monthly)
+                      {paymentFrequencies[paymentFrequency as keyof typeof paymentFrequencies].multiplier} vs 12 (monthly)
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className={`transition-colors duration-300 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>Extra payments per year:</span>
                     <span className={`font-bold text-green-600`}>
-                      {paymentFrequencies[paymentFrequency].multiplier - 12}
+                      {paymentFrequencies[paymentFrequency as keyof typeof paymentFrequencies].multiplier - 12}
                     </span>
                   </div>
                   <div className="border-t pt-2 mt-2">
                     <p className={`transition-colors duration-300 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                      <strong>Why this saves money:</strong> By making {paymentFrequencies[paymentFrequency].label.toLowerCase()} payments, 
+                      <strong>Why this saves money:</strong> By making {paymentFrequencies[paymentFrequency as keyof typeof paymentFrequencies].label.toLowerCase()} payments, 
                       you're essentially making extra principal payments throughout the year, reducing the total interest paid.
                     </p>
                   </div>
@@ -1095,7 +1100,7 @@ export default function MortgagePaymentCalculator() {
                             <td className="p-3">${formatCurrency(scenario.downPayment)} ({formatPercent((scenario.downPayment/scenario.purchasePrice)*100)}%)</td>
                             <td className="p-3">{scenario.interestRate.toFixed(2)}%</td>
                             <td className="p-3">{scenario.loanTerm}y</td>
-                            <td className="p-3">{paymentFrequencies[scenario.paymentFrequency].label}</td>
+                            <td className="p-3">{paymentFrequencies[scenario.paymentFrequency as keyof typeof paymentFrequencies].label}</td>
                             <td className="p-3">${formatCurrency(scenario.extraPayment)}</td>
                             <td className="p-3 font-bold text-blue-600">${formatCurrency(scenario.monthlyPayment)}</td>
                             <td className="p-3 font-bold text-red-600">${formatCurrency(scenario.totalInterest)}</td>

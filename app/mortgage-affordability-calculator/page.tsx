@@ -75,7 +75,7 @@ export default function MortgageAffordabilityCalculator() {
     setShowResults(true);
   };
 
-  const formatCurrency = (amount) => {
+  const formatCurrency = (amount: number) => {
     return amount.toLocaleString('en-CA', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
   };
 
@@ -85,13 +85,16 @@ export default function MortgageAffordabilityCalculator() {
       <header className="bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
-            <Link href="/" className="flex items-center group">
-              <h1 className="text-2xl font-bold text-gray-900">
-                Mortgage with Ford
-              </h1>
-              <span className="ml-3 text-sm text-gray-600">
-                Andreina Ford - Licensed Mortgage Agent Level 2
-              </span>
+            <Link href="/" className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-r from-slate-600 to-slate-800 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-xl">B</span>
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">
+                  Boring Mortgages Ontario
+                </h1>
+                <p className="text-sm text-gray-600">Making complex mortgages boringly simple</p>
+              </div>
             </Link>
             <div className="flex items-center space-x-4">
               <Link

@@ -1,81 +1,270 @@
-import Link from "next/link";
-import { Metadata } from "next";
+'use client';
 
-export const metadata: Metadata = {
-  title: "Best Mortgage Rates in Ottawa, Ontario 2025 | Boring Mortgages Ontario",
-  description: "Compare Ottawa's best mortgage rates with government employee programs. Current rates from 3.94%. Free calculators, federal worker benefits, and expert guidance for capital region homebuyers.",
-  keywords: "Ottawa mortgage rates, best mortgage rates Ottawa, Ottawa mortgage broker, government employee mortgage, Ottawa home loan rates, federal worker mortgage",
-  openGraph: {
-    title: "Best Mortgage Rates in Ottawa, Ontario 2025",
-    description: "Compare Ottawa's best mortgage rates with government employee programs. Current rates from 3.94%.",
-    type: "article",
+import { useState, useEffect } from 'react';
+import Link from "next/link";
+import BackgroundTexture from '../../components/backgrounds/BackgroundTexture';
+
+// CMHC Official Rules 2024
+const CMHC_RULES = {
+  premiumRates: {
+    95: 0.0400, // LTV > 90%
+    90: 0.0310, // LTV 85.01-90%
+    85: 0.0280, // LTV 80.01-85%
+    80: 0.0240, // LTV 75.01-80%
+    75: 0.0170, // LTV 65.01-75%
+    65: 0.0060  // LTV ≤ 65%
   },
+  minimumDownPayment: {
+    threshold1: 500000,
+    threshold2: 1000000,
+    rate1: 0.05, // 5% on first $500k
+    rate2: 0.10, // 10% on $500k-$1M
+    rate3: 0.20  // 20% on $1M+
+  }
 };
 
+function OttawaMortgageCalculator() {
+  const [homePrice, setHomePrice] = useState(687000);
+  const [downPayment, setDownPayment] = useState(34350);
+  const [interestRate, setInterestRate] = useState(5.79);
+  const [amortization, setAmortization] = useState(25);
+  const [results, setResults] = useState({
+    monthlyPayment: 0,
+    cmhcPremium: 0,
+    totalMortgage: 0,
+    ltvRatio: 0,
+    isEligible: true
+  });
+
+  // Calculate minimum down payment based on CMHC rules
+  const calculateMinDownPayment = (price: number): number => {
+    if (price <= CMHC_RULES.minimumDownPayment.threshold1) {
+      return price * CMHC_RULES.minimumDownPayment.rate1;
+    } else if (price <= CMHC_RULES.minimumDownPayment.threshold2) {
+      return (CMHC_RULES.minimumDownPayment.threshold1 * CMHC_RULES.minimumDownPayment.rate1) + 
+             ((price - CMHC_RULES.minimumDownPayment.threshold1) * CMHC_RULES.minimumDownPayment.rate2);
+    } else {
+      return price * CMHC_RULES.minimumDownPayment.rate3;
+    }
+  };
+
+  // Calculate CMHC premium
+  const calculateCMHCPremium = (mortgage: number, price: number): number => {
+    const ltv = (mortgage / price) * 100;
+    if (ltv <= 80) return 0; // No CMHC needed
+    
+    let rate = 0;
+    if (ltv > 95) return 0; // Not eligible
+    else if (ltv > 90) rate = CMHC_RULES.premiumRates[95];
+    else if (ltv > 85) rate = CMHC_RULES.premiumRates[90];
+    else if (ltv > 80) rate = CMHC_RULES.premiumRates[85];
+    
+    return mortgage * rate;
+  };
+
+  useEffect(() => {
+    const mortgage = homePrice - downPayment;
+    const ltvRatio = (mortgage / homePrice) * 100;
+    const cmhcPremium = calculateCMHCPremium(mortgage, homePrice);
+    const totalMortgage = mortgage + cmhcPremium;
+    
+    // Calculate monthly payment
+    const monthlyRate = interestRate / 100 / 12;
+    const numPayments = amortization * 12;
+    
+    let monthlyPayment = 0;
+    if (monthlyRate > 0) {
+      monthlyPayment = totalMortgage * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / (Math.pow(1 + monthlyRate, numPayments) - 1);
+    } else {
+      monthlyPayment = totalMortgage / numPayments;
+    }
+
+    const minDownPayment = calculateMinDownPayment(homePrice);
+    const isEligible = downPayment >= minDownPayment && homePrice <= 1000000 && ltvRatio <= 95;
+
+    setResults({
+      monthlyPayment,
+      cmhcPremium,
+      totalMortgage,
+      ltvRatio,
+      isEligible
+    });
+  }, [homePrice, downPayment, interestRate, amortization]);
+
+  const formatCurrency = (amount: number): string => {
+    return new Intl.NumberFormat('en-CA', {
+      style: 'currency',
+      currency: 'CAD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
+
+  const minDownPayment = calculateMinDownPayment(homePrice);
+
+  return (
+    <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
+      <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+        Ottawa Mortgage Calculator
+        <span className="block text-lg font-normal text-gray-600 mt-2">Official CMHC 2024 Rules</span>
+      </h2>
+      
+      <div className="space-y-8">
+        {/* Home Price */}
+        <div>
+          <label className="block text-lg font-semibold text-gray-700 mb-4">
+            Ottawa Home Price: <span className="text-red-600 font-bold">{formatCurrency(homePrice)}</span>
+          </label>
+          <input
+            type="range"
+            min="400000"
+            max="1200000"
+            step="10000"
+            value={homePrice}
+            onChange={(e) => setHomePrice(Number(e.target.value))}
+            className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+          />
+          <div className="flex justify-between text-sm text-gray-500 mt-2">
+            <span>$400K</span>
+            <span>$1.2M</span>
+          </div>
+        </div>
+
+        {/* Down Payment */}
+        <div>
+          <label className="block text-lg font-semibold text-gray-700 mb-4">
+            Down Payment: <span className="text-red-600 font-bold">{formatCurrency(downPayment)} ({((downPayment/homePrice)*100).toFixed(1)}%)</span>
+          </label>
+          <input
+            type="range"
+            min={minDownPayment}
+            max={homePrice * 0.35}
+            step="1000"
+            value={downPayment}
+            onChange={(e) => setDownPayment(Number(e.target.value))}
+            className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+          />
+          <div className="flex justify-between text-sm text-gray-500 mt-2">
+            <span>Min: {formatCurrency(minDownPayment)}</span>
+            <span>35%: {formatCurrency(homePrice * 0.35)}</span>
+          </div>
+          {downPayment < minDownPayment && (
+            <p className="text-red-500 text-sm mt-2">
+              ⚠️ Minimum down payment required: {formatCurrency(minDownPayment)}
+            </p>
+          )}
+        </div>
+
+        {/* Interest Rate */}
+        <div>
+          <label className="block text-lg font-semibold text-gray-700 mb-4">
+            Interest Rate: <span className="text-red-600 font-bold">{interestRate}%</span>
+          </label>
+          <input
+            type="range"
+            min="3"
+            max="8"
+            step="0.01"
+            value={interestRate}
+            onChange={(e) => setInterestRate(Number(e.target.value))}
+            className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+          />
+          <div className="flex justify-between text-sm text-gray-500 mt-2">
+            <span>3%</span>
+            <span>8%</span>
+          </div>
+        </div>
+
+        {/* Amortization */}
+        <div>
+          <label className="block text-lg font-semibold text-gray-700 mb-4">
+            Amortization: <span className="text-red-600 font-bold">{amortization} years</span>
+          </label>
+          <div className="grid grid-cols-4 gap-3">
+            {[15, 20, 25, 30].map((years) => (
+              <button
+                key={years}
+                onClick={() => setAmortization(years)}
+                disabled={results.cmhcPremium > 0 && years > 25}
+                className={`py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${
+                  amortization === years
+                    ? 'bg-red-600 text-white shadow-lg transform scale-105'
+                    : results.cmhcPremium > 0 && years > 25
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                {years}y
+              </button>
+            ))}
+          </div>
+          {results.cmhcPremium > 0 && (
+            <p className="text-sm text-orange-600 mt-2">
+              ⚠️ CMHC insurance limits amortization to 25 years
+            </p>
+          )}
+        </div>
+      </div>
+
+      {/* Results */}
+      <div className="mt-8 p-6 bg-gradient-to-br from-red-50 to-orange-50 rounded-xl border border-red-200">
+        <h3 className="text-xl font-bold text-gray-900 mb-4">Your Ottawa Mortgage</h3>
+        <div className="grid grid-cols-2 gap-4 text-sm">
+          <div className="flex justify-between">
+            <span className="text-gray-600">Monthly Payment:</span>
+            <span className="font-bold text-red-600">{formatCurrency(results.monthlyPayment)}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-600">LTV Ratio:</span>
+            <span className="font-bold">{results.ltvRatio.toFixed(1)}%</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-600">Mortgage Amount:</span>
+            <span className="font-bold">{formatCurrency(homePrice - downPayment)}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-600">CMHC Premium:</span>
+            <span className="font-bold">{formatCurrency(results.cmhcPremium)}</span>
+          </div>
+        </div>
+        
+        {results.cmhcPremium > 0 && (
+          <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+            <h4 className="font-semibold text-blue-900 mb-2">CMHC Insurance Required</h4>
+            <p className="text-blue-800 text-sm">
+              Down payment less than 20% requires CMHC mortgage default insurance.
+              <br />Premium: {((Object.entries(CMHC_RULES.premiumRates).find(([ltv]) => results.ltvRatio <= parseFloat(ltv))?.[1] ?? 0) * 100).toFixed(2)}% of loan amount
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function OttawaMortgageRates() {
-  const lenderComparison = [
-    { lender: "Big 6 Banks", rate: "4.89%", pros: "Branch access", cons: "Higher rates" },
-    { lender: "Credit Unions", rate: "4.24%", pros: "Member benefits", cons: "Limited locations" },
-    { lender: "Monoline Lenders", rate: "3.94%", pros: "Best rates", cons: "Online only", recommended: true },
-    { lender: "Alternative Lenders", rate: "5.49%", pros: "Flexible approval", cons: "Higher cost" },
-  ];
+  const ottawaData = {
+    averageHomePrice: 687000,
+    averageDownPayment: 34350,
+    landTransferTax: "Provincial only - no municipal LTT",
+    marketTrend: "Stable government town with steady demand"
+  };
 
-  const ottawaInsights = [
-    {
-      title: "Average Home Price",
-      value: "$687,000",
-      description: "OREA Dec 2024",
-      icon: "🏠"
-    },
-    {
-      title: "Down Payment Required",
-      value: "$34,350",
-      description: "5% on first $500K, 10% remainder",
-      icon: "💰"
-    },
-    {
-      title: "Government Programs",
-      value: "Federal Employee Benefits",
-      description: "Special rates for gov workers",
-      icon: "🏛️"
-    },
-    {
-      title: "Land Transfer Tax",
-      value: "Provincial Only",
-      description: "No municipal LTT in Ottawa",
-      icon: "📋"
-    }
-  ];
-
-  const ottawaPrograms = [
-    {
-      program: "Federal Employee Mortgage Program",
-      description: "Preferred rates and flexible terms for government workers",
-      eligibility: "Federal government employees"
-    },
-    {
-      program: "First-Time Home Buyer Incentive",
-      description: "Shared equity loan up to 10% of home price",
-      eligibility: "Household income under $120,000"
-    },
-    {
-      program: "Ontario Down Payment Assistance",
-      description: "Interest-free loan up to $40,000",
-      eligibility: "First-time buyers in select areas"
-    },
-    {
-      program: "CMHC Insurance",
-      description: "Low down payment options (5% minimum)",
-      eligibility: "Purchase price under $1M"
-    }
+  const currentRates = [
+    { term: "1 Year Fixed", rate: "6.44%", type: "Best Rate" },
+    { term: "2 Year Fixed", rate: "5.94%", type: "Best Rate" },
+    { term: "3 Year Fixed", rate: "5.64%", type: "Best Rate" },
+    { term: "5 Year Fixed", rate: "5.79%", type: "Best Rate" },
+    { term: "5 Year Variable", rate: "6.20%", type: "Prime - 0.30%" },
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <BackgroundTexture className="min-h-screen bg-gradient-to-br from-red-50 via-white to-orange-50">
+      
       {/* Header */}
-      <header className="bg-white shadow-sm border-b sticky top-0 z-50">
+      <header className="bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
+          <div className="flex justify-between items-center py-6">
             <Link href="/" className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-gradient-to-r from-slate-600 to-slate-800 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-xl">B</span>
@@ -87,326 +276,320 @@ export default function OttawaMortgageRates() {
                 <p className="text-sm text-gray-600">Making complex mortgages boringly simple</p>
               </div>
             </Link>
-            <div className="hidden md:flex items-center space-x-6">
-              <Link href="/" className="text-gray-600 hover:text-gray-900 font-medium">Home</Link>
+            <div className="flex items-center space-x-4">
               <Link
-                href="https://callme.mortgagewithford.ca"
-                className="bg-gradient-to-r from-slate-600 to-slate-800 text-white px-6 py-2 rounded-lg hover:from-slate-700 hover:to-slate-900 transition-all font-medium"
+                href="mailto:hello@mortgagewithford.ca"
+                className="bg-gradient-to-r from-red-600 to-orange-600 text-white px-6 py-3 rounded-lg hover:from-red-700 hover:to-orange-700 transition-all duration-300 transform hover:scale-105 font-medium"
               >
-                Book Consultation →
+                Get Pre-Approved
               </Link>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="py-16 lg:py-24 bg-gradient-to-br from-slate-50 to-gray-100 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/30 to-transparent"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-sm font-medium text-blue-700 mb-6">
-                🏛️ Ottawa, Ontario • Updated January 2025
-              </div>
-              <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                Best Mortgage Rates in
-                <span className="block text-blue-600">Ottawa</span>
-              </h1>
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Compare current Ottawa mortgage rates with special government employee programs. 
-                <strong>Federal worker benefits and capital region expertise.</strong>
-              </p>
-              
-              {/* Key Stats */}
-              <div className="grid grid-cols-2 gap-6 mb-8">
-                <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-lg border">
-                  <div className="text-2xl font-bold text-blue-600">3.94%</div>
-                  <div className="text-sm text-gray-600">Best 5-Year Fixed</div>
-                </div>
-                <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-lg border">
-                  <div className="text-2xl font-bold text-green-600">$687K</div>
-                  <div className="text-sm text-gray-600">Average Home Price</div>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/mortgage-payment-calculator"
-                  className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors text-center shadow-lg"
-                >
-                  Calculate Ottawa Payments
-                </Link>
-                <Link
-                  href="https://callme.mortgagewithford.ca"
-                  className="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-50 transition-colors text-center"
-                >
-                  Talk to Ottawa Expert
-                </Link>
-              </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Hero Section */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center px-4 py-2 bg-red-100 rounded-full text-sm font-medium text-red-700 mb-6">
+            🏛️ Ottawa, Ontario • Updated January 2025
+          </div>
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+            Best Mortgage Rates in Ottawa
+            <span className="block text-3xl md:text-4xl bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent mt-2">
+              Canada's Capital City
+            </span>
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+            Compare current Ottawa mortgage rates with <strong>special government employee programs</strong>. 
+            Federal worker benefits and capital region mortgage expertise.
+          </p>
+          
+          {/* Trust Indicators */}
+          <div className="flex justify-center items-center space-x-8 mt-8 flex-wrap gap-4">
+            <div className="flex items-center space-x-2">
+              <span className="text-green-500 text-2xl">🔒</span>
+              <span className="text-sm font-medium text-gray-600">CMHC Approved</span>
             </div>
-            
-            {/* Rate Card */}
-            <div className="bg-white rounded-2xl shadow-xl p-8 border">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-                Current Rates by Lender Type
-              </h3>
+            <div className="flex items-center space-x-2">
+              <span className="text-blue-500 text-2xl">⚡</span>
+              <span className="text-sm font-medium text-gray-600">Instant Results</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="text-red-500 text-2xl">🏛️</span>
+              <span className="text-sm font-medium text-gray-600">Federal Employee Expert</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="text-orange-500 text-2xl">🇨🇦</span>
+              <span className="text-sm font-medium text-gray-600">2025 Rates</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Calculator */}
+          <OttawaMortgageCalculator />
+
+          {/* Market Information */}
+          <div className="space-y-8">
+            {/* Current Rates */}
+            <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                Current Ottawa Mortgage Rates
+              </h2>
               <div className="space-y-4">
-                {lenderComparison.map((lender, index) => (
-                  <div key={index} className={`p-4 rounded-lg border ${lender.recommended ? 'bg-blue-50 border-2 border-blue-200' : 'bg-gray-50 border-gray-200'}`}>
-                    <div className="flex justify-between items-center mb-2">
-                      <div className="font-semibold text-gray-900 flex items-center gap-2">
-                        {lender.lender}
-                        {lender.recommended && (
-                          <span className="bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-medium">
-                            BEST VALUE
-                          </span>
-                        )}
-                      </div>
-                      <div className="text-2xl font-bold text-blue-600">
-                        {lender.rate}
-                      </div>
+                {currentRates.map((rate, index) => (
+                  <div key={index} className="flex justify-between items-center p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <div>
+                      <div className="font-semibold text-gray-900">{rate.term}</div>
+                      <div className="text-sm text-gray-600">{rate.type}</div>
                     </div>
-                    <div className="text-sm text-gray-600 grid grid-cols-2 gap-4">
-                      <div><span className="text-green-600">✓</span> {lender.pros}</div>
-                      <div><span className="text-red-600">✗</span> {lender.cons}</div>
+                    <div className="text-2xl font-bold text-red-600">
+                      {rate.rate}
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="mt-6 p-4 bg-slate-50 rounded-lg">
-                <p className="text-sm text-gray-600 mb-2">
-                  <strong>Rates shown:</strong> 5-year fixed, insured mortgages, 25-year amortization. 
-                  Government employees may qualify for additional discounts.
+              <div className="mt-6 p-4 bg-red-50 rounded-lg border border-red-200">
+                <p className="text-sm text-red-800 mb-2">
+                  <strong>Special Rate Alert:</strong> Federal government employees may qualify for additional discounts up to 0.25% off posted rates.
                 </p>
                 <Link 
-                  href="https://callme.mortgagewithford.ca" 
-                  className="text-blue-600 hover:text-blue-800 font-medium text-sm"
+                  href="mailto:hello@mortgagewithford.ca?subject=Government Employee Rates" 
+                  className="text-red-600 hover:text-red-800 font-medium text-sm"
                 >
-                  Get your personalized Ottawa rate quote →
+                  Get your government employee rate quote →
                 </Link>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Ottawa Market Insights */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Ottawa Market Insights
-            </h2>
-            <p className="text-lg text-gray-600">
-              The boring details that actually affect your Ottawa mortgage
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {ottawaInsights.map((insight, index) => (
-              <div key={index} className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl border shadow-sm hover:shadow-md transition-shadow">
-                <div className="text-3xl mb-3">{insight.icon}</div>
-                <h3 className="font-semibold text-gray-900 mb-2">{insight.title}</h3>
-                <div className="text-2xl font-bold text-blue-600 mb-1">{insight.value}</div>
-                <p className="text-sm text-gray-600">{insight.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Ottawa Programs */}
-      <section className="py-16 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Ottawa Home Buying Programs
-            </h2>
-            <p className="text-lg text-gray-600">
-              Boring government programs that could save you thousands
-            </p>
-          </div>
-          
-          <div className="grid lg:grid-cols-2 gap-8">
-            {ottawaPrograms.map((program, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-sm border hover:shadow-md transition-shadow">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{program.program}</h3>
-                <p className="text-gray-600 mb-4">{program.description}</p>
-                <div className="bg-blue-50 p-3 rounded-lg">
-                  <p className="text-sm text-blue-800">
-                    <strong>Eligibility:</strong> {program.eligibility}
-                  </p>
+            {/* Ottawa Market Stats */}
+            <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                Ottawa Real Estate Market
+              </h3>
+              <div className="grid grid-cols-2 gap-6">
+                <div className="text-center p-4 bg-gradient-to-br from-red-50 to-orange-50 rounded-lg border border-red-200">
+                  <div className="text-3xl font-bold text-red-600">{new Intl.NumberFormat('en-CA', {style: 'currency', currency: 'CAD', minimumFractionDigits: 0}).format(ottawaData.averageHomePrice)}</div>
+                  <div className="text-sm text-gray-600 mt-1">Average Home Price</div>
+                  <div className="text-xs text-gray-500 mt-1">OREA Dec 2024</div>
                 </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="text-center mt-12">
-            <p className="text-gray-600 mb-4">
-              Need help navigating Ottawa's programs? Our experts know the boring details.
-            </p>
-            <Link 
-              href="https://callme.mortgagewithford.ca" 
-              className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-block"
-            >
-              Get Ottawa Program Help
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Ready for Expert Ottawa Mortgage Help?
-          </h2>
-          <p className="text-xl text-blue-100 mb-8">
-            Our tools give you the boring details. When you're ready for personalized Ottawa guidance, 
-            connect with <strong>Andreina Ford</strong> - Licensed Mortgage Agent Level 2, BRX Mortgage #13463, specializing in government employee programs.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="https://callme.mortgagewithford.ca"
-              className="bg-white text-blue-800 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors"
-            >
-              Book Ottawa Consultation
-            </Link>
-            <Link
-              href="mailto:hello@mortgagewithford.ca"
-              className="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-blue-800 transition-colors"
-            >
-              Email About Ottawa Rates
-            </Link>
-          </div>
-          <div className="mt-6 flex items-center justify-center space-x-6 text-blue-200 text-sm">
-            <div className="flex items-center space-x-2">
-              <span className="text-blue-300">✓</span>
-              <span>Licensed in Ontario</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <span className="text-blue-300">✓</span>
-              <span>Government Employee Expert</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <span className="text-blue-300">✓</span>
-              <span>BRX Mortgage #13463</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-r from-slate-400 to-slate-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold">B</span>
-                </div>
-                <h3 className="text-lg font-semibold">Boring Mortgages Ontario</h3>
-              </div>
-              <p className="text-gray-400 text-sm mb-4">
-                Making complex mortgages boringly simple for Ontario residents.
-              </p>
-              <p className="text-gray-400 text-xs">
-                <strong>Andreina Ford</strong><br/>
-                Licensed Mortgage Agent Level 2<br/>
-                BRX Mortgage #13463
-              </p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Free Calculators</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="/mortgage-payment-calculator" className="hover:text-white">Payment Calculator</Link></li>
-                <li><Link href="/mortgage-affordability-calculator" className="hover:text-white">Affordability Calculator</Link></li>
-                <li><Link href="/heloc-payment-calculator" className="hover:text-white">HELOC Calculator</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Ontario Cities</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="/best-mortgage-rates-toronto" className="hover:text-white">Toronto</Link></li>
-                <li><Link href="/best-mortgage-rates-ottawa" className="hover:text-white text-blue-300">Ottawa</Link></li>
-                <li><Link href="/best-mortgage-rates-mississauga" className="hover:text-white">Mississauga</Link></li>
-                <li><Link href="/best-mortgage-rates-hamilton" className="hover:text-white">Hamilton</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Get Help</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="https://callme.mortgagewithford.ca" className="hover:text-white">Book Consultation</Link></li>
-                <li><Link href="mailto:hello@mortgagewithford.ca" className="hover:text-white">Email Us</Link></li>
-                <li><Link href="/" className="hover:text-white">Home</Link></li>
-              </ul>
-            </div>
-          </div>
-          
-          {/* Regulatory Logos */}
-          <div className="border-t border-gray-800 mt-8 pt-8">
-            <div className="flex flex-col items-center space-y-6">
-              <div className="flex items-center justify-center space-x-8 flex-wrap">
-                {/* BRX Mortgage Logo */}
-                <div className="flex items-center space-x-2">
-                  <div className="bg-green-500 text-white px-4 py-2 rounded text-xl font-bold">
-                    BRX
-                  </div>
-                  <div className="text-gray-400 text-xs">
-                    MORTGAGE<br/>
-                    #13463
-                  </div>
-                </div>
-                
-                {/* Proudly Canadian */}
-                <div className="flex items-center space-x-2">
-                  <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
-                    <span className="text-white text-2xl">🍁</span>
-                  </div>
-                  <div className="text-gray-400 text-xs">
-                    PROUDLY<br/>
-                    CANADIAN
-                  </div>
-                </div>
-                
-                {/* CMHC */}
-                <div className="flex items-center space-x-2">
-                  <div className="bg-blue-600 text-white px-3 py-2 rounded font-bold text-sm">
-                    CMHC
-                  </div>
-                  <div className="text-gray-400 text-xs">
-                    CANADA MORTGAGE<br/>
-                    & HOUSING CORP
-                  </div>
-                </div>
-                
-                {/* FSRA */}
-                <div className="flex items-center space-x-2">
-                  <div className="bg-teal-600 text-white px-3 py-2 rounded font-bold text-sm">
-                    FSRA
-                  </div>
-                  <div className="text-gray-400 text-xs">
-                    FINANCIAL SERVICES<br/>
-                    REGULATORY AUTHORITY
-                  </div>
+                <div className="text-center p-4 bg-gradient-to-br from-red-50 to-orange-50 rounded-lg border border-red-200">
+                  <div className="text-3xl font-bold text-red-600">{new Intl.NumberFormat('en-CA', {style: 'currency', currency: 'CAD', minimumFractionDigits: 0}).format(ottawaData.averageDownPayment)}</div>
+                  <div className="text-sm text-gray-600 mt-1">Min. Down Payment</div>
+                  <div className="text-xs text-gray-500 mt-1">5% CMHC Rule</div>
                 </div>
               </div>
               
-              <div className="flex flex-col md:flex-row justify-between items-center w-full">
-                <p className="text-gray-400 text-sm">
-                  © 2025 Boring Mortgages Ontario. Making Ottawa mortgages boringly simple.
-                </p>
-                <div className="flex space-x-6 mt-4 md:mt-0">
-                  <Link href="/privacy" className="text-gray-400 hover:text-white text-sm">Privacy</Link>
-                  <Link href="/terms" className="text-gray-400 hover:text-white text-sm">Terms</Link>
-                  <Link href="/disclaimer" className="text-gray-400 hover:text-white text-sm">Disclaimer</Link>
+              <div className="mt-6 space-y-4">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Land Transfer Tax:</span>
+                  <span className="font-semibold text-gray-900">{ottawaData.landTransferTax}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Market Trend:</span>
+                  <span className="font-semibold text-green-600">{ottawaData.marketTrend}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Government Jobs:</span>
+                  <span className="font-semibold text-blue-600">Federal employment hub</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Special Programs:</span>
+                  <span className="font-semibold text-purple-600">Federal employee rates</span>
                 </div>
               </div>
             </div>
+
+            {/* CTA */}
+            <div className="text-center">
+              <Link
+                href="mailto:hello@mortgagewithford.ca?subject=Ottawa Mortgage Pre-Approval"
+                className="inline-block bg-gradient-to-r from-red-500 to-orange-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-red-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+              >
+                Get Pre-Approved in Ottawa →
+              </Link>
+              <p className="mt-3 text-sm text-gray-500">
+                Federal employee specialist • Ottawa mortgage experts
+              </p>
+            </div>
           </div>
         </div>
-      </footer>
-    </div>
+
+        {/* Ottawa Features */}
+        <div className="mt-16 bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            Why Ottawa Mortgages Are Different
+          </h2>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-red-100 to-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-3xl">🏛️</span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Federal Employees</h3>
+              <p className="text-gray-600 text-sm">
+                Special mortgage rates and programs available for government workers in Canada's capital.
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-red-100 to-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-3xl">📋</span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No Municipal Tax</h3>
+              <p className="text-gray-600 text-sm">
+                Ottawa has no municipal land transfer tax, saving thousands compared to Toronto.
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-red-100 to-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-3xl">🏠</span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Stable Market</h3>
+              <p className="text-gray-600 text-sm">
+                Government town with steady employment and consistent real estate demand.
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-red-100 to-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-3xl">🇨🇦</span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">CMHC Expertise</h3>
+              <p className="text-gray-600 text-sm">
+                Deep knowledge of CMHC programs - the corporation is headquartered right here in Ottawa.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Educational Content */}
+        <div className="mt-16 bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8">
+            Ottawa Mortgage Guide
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                Federal Employee Benefits
+              </h3>
+              <ul className="space-y-3 text-gray-600">
+                <li className="flex items-start">
+                  <span className="text-red-600 mr-2">•</span>
+                  <strong>Preferred Rates:</strong> Up to 0.25% discount on posted rates
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-600 mr-2">•</span>
+                  <strong>Flexible Terms:</strong> Extended amortization options
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-600 mr-2">•</span>
+                  <strong>Job Security:</strong> Stable employment recognized by lenders
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-600 mr-2">•</span>
+                  <strong>Pension Income:</strong> Future pension can count toward qualification
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                Ottawa Market Advantages
+              </h3>
+              <ul className="space-y-3 text-gray-600">
+                <li className="flex items-start">
+                  <span className="text-green-600 mr-2">✓</span>
+                  No municipal land transfer tax (save $5,000-$15,000)
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-600 mr-2">✓</span>
+                  More affordable than Toronto and Vancouver
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-600 mr-2">✓</span>
+                  Stable government employment base
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-600 mr-2">✓</span>
+                  Growing tech sector complementing government jobs
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Related Tools */}
+        <div className="mt-16">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            Free Ottawa Mortgage Tools
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <Link
+              href="/mortgage-payment-calculator"
+              className="p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border border-gray-100"
+            >
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                Payment Calculator
+              </h3>
+              <p className="text-gray-600">
+                Calculate exact monthly payments for any Ottawa home price and down payment.
+              </p>
+            </Link>
+            
+            <Link
+              href="/mortgage-affordability-calculator"
+              className="p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border border-gray-100"
+            >
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                Affordability Calculator
+              </h3>
+              <p className="text-gray-600">
+                Determine how much house you can afford in Ottawa based on your government salary.
+              </p>
+            </Link>
+            
+            <Link
+              href="/heloc-payment-calculator"
+              className="p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border border-gray-100"
+            >
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                HELOC Calculator
+              </h3>
+              <p className="text-gray-600">
+                Calculate Home Equity Line of Credit payments for your Ottawa property.
+              </p>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <style jsx>{`
+        .slider::-webkit-slider-thumb {
+          appearance: none;
+          height: 20px;
+          width: 20px;
+          border-radius: 50%;
+          background: #DC2626;
+          cursor: pointer;
+          box-shadow: 0 4px 8px rgba(220, 38, 38, 0.3);
+          transition: all 0.3s ease;
+        }
+        .slider::-webkit-slider-thumb:hover {
+          background: #B91C1C;
+          transform: scale(1.1);
+          box-shadow: 0 6px 12px rgba(220, 38, 38, 0.5);
+        }
+        .slider::-webkit-slider-track {
+          height: 12px;
+          border-radius: 6px;
+          background: linear-gradient(to right, #DC2626 0%, #DC2626 var(--value, 0%), #E5E7EB var(--value, 0%), #E5E7EB 100%);
+        }
+      `}</style>
+    </BackgroundTexture>
   );
-} 
+}

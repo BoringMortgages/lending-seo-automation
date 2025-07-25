@@ -6,13 +6,15 @@ interface BackgroundTextureProps {
   intensity?: 'subtle' | 'normal' | 'strong';
   children: React.ReactNode;
   className?: string;
+  id?: string;
 }
 
 const BackgroundTexture: React.FC<BackgroundTextureProps> = ({
   variant = 'light-gray',
   intensity = 'normal',
   children,
-  className
+  className,
+  id
 }) => {
   const variants = {
     'light-gray': 'bg-boring-light-gray',
@@ -28,12 +30,15 @@ const BackgroundTexture: React.FC<BackgroundTextureProps> = ({
   };
 
   return (
-    <div className={cn(
-      'relative',
-      variants[variant],
-      intensities[intensity],
-      className
-    )}>
+    <div 
+      id={id}
+      className={cn(
+        'relative',
+        variants[variant],
+        intensities[intensity],
+        className
+      )}
+    >
       {children}
     </div>
   );

@@ -221,7 +221,7 @@ function TorontoMortgageCalculator() {
                       ✓ CMHC Insurance Available (Under $1.5M with &lt;20% down)
                     </p>
                     <p className="text-blue-700 text-base mt-2">
-                      Premium: {(Object.entries(CMHC_RULES.premiumRates).find(([ltv]) => ltvRatio <= parseFloat(ltv))?.[1] * 100 || 0).toFixed(2)}% of loan amount
+                      Premium: {((Object.entries(CMHC_RULES.premiumRates).find(([ltv]) => ltvRatio <= parseFloat(ltv))?.[1] ?? 0) * 100).toFixed(2)}% of loan amount
                     </p>
                   </div>
                 )}
@@ -344,7 +344,7 @@ function TorontoMortgageCalculator() {
                   <div className="flex justify-between">
                     <span className="text-base font-medium" style={{color: '#264653'}}>CMHC Premium Rate:</span>
                     <span className="font-bold text-orange-600 text-base">
-                      {(Object.entries(CMHC_RULES.premiumRates).find(([ltv]) => ltvRatio <= parseFloat(ltv))?.[1] * 100 || 0).toFixed(2)}%
+                      {((Object.entries(CMHC_RULES.premiumRates).find(([ltv]) => ltvRatio <= parseFloat(ltv))?.[1] ?? 0) * 100).toFixed(2)}%
                     </span>
                   </div>
                   <div className="flex justify-between">
@@ -387,7 +387,7 @@ function TorontoMortgageCalculator() {
                   <p className="text-sm mt-1 text-orange-800">
                     LTV over 80% requires mortgage default insurance per CMHC rules.
                     <br />Premium: {formatCurrency(cmhcPremium)}
-                    <br />Rate: {(Object.entries(CMHC_RULES.premiumRates).find(([ltv]) => ltvRatio <= parseFloat(ltv))?.[1] * 100 || 0).toFixed(2)}% of loan amount
+                    <br />Rate: {((Object.entries(CMHC_RULES.premiumRates).find(([ltv]) => ltvRatio <= parseFloat(ltv))?.[1] ?? 0) * 100).toFixed(2)}% of loan amount
                   </p>
                 </div>
               </div>
