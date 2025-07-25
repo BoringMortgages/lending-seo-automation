@@ -470,26 +470,85 @@ export default function TorontoMortgageRates() {
   const [lockRateSubmitted, setLockRateSubmitted] = React.useState(false);
   const [selectedRate, setSelectedRate] = React.useState('');
   
-  const currentRates = [
+  const [currentRates, setCurrentRates] = React.useState([
     { term: "1 Year Fixed", rate: "4.69%", type: "Fixed", bestFor: "Rate speculation", lender: "Monoline", payment: "$4,890" },
     { term: "3 Year Fixed", rate: "3.94%", type: "Fixed", bestFor: "Medium-term security", lender: "Monoline", payment: "$4,710" },
     { term: "5 Year Fixed", rate: "3.94%", type: "Fixed", bestFor: "Most popular", popular: true, lender: "Monoline", payment: "$4,710" },
     { term: "5 Year Variable", rate: "3.95%", type: "Variable", bestFor: "Rate optimists", lender: "Big Bank", payment: "$4,715" },
     { term: "2 Year Fixed", rate: "4.24%", type: "Fixed", bestFor: "Short commitment", lender: "Credit Union", payment: "$4,790" },
     { term: "10 Year Fixed", rate: "4.89%", type: "Fixed", bestFor: "Long-term security", lender: "Big Bank", payment: "$5,020" },
-  ];
-  
-  const filteredRates = selectedFilter === 'all' 
-    ? currentRates 
-    : currentRates.filter(rate => rate.type.toLowerCase() === selectedFilter);
-  
-  const lastUpdated = new Date().toLocaleString('en-CA', { 
+  ]);
+  const [ratesLoading, setRatesLoading] = React.useState(false);
+  const [lastUpdated, setLastUpdated] = React.useState(new Date().toLocaleString('en-CA', { 
     timeZone: 'America/Toronto',
     month: 'short', 
     day: 'numeric', 
     hour: '2-digit', 
     minute: '2-digit'
-  });
+  }));
+
+  // Fetch live rates on component mount
+  React.useEffect(() => {
+    const fetchLiveRates = async () => {
+      setRatesLoading(true);
+      try {
+        const response = await fetch('/api/mortgage-rates');
+        const data = await response.json();
+        
+        if (data.rates && data.rates.length > 0) {
+          // Transform API data to match our format
+          const transformedRates = data.rates.flatMap((provider: any) => 
+            provider.rates?.map((rate: any) => ({
+              term: rate.term,
+              rate: rate.rate,
+              type: rate.type,
+              bestFor: getBestFor(rate.term, rate.type),
+              lender: rate.lender,
+              payment: rate.payment,
+              popular: rate.term === "5-years-fixed" && rate.type === "Fixed"
+            })) || []
+          );
+          
+          setCurrentRates(transformedRates);
+          setLastUpdated(new Date().toLocaleString('en-CA', { 
+            timeZone: 'America/Toronto',
+            month: 'short', 
+            day: 'numeric', 
+            hour: '2-digit', 
+            minute: '2-digit'
+          }));
+        }
+      } catch (error) {
+        console.error('Error fetching live rates:', error);
+        // Keep existing rates if API fails
+      } finally {
+        setRatesLoading(false);
+      }
+    };
+
+    fetchLiveRates();
+    
+    // Refresh rates every 4 hours
+    const interval = setInterval(fetchLiveRates, 4 * 60 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Helper function to determine best for description
+  const getBestFor = (term: string, type: string) => {
+    if (term === "5-years-fixed") return "Most popular";
+    if (term === "3-years-fixed") return "Medium-term security";
+    if (term === "1-year-fixed") return "Rate speculation";
+    if (type === "Variable") return "Rate optimists";
+    if (term === "2-years-fixed") return "Short commitment";
+    if (term === "10-years-fixed") return "Long-term security";
+    return "Flexible option";
+  };
+  
+  const filteredRates = selectedFilter === 'all' 
+    ? currentRates 
+    : currentRates.filter(rate => rate.type.toLowerCase() === selectedFilter);
+  
+
 
   const lenderComparison = [
     { lender: "Big 6 Banks", rate: "4.89%", pros: "Branch access", cons: "Higher rates" },
@@ -701,6 +760,7 @@ export default function TorontoMortgageRates() {
                   </h3>
                   <p className="text-sm" style={{color: '#264653'}}>
                     Current mortgage rates for Toronto
+                    {ratesLoading && <span className="ml-2 text-orange-600">🔄 Updating...</span>}
                   </p>
                 </div>
                 <div className="flex gap-2 mt-4 sm:mt-0">
