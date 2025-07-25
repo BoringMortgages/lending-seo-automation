@@ -1,8 +1,5 @@
 {
   "buildCommand": "npm run build && node scripts/generate-sitemap.js",
   "framework": "nextjs",
-  "regions": ["iad1"],
-  "env": {
-    "FIRECRAWL_API_KEY": "@firecrawl-api-key"
-  }
+  "regions": ["iad1"]
 } 
