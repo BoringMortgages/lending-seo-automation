@@ -32,12 +32,7 @@ const CMHC_RULES = {
     standardAmortization: 25,         // Standard amortization period
     amortizationSurcharge: 0.0020,    // 0.20% surcharge for >25 year amortization
     blendedAmortizationSurcharge: 0.0060, // 0.60% surcharge for blended amortization
-    provincialTaxProvinces: ['ON', 'QC', 'SK', 'MB'], // Provinces with PST on CMHC premiums
-    ontarioTaxRate: 0.08,             // 8% PST in Ontario
-    quebecTaxRate: 0.09975,           // 9.975% PST in Quebec
-    saskatchewanTaxRate: 0.06,        // 6% PST in Saskatchewan
-    manitobaTaxRate: 0.07             // 7% PST in Manitoba
-  }
+ }
 };
 
 // Toronto Mortgage Calculator Component
@@ -602,7 +597,7 @@ export default function TorontoMortgageRates() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          to: 'hello@mortgagewithford.ca',
+          to: 'hello@boringmortgages.ca',
           subject: `New Rate Alert Set - Toronto`,
           message: `Rate Alert Request:\n\nTarget Rate: ${data.targetRate}%\nEmail: ${data.email}\nMortgage Type: ${data.mortgageType}\nLocation: Toronto\nTimestamp: ${data.timestamp}`
         })
@@ -632,7 +627,7 @@ export default function TorontoMortgageRates() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          to: 'hello@mortgagewithford.ca',
+          to: 'hello@boringmortgages.ca',
           subject: `New Rate Lock Request - Toronto`,
           message: `Rate Lock Request:\n\nName: ${data.name}\nEmail: ${data.email}\nRate: ${data.rate}\nLocation: Toronto\nTimestamp: ${data.timestamp}`
         })
@@ -675,13 +670,13 @@ export default function TorontoMortgageRates() {
           <div className="flex justify-between items-center py-4">
             <Link href="/" className="flex items-center space-x-3">
               <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{background: 'linear-gradient(to right, #264653, #2A9D8F)'}}>
-                <span className="text-white font-bold text-xl">M</span>
+                <span className="text-white font-bold text-xl">B</span>
               </div>
               <div>
-                <h1 className="text-2xl font-heading" style={{color: '#222831'}}>
+                <h1 className="text-3xl font-heading" style={{color: '#222831'}}>
                   Boring Mortgages Ontario
                 </h1>
-                <p className="text-sm" style={{color: '#264653'}}>Making complex mortgages boringly simple</p>
+                <p className="text-1xl" style={{color: '#264653'}}>Making complex mortgages boringly simple</p>
               </div>
             </Link>
             <div className="hidden md:flex items-center space-x-6">
@@ -710,7 +705,7 @@ export default function TorontoMortgageRates() {
               <Image
                 src="/logos/TORONTO-mortgages-GRADIENT.png"
                 alt="Best Mortgage Rates Toronto"
-                width={400}
+                width={500}
                 height={120}
                 priority
                 className="mx-auto"
@@ -891,7 +886,7 @@ export default function TorontoMortgageRates() {
               Calculate Your Toronto Mortgage Payment
             </h2>
             <p className="text-lg" style={{color: '#264653'}}>
-              Uses official CMHC 2024 rules including premium rates, debt service ratios, and Ontario PST
+              Uses official, up to date CMHC mortgage loan rules.
             </p>
           </div>
           
@@ -1267,7 +1262,7 @@ export default function TorontoMortgageRates() {
               Book Toronto Consultation
             </Link>
             <Link
-              href="mailto:hello@mortgagewithford.ca"
+              href="mailto:hello@boringmortgages.ca"
               className="border-2 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors hover:opacity-80" style={{borderColor: '#FAFAFA'}}
             >
               Email About Toronto Rates
@@ -1331,7 +1326,7 @@ export default function TorontoMortgageRates() {
               <h3 className="text-lg font-semibold mb-4">Get Help</h3>
               <ul className="space-y-2 text-gray-400">
                 <li><Link href="https://callme.mortgagewithford.ca" className="hover:text-white">Book Consultation</Link></li>
-                <li><Link href="mailto:hello@mortgagewithford.ca" className="hover:text-white">Email Us</Link></li>
+                <li><Link href="mailto:hello@boringmortgages.ca" className="hover:text-white">Email Us</Link></li>
                 <li><Link href="/" className="hover:text-white">Home</Link></li>
               </ul>
             </div>
@@ -1347,7 +1342,7 @@ export default function TorontoMortgageRates() {
                     BRX
                   </div>
                   <div className="text-gray-400 text-xs">
-                    MORTGAGE<br/>
+                    BRX MORTGAGE<br/>
                     #13463
                   </div>
                 </div>
