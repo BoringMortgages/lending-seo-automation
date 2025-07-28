@@ -38,7 +38,7 @@ export default function BoringMortgageLandingPage() {
             href: "#calculator"
           }}
           secondaryCTA={{
-            text: "Book Boring Consultation",
+            text: "Book a call",
             href: "https://callme.mortgagewithford.ca"
           }}
         />
@@ -69,7 +69,7 @@ export default function BoringMortgageLandingPage() {
       {/* Rate Comparison */}
       <RateComparison 
         title="Refreshingly Honest Rate Comparison"
-        subtitle="Real rates from real lenders • Updated weekly with boring consistency"
+        subtitle="Real rates from real lenders • Updated weekly with predictable consistency"
       />
 
       {/* CTA Section */}
@@ -96,7 +96,7 @@ export default function BoringMortgageLandingPage() {
             <Button 
               variant="secondary" 
               size="lg" 
-              href="mailto:hello@mortgagewithford.ca"
+              href="mailto:hello@boringmortgages.ca"
             >
               Send Quick Email
             </Button>
