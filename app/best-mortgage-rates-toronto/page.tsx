@@ -802,7 +802,7 @@ export default function TorontoMortgageRates() {
             </div>
             <div className="mb-6">
               <Image
-                src="/logos/TORONTO-mortgages-GRADIENT.png"
+                src="/logos/toronto-mortgages-gradient.png"
                 alt="Best Mortgage Rates Toronto"
                 width={500}
                 height={120}
