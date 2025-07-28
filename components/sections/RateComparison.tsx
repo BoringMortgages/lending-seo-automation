@@ -4,7 +4,6 @@ interface RateData {
   term: string;
   fixedRate: string;
   variableRate?: string;
-  bestFor: string;
   popular?: boolean;
 }
 
@@ -16,15 +15,15 @@ interface RateComparisonProps {
 }
 
 const defaultRates: RateData[] = [
-  { term: '1 Year', fixedRate: '4.69%', bestFor: 'Rate speculation', popular: false },
-  { term: '3 Year', fixedRate: '3.94%', bestFor: 'Medium-term security', popular: false },
-  { term: '5 Year', fixedRate: '3.94%', variableRate: '3.95%', bestFor: 'Most Canadians', popular: true },
-  { term: 'Variable', fixedRate: '—', variableRate: 'Prime - 1.00%', bestFor: 'Rate optimists', popular: false },
+  { term: '1 Year', fixedRate: '4.69%', popular: false },
+  { term: '3 Year', fixedRate: '3.94%', popular: false },
+  { term: '5 Year', fixedRate: '3.94%', variableRate: '3.95%', popular: true },
+  { term: 'Variable', fixedRate: '—', variableRate: 'Prime - 1.00%', popular: false },
 ];
 
 const RateComparison: React.FC<RateComparisonProps> = ({
   title = "Current Ontario Mortgage Rates",
-  subtitle = "Updated weekly • As of January 2025",
+  subtitle = "Current rates updated regularly",
   rates = defaultRates,
   className = ''
 }) => {
@@ -54,9 +53,6 @@ const RateComparison: React.FC<RateComparisonProps> = ({
                   <th className="text-left py-4 px-6 font-semibold text-boring-teal dark:text-boring-light-gray">
                     Variable Rate
                   </th>
-                  <th className="text-left py-4 px-6 font-semibold text-boring-teal dark:text-boring-light-gray">
-                    Best For
-                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -75,12 +71,19 @@ const RateComparison: React.FC<RateComparisonProps> = ({
                     `}
                   >
                     <td className="py-4 px-6 font-medium text-boring-charcoal dark:text-boring-light-gray">
-                      {rate.popular && (
-                        <span className="bg-boring-purple text-white text-xs font-medium px-2 py-1 rounded-full mr-2">
-                          POPULAR
-                        </span>
-                      )}
-                      {rate.term}
+                      <div>
+                        {rate.popular && (
+                          <span className="bg-boring-purple text-white text-xs font-medium px-2 py-1 rounded-full mr-2">
+                            POPULAR
+                          </span>
+                        )}
+                        <div className="font-semibold">{rate.term}</div>
+                        {rate.variableRate && rate.term !== 'Variable' && (
+                          <div className="text-xs text-boring-dark-gray dark:text-boring-light-gray/60 mt-1">
+                            Fixed & Variable available
+                          </div>
+                        )}
+                      </div>
                     </td>
                     <td className="py-4 px-6">
                       <span className="rate-display text-2xl font-bold text-boring-purple">
@@ -96,9 +99,6 @@ const RateComparison: React.FC<RateComparisonProps> = ({
                         <span className="text-boring-dark-gray dark:text-boring-light-gray/60 text-2xl">—</span>
                       )}
                     </td>
-                    <td className="py-4 px-6 text-sm text-boring-dark-gray dark:text-boring-light-gray/80">
-                      {rate.bestFor}
-                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -111,7 +111,7 @@ const RateComparison: React.FC<RateComparisonProps> = ({
               <strong className="text-boring-charcoal dark:text-boring-light-gray">
                 Boring but important:
               </strong>{' '}
-              Rates shown are best available for insured mortgages with 25-year amortization. 
+              Rates shown are best available for insured mortgages with 25-year amortization, 20% down payment, and semi-annual compounding. 
               Your rate depends on credit score, down payment, and property location.
             </p>
             <a 

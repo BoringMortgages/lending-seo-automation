@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
+import ContactForm from "../../components/ContactForm";
 
 // CMHC Official Mortgage Calculation Rules (2024)
 const CMHC_RULES = {
@@ -41,7 +42,7 @@ const CMHC_RULES = {
 };
 
 // Mississauga Mortgage Calculator Component
-function MississaugaMortgageCalculator() {
+function MississaugaMortgageCalculator({ onOpenContactForm }: { onOpenContactForm: () => void }) {
   const [purchasePrice, setPurchasePrice] = React.useState(925000);
   const [downPayment, setDownPayment] = React.useState(185000);
   const [interestRate, setInterestRate] = React.useState(3.94);
@@ -414,13 +415,13 @@ function MississaugaMortgageCalculator() {
 
           {/* CTA */}
           <div className="text-center">
-            <Link
-              href="https://callme.mortgagewithford.ca"
+            <button
+              onClick={onOpenContactForm}
               className="px-8 py-3 text-lg font-semibold inline-block rounded-lg text-white hover:opacity-90 transition-opacity"
               style={{backgroundColor: '#FF914D'}}
             >
               Get Pre-Approved Now
-            </Link>
+            </button>
           </div>
         </div>
       </div>
@@ -467,6 +468,7 @@ export default function MississaugaMortgageRates() {
   const [rateAlertSubmitted, setRateAlertSubmitted] = React.useState(false);
   const [lockRateSubmitted, setLockRateSubmitted] = React.useState(false);
   const [selectedRate, setSelectedRate] = React.useState('');
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   
   const currentRates = [
     { term: "1 Year Fixed", rate: "4.69%", type: "Fixed", bestFor: "Rate speculation", lender: "Monoline", payment: "$3,970" },
@@ -625,13 +627,13 @@ export default function MississaugaMortgageRates() {
             </Link>
             <div className="hidden md:flex items-center space-x-6">
               <Link href="/" className="font-medium hover:opacity-80" style={{color: '#264653'}}>Home</Link>
-              <Link
-                href="https://callme.mortgagewithford.ca"
+              <button
+                onClick={() => setIsContactFormOpen(true)}
                 className="px-6 py-2 text-sm font-medium rounded-lg text-white hover:opacity-90 transition-opacity"
                 style={{backgroundColor: '#FF914D'}}
               >
                 Book Consultation →
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -678,13 +680,13 @@ export default function MississaugaMortgageRates() {
               >
                 Calculate Mississauga Payments
               </Link>
-              <Link
-                href="https://callme.mortgagewithford.ca"
+              <button
+                onClick={() => setIsContactFormOpen(true)}
                 className="px-8 py-4 text-lg text-center shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 rounded-lg border-2 font-semibold hover:opacity-80"
                 style={{borderColor: '#264653', color: '#264653', backgroundColor: 'transparent'}}
               >
                 Talk to GTA Expert
-              </Link>
+              </button>
             </div>
           </div>
           {/* Interactive Rate Comparison Table */}
@@ -831,7 +833,7 @@ export default function MississaugaMortgageRates() {
             </p>
           </div>
           
-          <MississaugaMortgageCalculator />
+          <MississaugaMortgageCalculator onOpenContactForm={() => setIsContactFormOpen(true)} />
         </div>
       </section>
 
@@ -890,12 +892,12 @@ export default function MississaugaMortgageRates() {
             <p className="mb-4" style={{color: '#264653'}}>
               Need help navigating Mississauga's programs? Our experts know the details.
             </p>
-            <Link 
-              href="https://callme.mortgagewithford.ca" 
+            <button 
+              onClick={() => setIsContactFormOpen(true)}
               className="btn-primary px-8 py-3 font-semibold inline-block"
             >
               Get Mississauga Program Help
-            </Link>
+            </button>
           </div>
         </div>
       </section>
@@ -1169,12 +1171,12 @@ export default function MississaugaMortgageRates() {
       {/* Sticky CTA Bar */}
       <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t shadow-lg z-40 p-4 lg:hidden">
         <div className="flex gap-3">
-          <Link
-            href="https://callme.mortgagewithford.ca"
+          <button
+            onClick={() => setIsContactFormOpen(true)}
             className="flex-1 btn-primary py-3 text-center text-sm font-semibold"
           >
             Book Consultation
-          </Link>
+          </button>
           <Link
             href="/mortgage-payment-calculator"
             className="flex-1 btn-secondary py-3 text-center text-sm font-semibold"
@@ -1196,18 +1198,18 @@ export default function MississaugaMortgageRates() {
             connect with <strong>Andreina Ford</strong> - Licensed Mortgage Agent Level 2, BRX Mortgage #13463, specializing in the GTA market.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="https://callme.mortgagewithford.ca"
+            <button
+              onClick={() => setIsContactFormOpen(true)}
               className="px-8 py-4 rounded-lg text-lg font-semibold transition-colors shadow-lg" style={{backgroundColor: '#FAFAFA', color: '#264653'}}
             >
               Book Mississauga Consultation
-            </Link>
-            <Link
-              href="mailto:hello@mortgagewithford.ca"
+            </button>
+            <button
+              onClick={() => setIsContactFormOpen(true)}
               className="border-2 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors hover:opacity-80" style={{borderColor: '#FAFAFA'}}
             >
               Email About Mississauga Rates
-            </Link>
+            </button>
           </div>
           <div className="mt-6 flex items-center justify-center space-x-6 text-sm" style={{color: '#F4F4F4'}}>
             <div className="flex items-center space-x-2">
@@ -1324,7 +1326,7 @@ export default function MississaugaMortgageRates() {
               
               <div className="flex flex-col md:flex-row justify-between items-center w-full">
                 <p className="text-gray-400 text-sm">
-                  © 2025 Boring Mortgages Ontario. Making Mississauga mortgages boringly simple.
+                  © {new Date().getFullYear()} Boring Mortgages Ontario. Making Mississauga mortgages boringly simple.
                 </p>
                 <div className="flex space-x-6 mt-4 md:mt-0">
                   <Link href="/privacy" className="text-gray-400 hover:text-white text-sm">Privacy</Link>
@@ -1336,6 +1338,9 @@ export default function MississaugaMortgageRates() {
           </div>
         </div>
       </footer>
+
+      {/* Contact Form Modal */}
+      <ContactForm isOpen={isContactFormOpen} onClose={() => setIsContactFormOpen(false)} />
     </div>
   );
 }

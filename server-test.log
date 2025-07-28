@@ -1,0 +1,221 @@
+ ⚠ Port 3000 is in use by process 3708, using available port 3005 instead.
+   ▲ Next.js 15.4.3
+   - Local:        http://localhost:3005
+   - Network:      http://192.168.88.5:3005
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 1909ms
+ ○ Compiling /best-mortgage-rates-toronto ...
+ ✓ Compiled /best-mortgage-rates-toronto in 2.8s (650 modules)
+ GET /best-mortgage-rates-toronto 200 in 3289ms
+ GET /best-mortgage-rates-toronto 200 in 121ms
+ ✓ Compiled /api/mortgage-rates in 231ms (420 modules)
+ ✓ Compiled in 198ms (248 modules)
+ GET /favicon.ico 200 in 608ms
+ GET /api/mortgage-rates 200 in 585ms
+ GET /best-mortgage-rates-toronto 200 in 255ms
+ GET /api/mortgage-rates 200 in 24ms
+ ✓ Compiled in 1148ms (685 modules)
+ ✓ Compiled in 439ms (262 modules)
+ GET /best-mortgage-rates-toronto 200 in 90ms
+ GET /best-mortgage-rates-toronto 200 in 45ms
+ GET /best-mortgage-rates-toronto 200 in 36ms
+ ✓ Compiled in 805ms (685 modules)
+ GET /best-mortgage-rates-toronto 200 in 112ms
+ GET /best-mortgage-rates-toronto 200 in 43ms
+ GET /best-mortgage-rates-toronto 200 in 188ms
+ ✓ Compiled in 774ms (665 modules)
+ GET /best-mortgage-rates-toronto 200 in 220ms
+ GET /best-mortgage-rates-toronto 200 in 40ms
+ ✓ Compiled in 495ms (665 modules)
+ GET /best-mortgage-rates-toronto 200 in 140ms
+ GET /best-mortgage-rates-toronto 200 in 31ms
+ ✓ Compiled in 491ms (665 modules)
+ GET /best-mortgage-rates-toronto 200 in 68ms
+ GET /best-mortgage-rates-toronto 200 in 24ms
+ ✓ Compiled in 460ms (665 modules)
+ GET /best-mortgage-rates-toronto 200 in 85ms
+ GET /best-mortgage-rates-toronto 200 in 26ms
+ ✓ Compiled in 447ms (665 modules)
+ GET /best-mortgage-rates-toronto 200 in 91ms
+ GET /best-mortgage-rates-toronto 200 in 25ms
+ ✓ Compiled in 716ms (665 modules)
+ GET /best-mortgage-rates-toronto 200 in 55ms
+ GET /best-mortgage-rates-toronto 200 in 19ms
+ ✓ Compiled in 489ms (665 modules)
+ GET /best-mortgage-rates-toronto 200 in 109ms
+ GET /best-mortgage-rates-toronto 200 in 33ms
+ ✓ Compiled in 524ms (665 modules)
+ GET /best-mortgage-rates-toronto 200 in 84ms
+ GET /best-mortgage-rates-toronto 200 in 28ms
+ ✓ Compiled in 464ms (665 modules)
+ GET /best-mortgage-rates-toronto 200 in 71ms
+ GET /best-mortgage-rates-toronto 200 in 22ms
+ GET /best-mortgage-rates-toronto 200 in 177ms
+ GET /best-mortgage-rates-toronto 200 in 72ms
+ GET /best-mortgage-rates-toronto 200 in 103ms
+ ✓ Compiled /api/mortgage-rates in 205ms (423 modules)
+ GET /api/mortgage-rates 200 in 331ms
+ GET /best-mortgage-rates-toronto 200 in 260ms
+ GET /api/mortgage-rates 200 in 11ms
+ ✓ Compiled in 312ms (262 modules)
+ GET /best-mortgage-rates-toronto 200 in 273ms
+ ✓ Compiled /_not-found in 750ms (670 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /best-mortgage-rates-toronto 200 in 738ms
+ GET /_next/static/webpack/e4e46cdbb875f396.webpack.hot-update.json 404 in 848ms
+ GET /best-mortgage-rates-toronto 200 in 232ms
+ GET /best-mortgage-rates-toronto 200 in 158ms
+ GET /best-mortgage-rates-toronto 200 in 51ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /best-mortgage-rates-toronto 200 in 69ms
+ GET /_next/static/webpack/1287600871e8b3e2.webpack.hot-update.json 404 in 63ms
+ GET /best-mortgage-rates-toronto 200 in 89ms
+ ✓ Compiled /api/mortgage-rates in 199ms (421 modules)
+ ✓ Compiled (426 modules)
+ GET /favicon.ico 200 in 388ms
+ GET /api/mortgage-rates 200 in 358ms
+ GET /favicon.ico 200 in 9ms
+ GET /api/mortgage-rates 200 in 11ms
+ ✓ Compiled in 265ms (266 modules)
+ GET /best-mortgage-rates-toronto 200 in 121ms
+ GET /best-mortgage-rates-toronto 200 in 27ms
+ GET /best-mortgage-rates-toronto 200 in 22ms
+ ✓ Compiled in 350ms (266 modules)
+ GET /best-mortgage-rates-toronto 200 in 63ms
+ GET /best-mortgage-rates-toronto 200 in 50ms
+ GET /best-mortgage-rates-toronto 200 in 41ms
+ ✓ Compiled in 292ms (266 modules)
+ GET /best-mortgage-rates-toronto 200 in 84ms
+ GET /best-mortgage-rates-toronto 200 in 44ms
+ GET /best-mortgage-rates-toronto 200 in 35ms
+ GET /best-mortgage-rates-toronto 200 in 185ms
+ GET /api/mortgage-rates 200 in 19ms
+ ✓ Compiled in 302ms (262 modules)
+ GET /best-mortgage-rates-toronto 200 in 76ms
+ GET /best-mortgage-rates-toronto 200 in 66ms
+ GET /best-mortgage-rates-toronto 200 in 135ms
+ ✓ Compiled /_not-found in 241ms (656 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /_next/static/webpack/77318dc098b2e405.webpack.hot-update.json 404 in 492ms
+ GET /best-mortgage-rates-toronto 200 in 125ms
+ ✓ Compiled /api/mortgage-rates in 100ms (421 modules)
+ ✓ Compiled (426 modules)
+ GET /favicon.ico 200 in 281ms
+ GET /api/mortgage-rates 200 in 242ms
+ ✓ Compiled in 249ms (266 modules)
+ GET /best-mortgage-rates-toronto 200 in 109ms
+ GET /best-mortgage-rates-toronto 200 in 43ms
+ GET /best-mortgage-rates-toronto 200 in 32ms
+ ✓ Compiled in 697ms (692 modules)
+ GET /best-mortgage-rates-toronto 200 in 92ms
+ GET /best-mortgage-rates-toronto 200 in 32ms
+ GET /best-mortgage-rates-toronto 200 in 22ms
+ ✓ Compiled in 765ms (692 modules)
+ GET /best-mortgage-rates-toronto 200 in 84ms
+ GET /best-mortgage-rates-toronto 200 in 51ms
+ GET /best-mortgage-rates-toronto 200 in 45ms
+ ✓ Compiled in 770ms (665 modules)
+ GET /best-mortgage-rates-toronto 200 in 149ms
+ GET /best-mortgage-rates-toronto 200 in 24ms
+ GET /best-mortgage-rates-toronto 200 in 29ms
+ ✓ Compiled in 553ms (665 modules)
+ GET /best-mortgage-rates-toronto 200 in 124ms
+ GET /best-mortgage-rates-toronto 200 in 31ms
+ GET /best-mortgage-rates-toronto 200 in 29ms
+ ✓ Compiled in 513ms (665 modules)
+ GET /best-mortgage-rates-toronto 200 in 71ms
+ GET /best-mortgage-rates-toronto 200 in 38ms
+ GET /best-mortgage-rates-toronto 200 in 36ms
+ GET /best-mortgage-rates-toronto 200 in 222ms
+ ✓ Compiled /api/mortgage-rates in 77ms (423 modules)
+ GET /api/mortgage-rates 200 in 194ms
+ GET /best-mortgage-rates-toronto 200 in 233ms
+ GET /api/mortgage-rates 200 in 12ms
+ GET /best-mortgage-rates-toronto 200 in 101ms
+ GET /api/mortgage-rates 200 in 10ms
+ ✓ Compiled in 671ms (665 modules)
+ GET /best-mortgage-rates-toronto 200 in 254ms
+ GET /best-mortgage-rates-toronto 200 in 60ms
+ ✓ Compiled /_not-found in 299ms (656 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /_next/static/webpack/b16b2c787f5f011e.webpack.hot-update.json 404 in 474ms
+ GET /best-mortgage-rates-toronto 200 in 155ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /_next/static/webpack/ad1415e457274198.webpack.hot-update.json 404 in 48ms
+ GET /best-mortgage-rates-toronto 200 in 156ms
+ ✓ Compiled /api/mortgage-rates in 163ms (421 modules)
+ ✓ Compiled (426 modules)
+ GET /favicon.ico 200 in 385ms
+ GET /api/mortgage-rates 200 in 329ms
+ GET /favicon.ico 200 in 10ms
+ GET /api/mortgage-rates 200 in 14ms
+ ✓ Compiled in 616ms (692 modules)
+ GET /best-mortgage-rates-toronto 200 in 105ms
+ GET /best-mortgage-rates-toronto 200 in 26ms
+ ✓ Compiled in 675ms (692 modules)
+ GET /best-mortgage-rates-toronto 200 in 95ms
+ GET /best-mortgage-rates-toronto 200 in 32ms
+ ✓ Compiled in 567ms (692 modules)
+ GET /best-mortgage-rates-toronto 200 in 90ms
+ GET /best-mortgage-rates-toronto 200 in 39ms
+ ✓ Compiled in 794ms (692 modules)
+ GET /best-mortgage-rates-toronto 200 in 122ms
+ GET /best-mortgage-rates-toronto 200 in 26ms
+ ✓ Compiled in 733ms (692 modules)
+ GET /best-mortgage-rates-toronto 200 in 83ms
+ GET /best-mortgage-rates-toronto 200 in 30ms
+ ✓ Compiled in 320ms (262 modules)
+ GET /best-mortgage-rates-toronto 200 in 86ms
+ GET /best-mortgage-rates-toronto 200 in 25ms
+ ✓ Compiled in 291ms (262 modules)
+ ✓ Compiled in 218ms (262 modules)
+ GET /best-mortgage-rates-toronto 200 in 212ms
+ GET /best-mortgage-rates-toronto 200 in 54ms
+ GET /best-mortgage-rates-toronto 200 in 28ms
+ GET /best-mortgage-rates-toronto 200 in 19ms
+ ✓ Compiled in 685ms (665 modules)
+ GET /best-mortgage-rates-toronto 200 in 149ms
+ GET /best-mortgage-rates-toronto 200 in 24ms
+ ✓ Compiled in 883ms (665 modules)
+ GET /best-mortgage-rates-toronto 200 in 157ms
+ GET /best-mortgage-rates-toronto 200 in 37ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\2.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\2.pack.gz'
+ GET /best-mortgage-rates-toronto 200 in 183ms
+ ✓ Compiled /api/mortgage-rates in 92ms (423 modules)
+ GET /api/mortgage-rates 200 in 189ms
+ ✓ Compiled in 654ms (685 modules)
+ GET /best-mortgage-rates-toronto 200 in 130ms
+ GET /best-mortgage-rates-toronto 200 in 22ms
+ ✓ Compiled in 496ms (685 modules)
+ ✓ Compiled /_not-found in 187ms (676 modules)
+ GET /best-mortgage-rates-toronto 404 in 292ms
+ GET /best-mortgage-rates-toronto 200 in 202ms
+ GET /best-mortgage-rates-toronto 200 in 203ms
+ GET /api/mortgage-rates 200 in 27ms
+ ✓ Compiled in 889ms (690 modules)
+ GET /best-mortgage-rates-toronto 200 in 79ms
+ GET /best-mortgage-rates-toronto 200 in 30ms
+ ✓ Compiled in 601ms (690 modules)
+ GET /best-mortgage-rates-toronto 200 in 109ms
+ GET /best-mortgage-rates-toronto 200 in 31ms
+ GET /best-mortgage-rates-toronto 200 in 242ms
+ GET /api/mortgage-rates 200 in 34ms
+ GET /best-mortgage-rates-toronto 200 in 98ms
+ GET /api/mortgage-rates 200 in 10ms
+ ✓ Compiled in 835ms (665 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\server-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\server-development\0.pack.gz'
+ ✓ Compiled in 592ms (665 modules)
+ ✓ Compiled in 694ms (665 modules)
+ ✓ Compiled in 664ms (665 modules)
+ ✓ Compiled in 587ms (665 modules)
+ ✓ Compiled in 541ms (665 modules)
+ ✓ Compiled in 569ms (665 modules)
+ ✓ Compiled in 598ms (665 modules)
+ ✓ Compiled in 663ms (665 modules)
+ ✓ Compiled in 205ms (262 modules)
+ ✓ Compiled in 873ms (665 modules)
+ ✓ Compiled in 833ms (651 modules)
+ ✓ Compiled in 917ms (665 modules)
+ ✓ Compiled in 546ms (651 modules)

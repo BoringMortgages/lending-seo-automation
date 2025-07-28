@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
+import ContactForm from "../../components/ContactForm";
 
 // CMHC Official Mortgage Calculation Rules (2024)
 const CMHC_RULES = {
@@ -36,7 +37,7 @@ const CMHC_RULES = {
 };
 
 // Ottawa Mortgage Calculator Component
-function OttawaMortgageCalculator() {
+function OttawaMortgageCalculator({ onOpenContactForm }: { onOpenContactForm: () => void }) {
   const [purchasePrice, setPurchasePrice] = React.useState(687000);
   const [downPayment, setDownPayment] = React.useState(34350);
   const [interestRate, setInterestRate] = React.useState(3.94);
@@ -409,13 +410,13 @@ function OttawaMortgageCalculator() {
 
           {/* CTA */}
           <div className="text-center">
-            <Link
-              href="https://callme.mortgagewithford.ca"
+            <button
+              onClick={onOpenContactForm}
               className="px-8 py-3 text-lg font-semibold inline-block rounded-lg text-white hover:opacity-90 transition-opacity"
               style={{backgroundColor: '#FF914D'}}
             >
               Get Pre-Approved Now
-            </Link>
+            </button>
           </div>
         </div>
       </div>
@@ -462,6 +463,7 @@ export default function OttawaMortgageRates() {
   const [rateAlertSubmitted, setRateAlertSubmitted] = React.useState(false);
   const [lockRateSubmitted, setLockRateSubmitted] = React.useState(false);
   const [selectedRate, setSelectedRate] = React.useState('');
+  const [isContactFormOpen, setIsContactFormOpen] = React.useState(false);
   
   const [currentRates, setCurrentRates] = React.useState([
     { term: "1 Year Fixed", rate: "4.69%", type: "Fixed", bestFor: "Rate speculation", lender: "Monoline", payment: "$4,890" },
@@ -678,13 +680,13 @@ export default function OttawaMortgageRates() {
             </Link>
             <div className="hidden md:flex items-center space-x-6">
               <Link href="/" className="font-medium hover:opacity-80" style={{color: '#264653'}}>Home</Link>
-              <Link
-                href="https://callme.mortgagewithford.ca"
+              <button
+                onClick={() => setIsContactFormOpen(true)}
                 className="px-6 py-2 text-sm font-medium rounded-lg text-white hover:opacity-90 transition-opacity"
                 style={{backgroundColor: '#FF914D'}}
               >
                 Book Consultation →
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -733,13 +735,13 @@ export default function OttawaMortgageRates() {
               >
                 Calculate Ottawa Payments
               </Link>
-              <Link
-                href="https://callme.mortgagewithford.ca"
+              <button
+                onClick={() => setIsContactFormOpen(true)}
                 className="px-8 py-4 text-lg text-center shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 rounded-lg border-2 font-semibold hover:opacity-80"
                 style={{borderColor: '#264653', color: '#264653', backgroundColor: 'transparent'}}
               >
                 Talk to Ottawa Expert
-              </Link>
+              </button>
             </div>
           </div>
 
@@ -888,7 +890,7 @@ export default function OttawaMortgageRates() {
             </p>
           </div>
           
-          <OttawaMortgageCalculator />
+          <OttawaMortgageCalculator onOpenContactForm={() => setIsContactFormOpen(true)} />
         </div>
       </section>
 
@@ -1253,18 +1255,18 @@ export default function OttawaMortgageRates() {
             connect with <strong>Andreina Ford</strong> - Licensed Mortgage Agent Level 2, BRX Mortgage #13463, specializing in federal employee programs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="https://callme.mortgagewithford.ca"
+            <button
+              onClick={() => setIsContactFormOpen(true)}
               className="px-8 py-4 rounded-lg text-lg font-semibold transition-colors shadow-lg" style={{backgroundColor: '#FAFAFA', color: '#264653'}}
             >
               Book Ottawa Consultation
-            </Link>
-            <Link
-              href="mailto:hello@boringmortgages.ca"
+            </button>
+            <button
+              onClick={() => setIsContactFormOpen(true)}
               className="border-2 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors hover:opacity-80" style={{borderColor: '#FAFAFA'}}
             >
               Email About Ottawa Rates
-            </Link>
+            </button>
           </div>
           <div className="mt-6 flex items-center justify-center space-x-6 text-sm" style={{color: '#F4F4F4'}}>
             <div className="flex items-center space-x-2">
@@ -1323,8 +1325,8 @@ export default function OttawaMortgageRates() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Get Help</h3>
               <ul className="space-y-2 text-gray-400">
-                <li><Link href="https://callme.mortgagewithford.ca" className="hover:text-white">Book Consultation</Link></li>
-                <li><Link href="mailto:hello@boringmortgages.ca" className="hover:text-white">Email Us</Link></li>
+                <li><button onClick={() => setIsContactFormOpen(true)} className="hover:text-white text-left">Book Consultation</button></li>
+                <li><button onClick={() => setIsContactFormOpen(true)} className="hover:text-white text-left">Email Us</button></li>
                 <li><Link href="/" className="hover:text-white">Home</Link></li>
               </ul>
             </div>
@@ -1381,7 +1383,7 @@ export default function OttawaMortgageRates() {
               
               <div className="flex flex-col md:flex-row justify-between items-center w-full">
                 <p className="text-gray-400 text-sm">
-                  © 2025 Boring Mortgages Ontario. Making Ottawa mortgages boringly simple.
+                  © {new Date().getFullYear()} Boring Mortgages Ontario. Making Ottawa mortgages boringly simple.
                 </p>
                 <div className="flex space-x-6 mt-4 md:mt-0">
                   <Link href="/privacy" className="text-gray-400 hover:text-white text-sm">Privacy</Link>
@@ -1393,6 +1395,11 @@ export default function OttawaMortgageRates() {
           </div>
         </div>
       </footer>
+      
+      <ContactForm 
+        isOpen={isContactFormOpen} 
+        onClose={() => setIsContactFormOpen(false)} 
+      />
     </div>
   );
 }

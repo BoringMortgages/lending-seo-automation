@@ -1,0 +1,136 @@
+ ⚠ Port 3000 is in use by process 3708, using available port 3003 instead.
+   ▲ Next.js 15.4.3
+   - Local:        http://localhost:3003
+   - Network:      http://192.168.88.5:3003
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 1843ms
+ ○ Compiling /best-mortgage-rates-toronto ...
+ ✓ Compiled /best-mortgage-rates-toronto in 3.5s (682 modules)
+ GET /best-mortgage-rates-toronto 200 in 4184ms
+ GET /best-mortgage-rates-toronto 200 in 112ms
+ ✓ Compiled /api/mortgage-rates in 249ms (420 modules)
+ ✓ Compiled in 310ms (262 modules)
+ GET /favicon.ico 200 in 736ms
+ GET /api/mortgage-rates 200 in 723ms
+ GET /best-mortgage-rates-toronto 200 in 204ms
+ ✓ Compiled in 684ms (665 modules)
+ GET /best-mortgage-rates-toronto 200 in 169ms
+ ✓ Compiled in 445ms (665 modules)
+ GET /best-mortgage-rates-toronto 200 in 102ms
+ ✓ Compiled /_not-found in 400ms (656 modules)
+ GET /best-mortgage-rates-toronto 404 in 597ms
+ GET /best-mortgage-rates-toronto 200 in 199ms
+ ✓ Compiled /api/mortgage-rates in 229ms (423 modules)
+ GET /api/mortgage-rates 200 in 344ms
+ ✓ Compiled in 894ms (665 modules)
+ ✓ Compiled /_not-found in 442ms (656 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /best-mortgage-rates-toronto 404 in 833ms
+ GET /best-mortgage-rates-toronto 200 in 180ms
+ GET /_next/static/webpack/1b03be4eb2362a34.webpack.hot-update.json 404 in 769ms
+ GET /best-mortgage-rates-toronto 200 in 191ms
+ ✓ Compiled /api/mortgage-rates in 181ms (421 modules)
+ ✓ Compiled (426 modules)
+ GET /favicon.ico 200 in 405ms
+ GET /api/mortgage-rates 200 in 355ms
+ ✓ Compiled in 791ms (692 modules)
+ GET /best-mortgage-rates-toronto 200 in 136ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /_next/static/webpack/7a90abf09dbb3223.webpack.hot-update.json 404 in 153ms
+ GET /best-mortgage-rates-toronto 200 in 131ms
+ GET /favicon.ico 200 in 16ms
+ GET /api/mortgage-rates 200 in 12ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\3.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\3.pack.gz'
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\server-development\3.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\server-development\3.pack.gz'
+ ✓ Compiled in 732ms (665 modules)
+ GET /best-mortgage-rates-toronto 200 in 220ms
+ ✓ Compiled /_not-found in 171ms (656 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /_next/static/webpack/7a90abf09dbb3223.webpack.hot-update.json 404 in 523ms
+ GET /best-mortgage-rates-toronto 200 in 144ms
+ ✓ Compiled /favicon.ico in 100ms (421 modules)
+ ✓ Compiled /api/mortgage-rates in 84ms (426 modules)
+ GET /favicon.ico 200 in 379ms
+ GET /api/mortgage-rates 200 in 301ms
+ ✓ Compiled in 619ms (692 modules)
+ GET /best-mortgage-rates-toronto 200 in 107ms
+ ✓ Compiled in 506ms (692 modules)
+ GET /best-mortgage-rates-toronto 200 in 79ms
+ ✓ Compiled in 463ms (692 modules)
+ GET /best-mortgage-rates-toronto 200 in 95ms
+ ✓ Compiled in 492ms (692 modules)
+ GET /best-mortgage-rates-toronto 200 in 75ms
+ ✓ Compiled in 883ms (665 modules)
+ GET /best-mortgage-rates-toronto 200 in 147ms
+ ✓ Compiled in 442ms (665 modules)
+ ⨯ SyntaxError: Unexpected end of JSON input
+    at JSON.parse (<anonymous>) {
+  page: '/best-mortgage-rates-toronto'
+}
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 1356ms (979 modules)
+ GET /best-mortgage-rates-toronto 500 in 1865ms
+ GET /best-mortgage-rates-toronto 200 in 97ms
+ GET /best-mortgage-rates-toronto 200 in 22ms
+ GET /best-mortgage-rates-toronto 200 in 263ms
+ ✓ Compiled /api/mortgage-rates in 103ms (603 modules)
+ GET /api/mortgage-rates 200 in 212ms
+ ✓ Compiled in 616ms (1013 modules)
+ GET /best-mortgage-rates-toronto 200 in 122ms
+ ✓ Compiled in 468ms (1013 modules)
+ GET /best-mortgage-rates-toronto 200 in 99ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\server-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\server-development\0.pack.gz'
+ ✓ Compiled in 357ms (409 modules)
+ ✓ Compiled in 232ms (409 modules)
+ ✓ Compiled in 257ms (409 modules)
+ ✓ Compiled in 261ms (409 modules)
+ ✓ Compiled in 304ms (409 modules)
+ ✓ Compiled in 305ms (409 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\2.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\2.pack.gz'
+ ✓ Compiled in 341ms (409 modules)
+ ✓ Compiled in 301ms (409 modules)
+ ✓ Compiled in 754ms (906 modules)
+ ✓ Compiled in 688ms (906 modules)
+ ✓ Compiled in 698ms (906 modules)
+ ✓ Compiled in 534ms (906 modules)
+ ✓ Compiled in 743ms (906 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\server-development\1.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\server-development\1.pack.gz'
+ ✓ Compiled in 1031ms (906 modules)
+ ✓ Compiled in 535ms (906 modules)
+ ✓ Compiled in 625ms (906 modules)
+ ✓ Compiled in 887ms (906 modules)
+ ✓ Compiled in 530ms (906 modules)
+ ✓ Compiled in 570ms (906 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\server-development\1.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\server-development\1.pack.gz'
+ ✓ Compiled in 321ms (409 modules)
+ ✓ Compiled in 323ms (409 modules)
+ ✓ Compiled in 588ms (906 modules)
+ ✓ Compiled in 850ms (906 modules)
+ ✓ Compiled in 776ms (906 modules)
+ ✓ Compiled in 528ms (906 modules)
+ ✓ Compiled in 781ms (906 modules)
+ ✓ Compiled in 605ms (906 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\1.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\1.pack.gz'
+ ✓ Compiled in 960ms (906 modules)
+ ✓ Compiled in 669ms (906 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\server-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\server-development\0.pack.gz'
+ ✓ Compiled in 735ms (906 modules)
+ ✓ Compiled in 751ms (906 modules)
+ ✓ Compiled in 648ms (906 modules)
+ ✓ Compiled in 541ms (906 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\server-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\server-development\0.pack.gz'
+ ✓ Compiled in 641ms (906 modules)
+ ✓ Compiled in 632ms (906 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\server-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\server-development\0.pack.gz'
+ ✓ Compiled in 685ms (906 modules)
+ ✓ Compiled in 211ms (409 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\server-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\server-development\0.pack.gz'
+ ✓ Compiled in 914ms (906 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 1132ms (906 modules)
+ ✓ Compiled in 1219ms (906 modules)
+ ✓ Compiled in 664ms (892 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\1.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\1.pack.gz'

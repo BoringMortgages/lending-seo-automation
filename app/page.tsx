@@ -1,6 +1,11 @@
+'use client';
+
 import Link from "next/link";
+import { useState } from "react";
+import ContactForm from "../components/ContactForm";
 
 export default function Home() {
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Header */}
@@ -24,12 +29,12 @@ export default function Home() {
               <Link href="/blog" className="text-gray-600 hover:text-gray-900 font-medium">Blog</Link>
               <Link href="/youtube-playbook" className="text-gray-600 hover:text-gray-900 font-medium">Mortgage Playbook</Link>
               <Link href="/about" className="text-gray-600 hover:text-gray-900 font-medium">About</Link>
-              <Link
-                href="https://mortgagewithford.ca"
+              <button
+                onClick={() => setIsContactFormOpen(true)}
                 className="bg-gradient-to-r from-slate-600 to-slate-800 text-white px-6 py-2 rounded-lg hover:from-slate-700 hover:to-slate-900 transition-all font-medium"
               >
                 Get Expert Help →
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -40,7 +45,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="mb-8">
             <span className="inline-flex items-center px-4 py-2 bg-slate-100 rounded-full text-sm font-medium text-slate-700 mb-4">
-              🇨🇦 Licensed in Ontario • Updated January 2025
+              🇨🇦 Licensed in Ontario
             </span>
           </div>
           <h1 className="text-4xl md:text-7xl font-bold text-gray-900 mb-8 leading-tight">
@@ -98,7 +103,7 @@ export default function Home() {
               Current Ontario Mortgage Rates
             </h2>
             <p className="text-lg text-gray-600">
-              Updated weekly • As of January 2025
+              Current rates updated regularly
             </p>
           </div>
           
@@ -151,12 +156,12 @@ export default function Home() {
                 <strong>Boring but important:</strong> Rates shown are best available for insured mortgages with 25-year amortization. 
                 Your rate depends on credit score, down payment, and property location.
               </p>
-              <Link 
-                href="https://mortgagewithford.ca" 
+              <button 
+                onClick={() => setIsContactFormOpen(true)}
                 className="text-blue-600 hover:text-blue-800 font-medium text-sm"
               >
                 Get your personalized rate quote from Andreina Ford →
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -401,12 +406,12 @@ export default function Home() {
             connect with <strong>Andreina Ford</strong> - Licensed Mortgage Agent Level 2 in Ontario.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="https://mortgagewithford.ca"
+            <button
+              onClick={() => setIsContactFormOpen(true)}
               className="bg-white text-slate-800 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors"
             >
               Get Expert Consultation
-            </Link>
+            </button>
             <Link
               href="mailto:hello@mortgagewithford.ca"
               className="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-slate-800 transition-colors"
@@ -458,16 +463,16 @@ export default function Home() {
               <ul className="space-y-2 text-gray-400">
                 <li><Link href="/blog" className="hover:text-white">Boring Blog</Link></li>
                 <li><Link href="/youtube-playbook" className="hover:text-white">YouTube Playbook</Link></li>
-                <li><Link href="https://mortgagewithford.ca" className="hover:text-white">Expert Consultation</Link></li>
+                <li><button onClick={() => setIsContactFormOpen(true)} className="hover:text-white text-left">Expert Consultation</button></li>
                 <li><Link href="/about" className="hover:text-white">About</Link></li>
               </ul>
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
-              <p className="text-gray-400 text-sm">
-                © 2025 Boring Mortgages Ontario. Making mortgages boringly simple.
-              </p>
+                              <p className="text-gray-400 text-sm">
+                  © {new Date().getFullYear()} Boring Mortgages Ontario. Making mortgages boringly simple.
+                </p>
               <div className="flex space-x-6 mt-4 md:mt-0">
                 <Link href="/privacy" className="text-gray-400 hover:text-white text-sm">Privacy</Link>
                 <Link href="/terms" className="text-gray-400 hover:text-white text-sm">Terms</Link>
@@ -477,6 +482,11 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      
+      <ContactForm 
+        isOpen={isContactFormOpen} 
+        onClose={() => setIsContactFormOpen(false)} 
+      />
     </div>
   );
 }

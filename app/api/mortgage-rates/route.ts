@@ -1,78 +1,62 @@
 import { NextResponse } from 'next/server';
+import fs from 'fs/promises';
+import path from 'path';
 
 export async function GET() {
   try {
-    // Fetch from the Canadian mortgage rates service
-    const response = await fetch('https://mortgage-rates-service.vercel.app/', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to fetch rates');
+    // Read from single source rate data
+    const dataDir = path.join(process.cwd(), 'data', 'rates');
+    const masterRatesPath = path.join(dataDir, 'master-rates.json');
+    
+    let rateData;
+    try {
+      const rateContent = await fs.readFile(masterRatesPath, 'utf-8');
+      rateData = JSON.parse(rateContent);
+    } catch (error) {
+      console.log('No rate data found');
+      throw new Error('Rate data not available');
     }
 
-    const data = await response.json();
+    // Check if data is fresh (less than 4 days old)
+    const dataAge = Date.now() - new Date(rateData.scrapedAt).getTime();
+    const fourDays = 4 * 24 * 60 * 60 * 1000;
     
-    // Filter and format rates for Ontario/Toronto
-    const ontarioRates = data.mortgages?.map((provider: any) => ({
-      provider: provider.provider,
-      rates: provider.rates?.map((rate: any) => ({
-        term: rate.type,
-        rate: `${rate.rate}%`,
-        type: rate.type.includes('fixed') ? 'Fixed' : 'Variable',
-        lender: provider.provider,
-        comment: rate.comment || '',
-        payment: calculatePayment(rate.rate, rate.type) // Helper function
+    if (dataAge > fourDays) {
+      console.log('Rate data is stale, needs refresh');
+    }
+
+    // Format rates for the frontend
+    const formattedRates = [{
+      provider: rateData.source,
+      rates: rateData.rates.map((rate: any) => ({
+        term: rate.term,
+        rate: rate.rate,
+        type: rate.type,
+        lender: rate.lender,
+        payment: rate.payment,
+        popular: rate.term === '5 Year' && rate.type === 'Fixed'
       }))
-    })) || [];
+    }];
 
     return NextResponse.json({
-      rates: ontarioRates,
-      lastUpdated: new Date().toISOString(),
-      source: 'Canadian Mortgage Rates Service'
+      rates: formattedRates,
+      lastUpdated: rateData.scrapedAt,
+      source: rateData.source,
+      dataAge: Math.round(dataAge / (1000 * 60 * 60)) + ' hours'
     });
 
   } catch (error) {
     console.error('Error fetching mortgage rates:', error);
     
-    // Fallback to current rates if API fails
+    // Return error instead of fallback rates
     return NextResponse.json({
-      rates: [
-        {
-          provider: "Monoline Lenders",
-          rates: [
-            { term: "5-years-fixed", rate: "3.94%", type: "Fixed", lender: "Monoline", payment: "$4,710" },
-            { term: "3-years-fixed", rate: "3.94%", type: "Fixed", lender: "Monoline", payment: "$4,710" },
-            { term: "1-year-fixed", rate: "4.69%", type: "Fixed", lender: "Monoline", payment: "$4,890" }
-          ]
-        },
-        {
-          provider: "Big Banks",
-          rates: [
-            { term: "5-years-fixed", rate: "4.89%", type: "Fixed", lender: "Big Bank", payment: "$5,020" },
-            { term: "5-years-variable", rate: "3.95%", type: "Variable", lender: "Big Bank", payment: "$4,715" }
-          ]
-        }
-      ],
-      lastUpdated: new Date().toISOString(),
-      source: 'Fallback Rates'
-    });
+      error: 'Unable to fetch current mortgage rates',
+      message: 'Please contact us directly for current rates',
+      timestamp: new Date().toISOString()
+    }, { status: 503 });
   }
 }
 
-// Helper function to calculate estimated payment
-function calculatePayment(rate: number, term: string): string {
-  const principal = 1000000; // $1M mortgage
-  const monthlyRate = rate / 100 / 12;
-  const years = term.includes('5') ? 5 : term.includes('3') ? 3 : 1;
-  const numPayments = years * 12;
-  
-  if (monthlyRate === 0) return `$${Math.round(principal / numPayments).toLocaleString()}`;
-  
-  const payment = (principal * monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / 
-                 (Math.pow(1 + monthlyRate, numPayments) - 1);
-  
-  return `$${Math.round(payment).toLocaleString()}`;
-} 
+// Remove the old format function as we're using direct data
+
+ 

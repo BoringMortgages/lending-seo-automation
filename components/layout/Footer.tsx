@@ -194,7 +194,7 @@ const Footer: React.FC<FooterProps> = ({ showRegulatory = true }) => {
               
               <div className="flex flex-col md:flex-row justify-between items-center w-full">
                 <p className="text-boring-light-gray/60 text-sm">
-                  © 2025 Boring Mortgages Ontario. Making mortgages boringly simple.
+                  © {new Date().getFullYear()} Boring Mortgages Ontario. Making mortgages boringly simple.
                 </p>
                 <div className="flex space-x-6 mt-4 md:mt-0">
                   <Link 

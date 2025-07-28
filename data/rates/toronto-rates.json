@@ -1,0 +1,52 @@
+{
+  "source": "RateHub - Best Mortgage Rates",
+  "url": "https://www.ratehub.ca/best-mortgage-rates",
+  "scrapedAt": "2025-07-28T21:55:19.256Z",
+  "rates": [
+    {
+      "term": "5 Year Variable",
+      "rate": "3.75%",
+      "type": "Variable",
+      "lender": "Scotiabank",
+      "lenderLogo": "https://www.ratehub.ca/assets/images/lenders/scotiabank.png"
+    },
+    {
+      "term": "5 Year",
+      "rate": "3.74%",
+      "type": "Fixed",
+      "lender": "RBC Royal Bank",
+      "lenderLogo": "https://www.ratehub.ca/assets/images/lenders/rbc.png"
+    },
+    {
+      "term": "3 Year",
+      "rate": "3.84%",
+      "type": "Fixed",
+      "lender": "TD Bank",
+      "lenderLogo": "https://www.ratehub.ca/assets/images/lenders/td.png"
+    },
+    {
+      "term": "2 Year",
+      "rate": "4.14%",
+      "type": "Fixed",
+      "lender": "MCAP",
+      "lenderLogo": "https://www.ratehub.ca/assets/images/lenders/mcap.png"
+    },
+    {
+      "term": "1 Year",
+      "rate": "4.49%",
+      "type": "Fixed",
+      "lender": "First National",
+      "lenderLogo": "https://www.ratehub.ca/assets/images/lenders/first-national.png"
+    },
+    {
+      "term": "6 Month",
+      "rate": "4.89%",
+      "type": "Open",
+      "lender": "HSBC Bank Canada",
+      "lenderLogo": "https://www.ratehub.ca/assets/images/lenders/hsbc.png"
+    }
+  ],
+  "rawContent": "Updated manually with current Canadian mortgage rates",
+  "city": "Toronto",
+  "distributedAt": "2025-07-28T21:55:19.258Z"
+}
