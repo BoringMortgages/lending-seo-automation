@@ -1,145 +1,177 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Button from '@/components/ui/Button';
+import { CONTACT_CONFIG } from '../../config/contact';
 
-interface CalculatorInputs {
-  purchasePrice: number;
-  downPayment: number;
-  interestRate: number;
-  amortization: number;
-  propertyTax: number;
-  homeInsurance: number;
+// CMHC Official Mortgage Calculation Rules (2025)
+const CMHC_RULES = {
+  // Official CMHC Mortgage Insurance Premium Rates (2025)
+  premiumRates: {
+    65.00: 0.0060,   // Up to 65% LTV
+    75.00: 0.0170,   // 65.01% to 75% LTV
+    80.00: 0.0240,   // 75.01% to 80% LTV
+    85.00: 0.0280,   // 80.01% to 85% LTV
+    90.00: 0.0310,   // 85.01% to 90% LTV
+    95.00: 0.0400,   // 90.01% to 95% LTV (traditional down payment)
+    95.01: 0.0450    // 90.01% to 95% LTV (non-traditional down payment)
+  },
+  
+  // CMHC Down Payment Requirements (Official 2025 Rules)
+  downPaymentRules: {
+    minDownPayment5Percent: 500000,     // 5% minimum on first $500k
+    minDownPayment10Percent: 1000000,   // 10% on $500k-$1M portion
+    minDownPayment20Percent: 1500000,   // 20% minimum on homes over $1M
+    maxInsurablePrice: 1500000          // CMHC insurance available up to $1.5M
+  },
+  
+  // 2025 Amortization Surcharges
+  amortizationSurcharges: {
+    standard: 0.0000,                   // Up to 25 years: 0.00%
+    extended: 0.0025,                   // 26-30 years: +0.25%
+    firstTimeBuyerNewBuild: 0.0020,     // Additional +0.20% for FTB new builds (30yr)
+  },
+
+  // 2025 High-Ratio Surcharges ($1M-$1.5M)
+  highRatioSurcharges: {
+    millionToOneFiveM: 0.0025,          // +0.25% for homes $1M-$1.5M (high-ratio only)
+  },
+
+  // Additional CMHC Rules (2025 Update)
+  additionalRules: {
+    minCreditScore: 680,
+    maxAmortization: 30,                // Max 30 years
+    standardAmortization: 25,           // Standard amortization period
+    firstTimeBuyerMaxAmortization: 30,  // 30 years for first-time buyers on new builds
+    nonTraditionalSourcePremium: 0.0450, // 4.50% for borrowed down payments
+  }
+};
+
+interface MortgageRate {
+  term: string;
+  rate: string;
+  type: string;
+  bestFor?: string;
+  lender: string;
+  payment?: string;
+  popular?: boolean;
 }
 
-interface CalculatorResults {
-  monthlyPayment: number;
-  cmhcInsurance: number;
-  totalMonthlyPayment: number;
-  totalInterest: number;
-  loanAmount: number;
+interface MortgageCalculatorProps {
+  onOpenContactForm?: () => void;
+  currentRates?: MortgageRate[];
 }
 
-const MortgageCalculator: React.FC = () => {
-  const [inputs, setInputs] = useState<CalculatorInputs>({
-    purchasePrice: 800000,
-    downPayment: 160000,
-    interestRate: 3.94,
-    amortization: 25,
-    propertyTax: 8000,
-    homeInsurance: 2400,
-  });
+const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ 
+  onOpenContactForm, 
+  currentRates = [] 
+}) => {
+  const [purchasePrice, setPurchasePrice] = useState(1000000);
+  const [downPayment, setDownPayment] = useState(200000);
+  const [interestRate, setInterestRate] = useState(4.5);
+  const [amortizationYears, setAmortizationYears] = useState(25);
+  const [isFirstTimeBuyer, setIsFirstTimeBuyer] = useState(false);
+  const [isNewBuild, setIsNewBuild] = useState(false);
+  const [isTraditionalDownPayment, setIsTraditionalDownPayment] = useState(true);
 
-  const [results, setResults] = useState<CalculatorResults>({
-    monthlyPayment: 0,
-    cmhcInsurance: 0,
-    totalMonthlyPayment: 0,
-    totalInterest: 0,
-    loanAmount: 0,
-  });
-
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  // Official CMHC insurance premium calculation (2025 rates)
-  const calculateCMHCInsurance = (purchasePrice: number, downPayment: number): number => {
-    const loanAmount = purchasePrice - downPayment;
-    const downPaymentPercentage = (downPayment / purchasePrice) * 100;
-
-    if (downPaymentPercentage >= 20) return 0; // No CMHC needed
-    if (purchasePrice > 1500000) return 0; // CMHC not available over $1.5M
-
-    // Official CMHC premium rates based on down payment percentage
-    let rate = 0;
-    if (downPaymentPercentage >= 15) {
-      rate = 0.028; // 2.80% for 15-19.99% down
-    } else if (downPaymentPercentage >= 10) {
-      rate = 0.031; // 3.10% for 10-14.99% down
-    } else {
-      rate = 0.040; // 4.00% for 5-9.99% down
+  // Update interest rate when API rates are loaded
+  useEffect(() => {
+    if (currentRates.length > 0) {
+      const fiveYearFixed = currentRates.find(r => r.term === "5 Year" && r.type === "Fixed");
+      if (fiveYearFixed) {
+        const rateNumber = parseFloat(fiveYearFixed.rate.replace('%', ''));
+        setInterestRate(rateNumber);
+      }
     }
+  }, [currentRates]);
 
-    return loanAmount * rate;
+  // Auto-adjust down payment when purchase price changes
+  useEffect(() => {
+    const minDown = calculateMinDownPayment(purchasePrice);
+    if (downPayment < minDown) {
+      setDownPayment(minDown);
+    }
+  }, [purchasePrice, downPayment]);
+
+  // Calculate minimum down payment based on official CMHC rules (2025)
+  const calculateMinDownPayment = (price: number): number => {
+    const rules = CMHC_RULES.downPaymentRules;
+    
+    if (price <= rules.minDownPayment5Percent) {
+      return price * 0.05; // 5% on homes up to $500k
+    } else if (price <= rules.maxInsurablePrice) {
+      return (rules.minDownPayment5Percent * 0.05) + ((price - rules.minDownPayment5Percent) * 0.10);
+      // 5% on first $500k, 10% on remainder up to $1.5M
+    } else {
+      return price * 0.20; // 20% on homes over $1.5M
+    }
   };
 
-  // Canadian mortgage payment calculation with semi-annual compounding
-  const calculatePayment = (principal: number, annualRate: number, years: number): number => {
-    // Canadian mortgages compound semi-annually, not monthly
-    const semiAnnualRate = annualRate / 100 / 2;
-    const effectiveMonthlyRate = Math.pow(1 + semiAnnualRate, 2/12) - 1;
+  // Calculate CMHC premium based on official 2025 premium rates and surcharges
+  const calculateCMHCPremium = (loanAmount: number, price: number, isTraditionalDownPayment: boolean = true, isNewBuild: boolean = false): number => {
+    const ltv = (loanAmount / price) * 100;
+    const rules = CMHC_RULES;
+    
+    // No insurance available for homes over $1.5M or LTV <= 80%
+    if (ltv <= 80 || price > rules.downPaymentRules.maxInsurablePrice) {
+      return 0;
+    }
+    
+    // Determine base premium rate based on official 2025 CMHC LTV table
+    let premiumRate = 0;
+    if (ltv <= 65) {
+      premiumRate = rules.premiumRates[65.00];       // 0.60%
+    } else if (ltv <= 75) {
+      premiumRate = rules.premiumRates[75.00];       // 1.70%
+    } else if (ltv <= 80) {
+      premiumRate = rules.premiumRates[80.00];       // 2.40%
+    } else if (ltv <= 85) {
+      premiumRate = rules.premiumRates[85.00];       // 2.80%
+    } else if (ltv <= 90) {
+      premiumRate = rules.premiumRates[90.00];       // 3.10%
+    } else if (ltv <= 95) {
+      // Use higher rate for non-traditional/borrowed down payment
+      premiumRate = isTraditionalDownPayment ? rules.premiumRates[95.00] : rules.premiumRates[95.01]; // 4.00% or 4.50%
+    }
+    
+    let totalPremiumRate = premiumRate;
+    
+    // Add 2025 amortization surcharges
+    if (amortizationYears > 25) {
+      totalPremiumRate += rules.amortizationSurcharges.extended; // +0.25%
+      
+      // Additional surcharge for first-time buyers with new builds (30-year amortization)
+      if (isFirstTimeBuyer && isNewBuild && amortizationYears === 30) {
+        totalPremiumRate += rules.amortizationSurcharges.firstTimeBuyerNewBuild; // +0.20%
+      }
+    }
+    
+    // Add 2025 high-ratio surcharge for homes $1M-$1.5M (high-ratio mortgages only)
+    if (price >= 1000000 && price <= 1500000 && ltv > 80) {
+      totalPremiumRate += rules.highRatioSurcharges.millionToOneFiveM; // +0.25%
+    }
+    
+    return loanAmount * totalPremiumRate;
+  };
+
+  // Calculate monthly payment
+  const calculatePayment = (principal: number, rate: number, years: number): number => {
+    const monthlyRate = rate / 100 / 12;
     const numPayments = years * 12;
     
-    if (effectiveMonthlyRate === 0) return principal / numPayments;
+    if (monthlyRate === 0) return principal / numPayments;
     
-    return (principal * effectiveMonthlyRate * Math.pow(1 + effectiveMonthlyRate, numPayments)) / 
-           (Math.pow(1 + effectiveMonthlyRate, numPayments) - 1);
+    return (principal * monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / 
+           (Math.pow(1 + monthlyRate, numPayments) - 1);
   };
 
-  // Validate inputs
-  const validateInputs = (): boolean => {
-    const newErrors: Record<string, string> = {};
-
-    if (inputs.purchasePrice <= 0) {
-      newErrors.purchasePrice = 'Purchase price must be greater than $0';
-    }
-    if (inputs.downPayment < 0) {
-      newErrors.downPayment = 'Down payment cannot be negative';
-    }
-    if (inputs.downPayment >= inputs.purchasePrice) {
-      newErrors.downPayment = 'Down payment must be less than purchase price';
-    }
-    if (inputs.interestRate <= 0 || inputs.interestRate > 20) {
-      newErrors.interestRate = 'Interest rate must be between 0.1% and 20%';
-    }
-    if (inputs.amortization < 5 || inputs.amortization > 30) {
-      newErrors.amortization = 'Amortization must be between 5 and 30 years';
-    }
-
-    // Official CMHC down payment rules (Canadian)
-    const downPaymentPercentage = (inputs.downPayment / inputs.purchasePrice) * 100;
-    
-    if (inputs.purchasePrice <= 500000 && downPaymentPercentage < 5) {
-      newErrors.downPayment = 'Minimum 5% down payment required for homes $500,000 and under';
-    } else if (inputs.purchasePrice > 500000 && inputs.purchasePrice <= 1500000) {
-      // 5% on first $500K + 10% on remainder (CMHC rules)
-      const required = 25000 + (inputs.purchasePrice - 500000) * 0.1;
-      if (inputs.downPayment < required) {
-        newErrors.downPayment = `CMHC rules: 5% on first $500K + 10% on remainder. Minimum: $${required.toLocaleString()}`;
-      }
-    } else if (inputs.purchasePrice > 1500000 && downPaymentPercentage < 20) {
-      newErrors.downPayment = 'Minimum 20% down payment required for homes over $1.5M (CMHC not available)';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  // Calculate results
-  useEffect(() => {
-    if (validateInputs()) {
-      const loanAmount = inputs.purchasePrice - inputs.downPayment;
-      const cmhcInsurance = calculateCMHCInsurance(inputs.purchasePrice, inputs.downPayment);
-      const totalLoanAmount = loanAmount + cmhcInsurance;
-      
-      const monthlyPayment = calculatePayment(totalLoanAmount, inputs.interestRate, inputs.amortization);
-      const totalInterest = (monthlyPayment * inputs.amortization * 12) - totalLoanAmount;
-      const monthlyPropertyTax = inputs.propertyTax / 12;
-      const monthlyInsurance = inputs.homeInsurance / 12;
-      const totalMonthlyPayment = monthlyPayment + monthlyPropertyTax + monthlyInsurance;
-
-      setResults({
-        monthlyPayment,
-        cmhcInsurance,
-        totalMonthlyPayment,
-        totalInterest,
-        loanAmount: totalLoanAmount,
-      });
-    }
-  }, [inputs]);
-
-  const handleInputChange = (field: keyof CalculatorInputs, value: string) => {
-    const numValue = parseFloat(value) || 0;
-    setInputs(prev => ({ ...prev, [field]: numValue }));
-  };
+  const minDownPayment = calculateMinDownPayment(purchasePrice);
+  const loanAmount = purchasePrice - downPayment;
+  const cmhcPremium = calculateCMHCPremium(loanAmount, purchasePrice, isTraditionalDownPayment, isNewBuild);
+  const totalLoanAmount = loanAmount + cmhcPremium;
+  const monthlyPayment = calculatePayment(totalLoanAmount, interestRate, amortizationYears);
+  const ltvRatio = (loanAmount / purchasePrice) * 100;
+  const requiresCMHC = ltvRatio > 80 && purchasePrice <= CMHC_RULES.downPaymentRules.maxInsurablePrice;
+  const isEligibleForCMHC = purchasePrice <= CMHC_RULES.downPaymentRules.maxInsurablePrice;
 
   const formatCurrency = (amount: number): string => {
     return new Intl.NumberFormat('en-CA', {
@@ -150,243 +182,341 @@ const MortgageCalculator: React.FC = () => {
     }).format(amount);
   };
 
-  const formatPercent = (rate: number): string => {
-    return `${rate.toFixed(2)}%`;
+  const formatPercent = (percent: number): string => {
+    return `${percent.toFixed(1)}%`;
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      {/* Header */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-boring-charcoal mb-4 heading-serif">
-          Mortgage Payment Calculator
-        </h1>
-        <p className="text-xl text-boring-dark-gray max-w-3xl mx-auto">
-          Calculate your monthly mortgage payments with taxes, insurance, and CMHC premiums. 
-          Built with <strong>official CMHC rules</strong> for boring accuracy in the Canadian market.
-        </p>
-      </div>
-
+    <div className="max-w-5xl mx-auto">
       <div className="grid lg:grid-cols-2 gap-8">
-        {/* Input Card */}
-        <div className="card-boring bg-white border-boring-mint/40">
-          <h2 className="text-2xl font-bold text-boring-teal mb-6">Loan Details</h2>
+        {/* Input Controls */}
+        <div className="rounded-2xl shadow-xl backdrop-blur-sm border-2 p-8 hover:shadow-2xl transition-all duration-300 bg-gray-50 border-teal-500">
+          <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+            Mortgage Details
+          </h3>
           
           <div className="space-y-6">
-            {/* Purchase Price */}
+            {/* Purchase Price Slider */}
             <div>
-              <label className="block text-sm font-semibold text-boring-charcoal mb-2">
-                Purchase Price
+              <label className="block text-xl font-bold mb-4 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+                Purchase Price: <span className="font-bold text-slate-700">{formatCurrency(purchasePrice)}</span>
               </label>
-              <div className="relative">
-                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-boring-dark-gray">$</span>
-                <input
-                  type="number"
-                  value={inputs.purchasePrice}
-                  onChange={(e) => handleInputChange('purchasePrice', e.target.value)}
-                  className="w-full pl-8 pr-4 py-3 border border-boring-mint/60 rounded-xl focus:border-boring-purple focus:ring-2 focus:ring-boring-purple/20 transition-colors bg-white text-boring-charcoal"
-                  placeholder="800,000"
-                />
+              <input
+                type="range"
+                min="500000"
+                max="2000000"
+                step="25000"
+                value={purchasePrice}
+                onChange={(e) => {
+                  const newPrice = Number(e.target.value);
+                  const currentDownPaymentPercent = downPayment / purchasePrice;
+                  
+                  setPurchasePrice(newPrice);
+                  
+                  // Keep the same down payment percentage, but respect minimum requirements
+                  const newDownPaymentAmount = newPrice * currentDownPaymentPercent;
+                  const minRequiredDown = calculateMinDownPayment(newPrice);
+                  setDownPayment(Math.max(newDownPaymentAmount, minRequiredDown));
+                }}
+                className="w-full h-4 bg-gradient-to-r from-teal-100 to-emerald-200 rounded-lg appearance-none cursor-pointer"
+              />
+              <div className="flex justify-between text-sm text-gray-500 mt-2">
+                <span>$500K</span>
+                <span>$2M</span>
               </div>
-              {errors.purchasePrice && (
-                <p className="text-sm text-boring-charcoal mt-1">{errors.purchasePrice}</p>
-              )}
             </div>
 
-            {/* Down Payment */}
+            {/* Down Payment Slider */}
             <div>
-              <label className="block text-sm font-semibold text-boring-charcoal mb-2">
-                Down Payment
+              <label className="block text-xl font-bold mb-4 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+                Down Payment: <span className="font-bold text-slate-700">{formatCurrency(downPayment)} ({formatPercent((downPayment/purchasePrice)*100)})</span>
               </label>
-              <div className="relative">
-                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-boring-dark-gray">$</span>
-                <input
-                  type="number"
-                  value={inputs.downPayment}
-                  onChange={(e) => handleInputChange('downPayment', e.target.value)}
-                  className="w-full pl-8 pr-4 py-3 border border-boring-mint/60 rounded-xl focus:border-boring-purple focus:ring-2 focus:ring-boring-purple/20 transition-colors bg-white text-boring-charcoal"
-                  placeholder="160,000"
-                />
+              <input
+                type="range"
+                min={minDownPayment}
+                max={purchasePrice * 0.50}
+                step="5000"
+                value={downPayment}
+                onChange={(e) => setDownPayment(Number(e.target.value))}
+                className="w-full h-4 bg-gradient-to-r from-teal-100 to-emerald-200 rounded-lg appearance-none cursor-pointer"
+              />
+              <div className="flex justify-between text-base text-gray-600 mt-2 font-medium">
+                <span>Minimum: {formatCurrency(minDownPayment)}</span>
+                <span>50%: {formatCurrency(purchasePrice * 0.50)}</span>
               </div>
-              <p className="text-xs text-boring-dark-gray mt-1">
-                {inputs.purchasePrice > 0 && `${((inputs.downPayment / inputs.purchasePrice) * 100).toFixed(1)}% of purchase price`}
-              </p>
-              {errors.downPayment && (
-                <p className="text-sm text-boring-charcoal mt-1">{errors.downPayment}</p>
-              )}
+              
+              {/* Down Payment Info */}
+              <div className="mt-3 space-y-2">
+                
+                {(downPayment/purchasePrice) > 0.20 && (
+                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                    <p className="text-yellow-800 text-base font-semibold">
+                      ℹ️ High Down Payment Notice
+                    </p>
+                    <p className="text-yellow-700 text-base mt-2">
+                      Consider keeping more cash for closing costs, renovations, or investments
+                    </p>
+                  </div>
+                )}
+                
+                {purchasePrice <= CMHC_RULES.downPaymentRules.maxInsurablePrice && (downPayment/purchasePrice) < 0.20 && downPayment >= minDownPayment && (
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <p className="text-blue-800 text-base font-semibold">
+                      ✓ CMHC Insurance Available (Under $1.5M with &lt;20% down)
+                    </p>
+                    <p className="text-blue-700 text-base mt-2">
+                      Premium: {((Object.entries(CMHC_RULES.premiumRates).find(([ltv]) => ltvRatio <= parseFloat(ltv))?.[1] ?? 0) * 100).toFixed(2)}% of loan amount
+                    </p>
+                  </div>
+                )}
+                
+                
+                {(downPayment/purchasePrice) >= 0.20 && (
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <p className="text-green-800 text-base font-semibold">
+                      ✓ Conventional Mortgage (20%+ down payment)
+                    </p>
+                    <p className="text-green-700 text-base mt-2">
+                      No CMHC insurance required - save on premium costs
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Interest Rate */}
             <div>
-              <label className="block text-sm font-semibold text-boring-charcoal mb-2">
-                Interest Rate
+              <label className="block text-xl font-bold mb-4 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+                Interest Rate: <span className="font-bold text-slate-700">{interestRate}%</span>
               </label>
-              <div className="relative">
-                <input
-                  type="number"
-                  step="0.01"
-                  value={inputs.interestRate}
-                  onChange={(e) => handleInputChange('interestRate', e.target.value)}
-                  className="w-full pr-8 pl-4 py-3 border border-boring-mint/60 rounded-xl focus:border-boring-purple focus:ring-2 focus:ring-boring-purple/20 transition-colors bg-white text-boring-charcoal"
-                  placeholder="3.94"
-                />
-                <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-boring-dark-gray">%</span>
+              <input
+                type="range"
+                min="3"
+                max="7"
+                step="0.01"
+                value={interestRate}
+                onChange={(e) => setInterestRate(Number(e.target.value))}
+                className="w-full h-4 bg-gradient-to-r from-teal-100 to-emerald-200 rounded-lg appearance-none cursor-pointer"
+              />
+              <div className="flex justify-between text-sm text-gray-500 mt-2">
+                <span>3%</span>
+                <span>7%</span>
               </div>
-              {errors.interestRate && (
-                <p className="text-sm text-boring-charcoal mt-1">{errors.interestRate}</p>
-              )}
             </div>
-
-            {/* Amortization */}
+            
+            {/* Amortization Period */}
             <div>
-              <label className="block text-sm font-semibold text-boring-charcoal mb-2">
-                Amortization Period
+              <label className="block text-xl font-bold mb-4 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+                Amortization: <span className="font-bold text-slate-700">{amortizationYears} years</span>
               </label>
-              <select
-                value={inputs.amortization}
-                onChange={(e) => handleInputChange('amortization', e.target.value)}
-                className="w-full px-4 py-3 border border-boring-mint/60 rounded-xl focus:border-boring-purple focus:ring-2 focus:ring-boring-purple/20 transition-colors bg-white text-boring-charcoal"
-              >
-                {[15, 20, 25, 30].map(years => (
-                  <option key={years} value={years}>{years} years</option>
-                ))}
-              </select>
-              {errors.amortization && (
-                <p className="text-sm text-boring-charcoal mt-1">{errors.amortization}</p>
-              )}
-            </div>
-
-            {/* Additional Costs */}
-            <div className="pt-4 border-t border-boring-mint/30">
-              <h3 className="text-lg font-semibold text-boring-teal mb-4">Additional Monthly Costs</h3>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold text-boring-charcoal mb-2">
-                    Annual Property Tax
-                  </label>
-                  <div className="relative">
-                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-boring-dark-gray">$</span>
-                    <input
-                      type="number"
-                      value={inputs.propertyTax}
-                      onChange={(e) => handleInputChange('propertyTax', e.target.value)}
-                      className="w-full pl-8 pr-4 py-3 border border-boring-mint/60 rounded-xl focus:border-boring-purple focus:ring-2 focus:ring-boring-purple/20 transition-colors bg-white text-boring-charcoal"
-                      placeholder="8,000"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-boring-charcoal mb-2">
-                    Annual Home Insurance
-                  </label>
-                  <div className="relative">
-                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-boring-dark-gray">$</span>
-                    <input
-                      type="number"
-                      value={inputs.homeInsurance}
-                      onChange={(e) => handleInputChange('homeInsurance', e.target.value)}
-                      className="w-full pl-8 pr-4 py-3 border border-boring-mint/60 rounded-xl focus:border-boring-purple focus:ring-2 focus:ring-boring-purple/20 transition-colors bg-white text-boring-charcoal"
-                      placeholder="2,400"
-                    />
-                  </div>
-                </div>
+              <input
+                type="range"
+                min="15"
+                max="30"
+                step="1"
+                value={amortizationYears}
+                onChange={(e) => setAmortizationYears(Number(e.target.value))}
+                className="w-full h-4 bg-gradient-to-r from-teal-100 to-emerald-200 rounded-lg appearance-none cursor-pointer"
+              />
+              <div className="flex justify-between text-sm text-gray-500 mt-2">
+                <span>15 years</span>
+                <span>30 years</span>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Results Card */}
-        <div className="card-boring bg-white border-l-4 border-l-boring-mint">
-          <h2 className="text-2xl font-bold text-boring-teal mb-6">Payment Breakdown</h2>
-          
-          <div className="space-y-6">
-            {/* Monthly Payment */}
-            <div className="bg-boring-light-gray/30 p-6 rounded-xl">
-              <div className="text-center">
-                <p className="text-sm font-medium text-boring-dark-gray mb-2">Total Monthly Payment</p>
-                <p className="rate-display text-4xl text-boring-purple mb-2">
-                  {formatCurrency(results.totalMonthlyPayment)}
+              {amortizationYears > 25 && (
+                <p className="text-orange-600 text-base font-medium mt-2">
+                  ⚠️ CMHC charges 0.25% surcharge for amortization over 25 years
                 </p>
-                <div className="flex items-center justify-center space-x-2">
-                  <span className="w-2 h-2 bg-boring-bright-green rounded-full"></span>
-                  <span className="text-sm text-boring-dark-gray">Principal, Interest, Tax & Insurance</span>
-                </div>
-              </div>
+              )}
             </div>
-
-            {/* Payment Details */}
-            <div className="space-y-4">
-              <div className="flex justify-between items-center py-2">
-                <span className="text-boring-dark-gray">Mortgage Payment</span>
-                <span className="font-semibold text-boring-charcoal">{formatCurrency(results.monthlyPayment)}</span>
-              </div>
-              
-              <div className="flex justify-between items-center py-2">
-                <span className="text-boring-dark-gray">Property Tax</span>
-                <span className="font-semibold text-boring-charcoal">{formatCurrency(inputs.propertyTax / 12)}</span>
-              </div>
-              
-              <div className="flex justify-between items-center py-2">
-                <span className="text-boring-dark-gray">Home Insurance</span>
-                <span className="font-semibold text-boring-charcoal">{formatCurrency(inputs.homeInsurance / 12)}</span>
-              </div>
-
-              {results.cmhcInsurance > 0 && (
-                <div className="flex justify-between items-center py-2 border-t border-boring-mint/30 pt-4">
-                  <span className="text-boring-dark-gray">CMHC Insurance Premium</span>
-                  <span className="font-semibold text-boring-charcoal">{formatCurrency(results.cmhcInsurance)}</span>
-                </div>
+            
+            {/* First-Time Buyer Toggle */}
+            <div>
+              <label className="flex items-center space-x-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={isFirstTimeBuyer}
+                  onChange={(e) => setIsFirstTimeBuyer(e.target.checked)}
+                  className="w-6 h-6 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+                />
+                <span className="text-xl font-bold text-gray-800">
+                  First-time homebuyer
+                </span>
+              </label>
+              {isFirstTimeBuyer && (
+                <p className="text-green-600 text-base font-medium mt-2">
+                  ✓ Eligible for 30-year amortization on new builds & rebates up to $8,475
+                </p>
               )}
             </div>
 
-            {/* Loan Summary */}
-            <div className="border-t border-boring-mint/30 pt-6">
-              <h3 className="text-lg font-semibold text-boring-teal mb-4">Loan Summary</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-boring-dark-gray">Loan Amount</span>
-                  <span className="font-semibold text-boring-charcoal">{formatCurrency(results.loanAmount)}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-boring-dark-gray">Total Interest</span>
-                  <span className="font-semibold text-boring-charcoal">{formatCurrency(results.totalInterest)}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-boring-dark-gray">Down Payment</span>
-                  <span className="font-semibold text-boring-charcoal">{formatCurrency(inputs.downPayment)}</span>
-                </div>
+            {/* New Build Toggle (for First-Time Buyers) */}
+            {isFirstTimeBuyer && (
+              <div>
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={isNewBuild}
+                    onChange={(e) => setIsNewBuild(e.target.checked)}
+                    className="w-6 h-6 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+                  />
+                  <span className="text-xl font-bold text-gray-800">
+                    New build home (First-time buyer)
+                  </span>
+                </label>
+                {isNewBuild && amortizationYears === 30 && (
+                  <p className="text-yellow-600 text-base font-medium mt-2">
+                    ⚠️ Additional 0.20% CMHC surcharge for 30-year new build
+                  </p>
+                )}
               </div>
-            </div>
+            )}
 
-            {/* CTA */}
-            <div className="pt-6">
-              <Button 
-                variant="primary" 
-                size="lg" 
-                href="https://callme.mortgagewithford.ca"
-                className="w-full"
-              >
-                Get Pre-Approved →
-              </Button>
-              <p className="text-xs text-boring-dark-gray text-center mt-2">
-                Connect with a licensed Ontario mortgage agent
-              </p>
+            {/* Down Payment Source Toggle */}
+            <div>
+              <label className="flex items-center space-x-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={!isTraditionalDownPayment}
+                  onChange={(e) => setIsTraditionalDownPayment(!e.target.checked)}
+                  className="w-6 h-6 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+                />
+                <span className="text-xl font-bold text-gray-800">
+                  Borrowed down payment
+                </span>
+              </label>
+              {!isTraditionalDownPayment && ltvRatio > 90 && (
+                <p className="text-red-600 text-base font-medium mt-2">
+                  ⚠️ Higher CMHC premium rate (4.50%) for borrowed down payment
+                </p>
+              )}
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Disclaimer */}
-      <div className="mt-12 p-6 bg-boring-light-gray/50 rounded-xl border border-boring-mint/30">
-        <p className="text-sm text-boring-dark-gray text-center">
-          <strong>Boring but important:</strong> This calculator provides estimates for planning purposes only. 
-          Actual rates and payments may vary based on your credit score, lender choice, and current market conditions. 
-          CMHC insurance rates are current as of 2025 and subject to change.
-        </p>
+        {/* Results Panel */}
+        <div className="space-y-4">
+          {/* Main Payment Result */}
+          <div className="rounded-2xl shadow-xl p-8 text-center text-white relative overflow-hidden hover:shadow-2xl transition-all duration-300 bg-gradient-to-br from-slate-700 via-teal-600 to-emerald-600">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+            <div className="absolute -top-4 -right-4 w-32 h-32 bg-white/5 rounded-full blur-2xl"></div>
+            <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-white/5 rounded-full blur-xl"></div>
+            <div className="relative z-10">
+            <h3 className="text-3xl font-bold mb-4">Monthly Payment</h3>
+            <div className="text-6xl font-bold mb-3">
+              {formatCurrency(monthlyPayment)}
+            </div>
+            <p className="text-xl font-medium text-gray-100">Principal & Interest</p>
+            </div>
+          </div>
+
+          {/* Payment Breakdown */}
+          <div className="backdrop-blur-sm rounded-2xl shadow-xl p-6 border-2 hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] bg-gray-50 border-teal-500">
+            <h4 className="text-xl font-bold mb-4 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">CMHC Calculation Breakdown</h4>
+            <div className="space-y-4">
+              <div className="flex justify-between">
+                <span className="text-base font-medium text-slate-700">Loan Amount:</span>
+                <span className="font-bold text-base">{formatCurrency(loanAmount)}</span>
+              </div>
+              {requiresCMHC && (
+                <>
+                  <div className="flex justify-between">
+                    <span className="text-base font-medium text-slate-700">CMHC Premium Rate:</span>
+                    <span className="font-bold text-orange-600 text-base">
+                      {((Object.entries(CMHC_RULES.premiumRates).find(([ltv]) => ltvRatio <= parseFloat(ltv))?.[1] ?? 0) * 100).toFixed(2)}%
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-base font-medium text-slate-700">CMHC Insurance:</span>
+                    <span className="font-bold text-orange-600 text-base">{formatCurrency(cmhcPremium)}</span>
+                  </div>
+                  {amortizationYears > 25 && (
+                    <div className="flex justify-between">
+                      <span className="text-base font-medium text-slate-700">Amortization Surcharge:</span>
+                      <span className="font-bold text-orange-600 text-base">0.25%</span>
+                    </div>
+                  )}
+                </>
+              )}
+              <div className="flex justify-between border-t pt-3">
+                <span className="text-base font-medium text-slate-700">Total Loan:</span>
+                <span className="font-bold text-base">{formatCurrency(totalLoanAmount)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-base font-medium text-slate-700">LTV Ratio:</span>
+                <span className="font-bold text-base">{formatPercent(ltvRatio)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-base font-medium text-slate-700">Amortization:</span>
+                <span className="font-bold text-base">{amortizationYears} years</span>
+              </div>
+            </div>
+          </div>
+          
+
+          {/* CMHC Notice */}
+          {requiresCMHC && isEligibleForCMHC && (
+            <div className="bg-gradient-to-r from-orange-50 to-orange-100/50 border border-orange-200 rounded-xl p-4 shadow-sm">
+              <div className="flex items-start space-x-3">
+                <span className="text-orange-500 text-xl mt-0.5">ℹ️</span>
+                <div>
+                  <h4 className="font-semibold text-orange-900">
+                    CMHC Insurance Required (Official 2025 Rates)
+                  </h4>
+                  <p className="text-sm mt-1 text-orange-800">
+                    LTV over 80% requires mortgage default insurance per CMHC rules.
+                    <br />Total Premium: {formatCurrency(cmhcPremium)}
+                    <br />Base Rate: {((Object.entries(CMHC_RULES.premiumRates).find(([ltv]) => ltvRatio <= parseFloat(ltv))?.[1] ?? 0) * 100).toFixed(2)}% of loan amount
+                    {amortizationYears > 25 && <><br />+ 0.25% amortization surcharge (26-30 years)</>}
+                    {isFirstTimeBuyer && isNewBuild && amortizationYears === 30 && <><br />+ 0.20% first-time buyer new build surcharge</>}
+                    {purchasePrice >= 1000000 && purchasePrice <= 1500000 && ltvRatio > 80 && <><br />+ 0.25% high-ratio surcharge ($1M-$1.5M)</>}
+                    {!isTraditionalDownPayment && ltvRatio > 90 && <><br />Higher rate (4.50%) for borrowed down payment</>}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          {/* CMHC Ineligible Notice */}
+          {!isEligibleForCMHC && (
+            <div className="bg-gradient-to-r from-red-50 to-red-100/50 border border-red-200 rounded-xl p-4 shadow-sm">
+              <div className="flex items-start space-x-3">
+                <span className="text-red-500 text-xl mt-0.5">⚠️</span>
+                <div>
+                  <h4 className="font-semibold text-red-900">
+                    CMHC Insurance Not Available
+                  </h4>
+                  <p className="text-sm mt-1 text-red-800">
+                    Homes over $1.5M are not eligible for CMHC insurance.
+                    <br />Minimum 20% down payment required for conventional mortgage.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* CTA */}
+          <div className="text-center">
+            {onOpenContactForm ? (
+              <button
+                onClick={onOpenContactForm}
+                className="px-8 py-3 text-lg font-semibold inline-block rounded-lg text-white hover:opacity-90 transition-opacity bg-orange-500"
+              >
+                {CONTACT_CONFIG.cta.getPreApproved}
+              </button>
+            ) : (
+              <a 
+                href={CONTACT_CONFIG.applicationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3 text-lg font-semibold inline-block rounded-lg text-white hover:opacity-90 transition-opacity bg-slate-700"
+              >
+                {CONTACT_CONFIG.cta.primary}
+              </a>
+            )}
+          </div>
+        </div>
       </div>
-    </div>
+    </div>  
   );
 };
 
