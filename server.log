@@ -134,3 +134,14 @@
  ✓ Compiled in 1219ms (906 modules)
  ✓ Compiled in 664ms (892 modules)
 <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\1.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\1.pack.gz'
+ ✓ Compiled in 1006ms (906 modules)
+ ✓ Compiled in 447ms (409 modules)
+ ✓ Compiled in 275ms (409 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\1.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\1.pack.gz'
+ ✓ Compiled in 348ms (409 modules)
+ ✓ Compiled in 622ms (409 modules)
+ ✓ Compiled in 317ms (409 modules)
+ ✓ Compiled in 428ms (409 modules)
+ ✓ Compiled in 440ms (409 modules)
+ ✓ Compiled in 275ms (409 modules)
+ ✓ Compiled in 386ms (409 modules)

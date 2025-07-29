@@ -4,9 +4,9 @@ import Image from "next/image";
 import React, { useState } from "react";
 import ContactForm from "../../components/ContactForm";
 
-// CMHC Official Mortgage Calculation Rules (2024)
+// CMHC Official Mortgage Calculation Rules (2025)
 const CMHC_RULES = {
-  // Official CMHC Mortgage Insurance Premium Rates (2024)
+  // Official CMHC Mortgage Insurance Premium Rates (2025)
   premiumRates: {
     65.00: 0.0060,   // Up to 65% LTV
     75.00: 0.0170,   // 65.01% to 75% LTV
@@ -17,28 +17,35 @@ const CMHC_RULES = {
     95.01: 0.0450    // 90.01% to 95% LTV (non-traditional down payment)
   },
   
-  // CMHC Down Payment Requirements (Official 2024 Rules)
+  // CMHC Down Payment Requirements (Official 2025 Rules)
   downPaymentRules: {
     minDownPayment5Percent: 500000,     // 5% minimum on first $500k
     minDownPayment10Percent: 1000000,   // 10% on $500k-$1M portion
     minDownPayment20Percent: 1500000,   // 20% minimum on homes over $1M
-    maxInsurablePrice: 1500000          // CMHC insurance not available over $1.5M
+    maxInsurablePrice: 1500000          // CMHC insurance available up to $1.5M
   },
   
   
-  // Additional CMHC Rules for Future Use
+  // 2025 Amortization Surcharges
+  amortizationSurcharges: {
+    standard: 0.0000,                   // Up to 25 years: 0.00%
+    extended: 0.0025,                   // 26-30 years: +0.25%
+    firstTimeBuyerNewBuild: 0.0020,     // Additional +0.20% for FTB new builds (30yr)
+  },
+
+  // 2025 High-Ratio Surcharges ($1M-$1.5M)
+  highRatioSurcharges: {
+    millionToOneFiveM: 0.0025,          // +0.25% for homes $1M-$1.5M (high-ratio only)
+  },
+
+  // Additional CMHC Rules (2025 Update)
   additionalRules: {
     minCreditScore: 680,
-    maxAmortization: 30,              // 30 years for first-time buyers on new builds
-    standardAmortization: 25,         // Standard amortization period
-    amortizationSurcharge: 0.0020,    // 0.20% surcharge for >25 year amortization
-    blendedAmortizationSurcharge: 0.0060, // 0.60% surcharge for blended amortization
-    provincialTaxProvinces: ['ON', 'QC', 'SK', 'MB'], // Provinces with PST on CMHC premiums
-    ontarioTaxRate: 0.08,             // 8% PST in Ontario
-    quebecTaxRate: 0.09975,           // 9.975% PST in Quebec
-    saskatchewanTaxRate: 0.06,        // 6% PST in Saskatchewan
-    manitobaTaxRate: 0.07             // 7% PST in Manitoba
-  }
+    maxAmortization: 30,                // Max 30 years
+    standardAmortization: 25,           // Standard amortization period
+    firstTimeBuyerMaxAmortization: 30,  // 30 years for first-time buyers on new builds
+    nonTraditionalSourcePremium: 0.0450, // 4.50% for borrowed down payments
+ }
 };
 
 // Hamilton Mortgage Calculator Component
@@ -194,16 +201,6 @@ function HamiltonMortgageCalculator({ onOpenContactForm }: { onOpenContactForm: 
               
               {/* Down Payment Info */}
               <div className="mt-3 space-y-2">
-                {downPayment < minDownPayment && (
-                  <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-                    <p className="text-red-800 text-base font-semibold">
-                      ⚠️ Below Minimum Down Payment
-                    </p>
-                    <p className="text-red-700 text-base mt-2">
-                      Minimum required: {formatCurrency(minDownPayment)} ({formatPercent((minDownPayment/purchasePrice)*100)})
-                    </p>
-                  </div>
-                )}
                 
                 {(downPayment/purchasePrice) > 0.20 && (
                   <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
@@ -227,16 +224,6 @@ function HamiltonMortgageCalculator({ onOpenContactForm }: { onOpenContactForm: 
                   </div>
                 )}
                 
-                {purchasePrice > CMHC_RULES.downPaymentRules.maxInsurablePrice && (downPayment/purchasePrice) < 0.20 && (
-                  <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
-                    <p className="text-orange-800 text-base font-semibold">
-                      ⚠️ Home over $1.5M - 20% Down Payment Required
-                    </p>
-                    <p className="text-orange-700 text-base mt-2">
-                      CMHC insurance not available. Conventional mortgage requires minimum 20% down.
-                    </p>
-                  </div>
-                )}
                 
                 {(downPayment/purchasePrice) >= 0.20 && (
                   <div className="bg-green-50 border border-green-200 rounded-lg p-4">
@@ -1268,9 +1255,10 @@ export default function HamiltonMortgageRates() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Get Help</h3>
               <ul className="space-y-2 text-gray-400">
-                <li><Link href="https://callme.mortgagewithford.ca" className="hover:text-white">Book Consultation</Link></li>
-                <li><Link href="mailto:hello@mortgagewithford.ca" className="hover:text-white">Email Us</Link></li>
-                <li><Link href="/" className="hover:text-white">Home</Link></li>
+                <li><a href="https://callme.mortgagewithford.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">Book Consultation</a></li>
+                <li><a href="mailto:hello@boringmortgages.ca?subject=Mortgage questions from Hamilton" className="hover:text-white">Email Us</a></li>
+                <li><a href="https://mortgagewithford.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">About Us</a></li>
+                <li><a href="https://boringmortgages.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">Home</a></li>
               </ul>
             </div>
           </div>

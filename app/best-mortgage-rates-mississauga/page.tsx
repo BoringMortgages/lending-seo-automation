@@ -1270,7 +1270,7 @@ export default function MississaugaMortgageRates() {
               <ul className="space-y-2 text-gray-400">
                 <li><Link href="https://callme.mortgagewithford.ca" className="hover:text-white">Book Consultation</Link></li>
                 <li><Link href="mailto:hello@mortgagewithford.ca" className="hover:text-white">Email Us</Link></li>
-                <li><Link href="/" className="hover:text-white">Home</Link></li>
+                <li><a href="https://boringmortgages.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">Home</a></li>
               </ul>
             </div>
           </div>
