@@ -1325,9 +1325,10 @@ export default function OttawaMortgageRates() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Get Help</h3>
               <ul className="space-y-2 text-gray-400">
-                <li><button onClick={() => setIsContactFormOpen(true)} className="hover:text-white text-left">Book Consultation</button></li>
-                <li><button onClick={() => setIsContactFormOpen(true)} className="hover:text-white text-left">Email Us</button></li>
-                <li><Link href="/" className="hover:text-white">Home</Link></li>
+                <li><a href="https://callme.mortgagewithford.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">Book Consultation</a></li>
+                <li><a href="mailto:hello@boringmortgages.ca?subject=Mortgage questions from Ottawa" className="hover:text-white">Email Us</a></li>
+                <li><a href="https://mortgagewithford.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">About Us</a></li>
+                <li><a href="https://boringmortgages.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">Home</a></li>
               </ul>
             </div>
           </div>

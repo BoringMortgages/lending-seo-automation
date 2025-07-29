@@ -194,16 +194,6 @@ function MississaugaMortgageCalculator({ onOpenContactForm }: { onOpenContactFor
               
               {/* Down Payment Info */}
               <div className="mt-3 space-y-2">
-                {downPayment < minDownPayment && (
-                  <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-                    <p className="text-red-800 text-base font-semibold">
-                      ⚠️ Below Minimum Down Payment
-                    </p>
-                    <p className="text-red-700 text-base mt-2">
-                      Minimum required: {formatCurrency(minDownPayment)} ({formatPercent((minDownPayment/purchasePrice)*100)})
-                    </p>
-                  </div>
-                )}
                 
                 {(downPayment/purchasePrice) > 0.20 && (
                   <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
@@ -227,16 +217,6 @@ function MississaugaMortgageCalculator({ onOpenContactForm }: { onOpenContactFor
                   </div>
                 )}
                 
-                {purchasePrice > CMHC_RULES.downPaymentRules.maxInsurablePrice && (downPayment/purchasePrice) < 0.20 && (
-                  <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
-                    <p className="text-orange-800 text-base font-semibold">
-                      ⚠️ Home over $1.5M - 20% Down Payment Required
-                    </p>
-                    <p className="text-orange-700 text-base mt-2">
-                      CMHC insurance not available. Conventional mortgage requires minimum 20% down.
-                    </p>
-                  </div>
-                )}
                 
                 {(downPayment/purchasePrice) >= 0.20 && (
                   <div className="bg-green-50 border border-green-200 rounded-lg p-4">
@@ -1268,8 +1248,9 @@ export default function MississaugaMortgageRates() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Get Help</h3>
               <ul className="space-y-2 text-gray-400">
-                <li><Link href="https://callme.mortgagewithford.ca" className="hover:text-white">Book Consultation</Link></li>
-                <li><Link href="mailto:hello@mortgagewithford.ca" className="hover:text-white">Email Us</Link></li>
+                <li><a href="https://callme.mortgagewithford.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">Book Consultation</a></li>
+                <li><a href="mailto:hello@boringmortgages.ca?subject=Mortgage questions from Mississauga" className="hover:text-white">Email Us</a></li>
+                <li><a href="https://mortgagewithford.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">About Us</a></li>
                 <li><a href="https://boringmortgages.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">Home</a></li>
               </ul>
             </div>
