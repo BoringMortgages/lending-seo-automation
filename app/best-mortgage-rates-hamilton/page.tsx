@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ContactForm from "../../components/ContactForm";
 
 // CMHC Official Mortgage Calculation Rules (2025)
@@ -407,7 +407,7 @@ function HamiltonMortgageCalculator({ onOpenContactForm }: { onOpenContactForm: 
               className="px-8 py-3 text-lg font-semibold inline-block rounded-lg text-white hover:opacity-90 transition-opacity"
               style={{backgroundColor: '#FF914D'}}
             >
-              Get Pre-Approved Now
+              Apply Now for Pre-Approval!
             </button>
           </div>
         </div>
@@ -448,6 +448,17 @@ function HamiltonMortgageCalculator({ onOpenContactForm }: { onOpenContactForm: 
   );
 }
 
+// Interface for rate data
+interface MortgageRate {
+  term: string;
+  rate: string;
+  type: string;
+  lender: string;
+  payment?: string;
+  popular?: boolean;
+  bestFor?: string;
+}
+
 export default function HamiltonMortgageRates() {
   const [selectedFilter, setSelectedFilter] = React.useState('all');
   const [showRateAlert, setShowRateAlert] = React.useState(false);
@@ -456,27 +467,88 @@ export default function HamiltonMortgageRates() {
   const [lockRateSubmitted, setLockRateSubmitted] = React.useState(false);
   const [selectedRate, setSelectedRate] = React.useState('');
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const [currentRates, setCurrentRates] = React.useState<MortgageRate[]>([]);
+  const [rateDataAge, setRateDataAge] = React.useState<string>('');
+  const [lastUpdated, setLastUpdated] = React.useState<string>('');
   
-  const currentRates = [
-    { term: "1 Year Fixed", rate: "4.69%", type: "Fixed", bestFor: "Rate speculation", lender: "Monoline", payment: "$3,340" },
-    { term: "3 Year Fixed", rate: "3.94%", type: "Fixed", bestFor: "Medium-term security", lender: "Monoline", payment: "$3,210" },
-    { term: "5 Year Fixed", rate: "3.94%", type: "Fixed", bestFor: "Most popular", popular: true, lender: "Monoline", payment: "$3,210" },
-    { term: "5 Year Variable", rate: "3.95%", type: "Variable", bestFor: "Rate optimists", lender: "Big Bank", payment: "$3,215" },
-    { term: "2 Year Fixed", rate: "4.24%", type: "Fixed", bestFor: "Short commitment", lender: "Credit Union", payment: "$3,270" },
-    { term: "10 Year Fixed", rate: "4.89%", type: "Fixed", bestFor: "Long-term security", lender: "Big Bank", payment: "$3,420" },
-  ];
+  // Fetch live mortgage rates
+  useEffect(() => {
+    const fetchRates = async () => {
+      try {
+        const response = await fetch('/api/mortgage-rates');
+        const data = await response.json();
+        
+        if (data.rates && data.rates.length > 0) {
+          // Transform the API data to match our component expectations
+          const transformedRates = data.rates[0].rates.map((rate: any) => ({
+            term: rate.term,
+            rate: rate.rate,
+            type: rate.type,
+            lender: rate.lender,
+            payment: rate.payment || calculatePayment(rate.rate),
+            popular: rate.popular,
+            bestFor: getBestForText(rate.term, rate.type)
+          }));
+          
+          setCurrentRates(transformedRates);
+          setRateDataAge(data.dataAge || '');
+          setLastUpdated(data.lastUpdated ? new Date(data.lastUpdated).toLocaleString('en-CA', {
+            timeZone: 'America/Toronto',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          }) : '');
+        }
+      } catch (error) {
+        console.error('Error fetching rates:', error);
+        // Fallback to static rates if API fails
+        setCurrentRates([
+          { term: "1 Year Fixed", rate: "4.69%", type: "Fixed", bestFor: "Rate speculation", lender: "Monoline", payment: "$3,340" },
+          { term: "3 Year Fixed", rate: "3.94%", type: "Fixed", bestFor: "Medium-term security", lender: "Monoline", payment: "$3,210" },
+          { term: "5 Year Fixed", rate: "3.94%", type: "Fixed", bestFor: "Most popular", popular: true, lender: "Monoline", payment: "$3,210" },
+          { term: "5 Year Variable", rate: "3.95%", type: "Variable", bestFor: "Rate optimists", lender: "Big Bank", payment: "$3,215" },
+          { term: "2 Year Fixed", rate: "4.24%", type: "Fixed", bestFor: "Short commitment", lender: "Credit Union", payment: "$3,270" },
+          { term: "10 Year Fixed", rate: "4.89%", type: "Fixed", bestFor: "Long-term security", lender: "Big Bank", payment: "$3,420" },
+        ]);
+      }
+    };
+    
+    fetchRates();
+  }, []);
+  
+  // Helper function to calculate payment for display
+  const calculatePayment = (rateStr: string): string => {
+    const rate = parseFloat(rateStr.replace('%', '')) / 100;
+    const principal = 622400; // 80% of Hamilton average
+    const monthlyRate = rate / 12;
+    const numPayments = 25 * 12;
+    
+    if (monthlyRate === 0) {
+      return `$${Math.round(principal / numPayments).toLocaleString()}`;
+    }
+    
+    const payment = (principal * monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / 
+                   (Math.pow(1 + monthlyRate, numPayments) - 1);
+    
+    return `$${Math.round(payment).toLocaleString()}`;
+  };
+  
+  // Helper function to get bestFor text
+  const getBestForText = (term: string, type: string): string => {
+    if (term.includes('5 Year') && type === 'Fixed') return 'Most popular';
+    if (term.includes('Variable')) return 'Rate optimists';
+    if (term.includes('1 Year')) return 'Rate speculation';
+    if (term.includes('3 Year')) return 'Medium-term security';
+    if (term.includes('2 Year')) return 'Short commitment';
+    if (term.includes('10 Year')) return 'Long-term security';
+    return 'Good option';
+  };
   
   const filteredRates = selectedFilter === 'all' 
     ? currentRates 
     : currentRates.filter(rate => rate.type.toLowerCase() === selectedFilter);
   
-  const lastUpdated = new Date().toLocaleString('en-CA', { 
-    timeZone: 'America/Toronto',
-    month: 'short', 
-    day: 'numeric', 
-    hour: '2-digit', 
-    minute: '2-digit'
-  });
 
   const lenderComparison = [
     { lender: "Big 6 Banks", rate: "4.89%", pros: "Branch access", cons: "Higher rates" },
@@ -650,7 +722,9 @@ export default function HamiltonMortgageRates() {
             {/* Key Stats */}
             <div className="grid grid-cols-2 gap-6 mb-8 max-w-md">
               <div className="text-center p-4 backdrop-blur-sm rounded-xl border shadow-professional hover:shadow-lg transition-all duration-300" style={{backgroundColor: '#F4F4F4', borderColor: '#2A9D8F'}}>
-                <div className="text-2xl font-bold" style={{color: '#264653'}}>3.94%</div>
+                <div className="text-2xl font-bold" style={{color: '#264653'}}>
+                  {currentRates.find(r => r.term === "5 Year Fixed" && r.type === "Fixed")?.rate || "3.94%"}
+                </div>
                 <div className="text-sm" style={{color: '#264653'}}>Best 5-Year Fixed</div>
               </div>
               <div className="text-center p-4 backdrop-blur-sm rounded-xl border shadow-professional hover:shadow-lg transition-all duration-300" style={{backgroundColor: '#F4F4F4', borderColor: '#2A9D8F'}}>
@@ -685,7 +759,8 @@ export default function HamiltonMortgageRates() {
                     Live Hamilton Mortgage Rates
                   </h3>
                   <p className="text-sm" style={{color: '#264653'}}>
-                    Current mortgage rates for Hamilton
+                    {lastUpdated ? `Updated ${lastUpdated}` : 'Current mortgage rates for Hamilton'}
+                    {rateDataAge && ` (${rateDataAge} old)`}
                   </p>
                 </div>
                 <div className="flex gap-2 mt-4 sm:mt-0">

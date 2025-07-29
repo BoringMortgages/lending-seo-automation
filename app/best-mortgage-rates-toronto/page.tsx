@@ -818,7 +818,9 @@ export default function TorontoMortgageRates() {
             {/* Key Stats */}
             <div className="grid grid-cols-2 gap-6 mb-8 max-w-md">
               <div className="text-center p-4 backdrop-blur-sm rounded-xl border-2 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105" style={{backgroundColor: '#F8F9FA', borderColor: '#2A9D8F', background: 'linear-gradient(135deg, #F8F9FA 0%, #F4F4F4 100%)'}}>
-                <div className="text-2xl font-bold" style={{color: '#264653'}}>3.74%</div>
+                <div className="text-2xl font-bold" style={{color: '#264653'}}>
+                  {currentRates.find(r => r.term === "5 Year" && r.type === "Fixed")?.rate || "3.74%"}
+                </div>
                 <div className="text-sm" style={{color: '#264653'}}>Best 5-Year Fixed</div>
               </div>
               <div className="text-center p-4 backdrop-blur-sm rounded-xl border-2 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105" style={{backgroundColor: '#F8F9FA', borderColor: '#2A9D8F', background: 'linear-gradient(135deg, #F8F9FA 0%, #F4F4F4 100%)'}}>
