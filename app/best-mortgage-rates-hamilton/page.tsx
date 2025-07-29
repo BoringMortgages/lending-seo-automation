@@ -101,7 +101,7 @@ function HamiltonMortgageCalculator({ onOpenContactForm }: { onOpenContactForm: 
     
     // Add amortization surcharge if > 25 years
     if (amortizationYears > 25) {
-      premium += loanAmount * rules.additionalRules.amortizationSurcharge;
+      premium += loanAmount * rules.amortizationSurcharges.extended;
     }
     
     return premium;
