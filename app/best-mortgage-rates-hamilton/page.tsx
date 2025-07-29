@@ -723,7 +723,7 @@ export default function HamiltonMortgageRates() {
             <div className="grid grid-cols-2 gap-6 mb-8 max-w-md">
               <div className="text-center p-4 backdrop-blur-sm rounded-xl border shadow-professional hover:shadow-lg transition-all duration-300" style={{backgroundColor: '#F4F4F4', borderColor: '#2A9D8F'}}>
                 <div className="text-2xl font-bold" style={{color: '#264653'}}>
-                  {currentRates.find(r => r.term === "5 Year Fixed" && r.type === "Fixed")?.rate || "3.94%"}
+                  {currentRates.find(r => r.term === "5 Year" && r.type === "Fixed")?.rate || "3.94%"}
                 </div>
                 <div className="text-sm" style={{color: '#264653'}}>Best 5-Year Fixed</div>
               </div>
