@@ -118,7 +118,7 @@ const RateComparison: React.FC<RateComparisonProps> = ({
               href="https://callme.mortgagewithford.ca" 
               className="text-boring-purple hover:text-boring-purple/80 font-medium text-sm transition-colors"
             >
-              Get your personalized rate quote from Andreina Ford →
+              Get your quote from a licensed mortgage agent →
             </a>
           </div>
         </div>

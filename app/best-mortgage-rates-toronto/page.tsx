@@ -847,10 +847,6 @@ export default function TorontoMortgageRates() {
               <span style={{color: '#2A9D8F'}}>✓</span>
               <span>GTA Market Expert</span>
             </div>
-            <div className="flex items-center space-x-2">
-              <span style={{color: '#2A9D8F'}}>✓</span>
-              <span>BRX Mortgage #13463</span>
-            </div>
           </div>
         </div>
       </section>

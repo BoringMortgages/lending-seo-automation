@@ -237,3 +237,555 @@
  ✓ Compiled in 344ms (262 modules)
  ✓ Compiled in 354ms (262 modules)
  ✓ Compiled in 423ms (262 modules)
+ ✓ Compiled in 338ms (262 modules)
+ ✓ Compiled in 493ms (262 modules)
+ ✓ Compiled in 289ms (262 modules)
+ ✓ Compiled in 270ms (262 modules)
+ ✓ Compiled in 346ms (262 modules)
+ ✓ Compiled in 792ms (665 modules)
+ ✓ Compiled in 298ms (262 modules)
+ ✓ Compiled in 299ms (262 modules)
+ ✓ Compiled in 307ms (262 modules)
+ ✓ Compiled in 468ms (262 modules)
+ ✓ Compiled in 358ms (262 modules)
+ ✓ Compiled in 401ms (262 modules)
+ ✓ Compiled in 480ms (262 modules)
+ ✓ Compiled in 267ms (262 modules)
+ ✓ Compiled in 311ms (262 modules)
+ ✓ Compiled in 329ms (262 modules)
+ ✓ Compiled in 318ms (262 modules)
+ ✓ Compiled in 316ms (262 modules)
+ ✓ Compiled in 321ms (262 modules)
+ ✓ Compiled in 329ms (262 modules)
+ ✓ Compiled in 321ms (262 modules)
+ ✓ Compiled in 296ms (262 modules)
+ ✓ Compiled in 285ms (262 modules)
+ ✓ Compiled in 291ms (262 modules)
+ ✓ Compiled in 300ms (262 modules)
+ ✓ Compiled in 504ms (262 modules)
+ ✓ Compiled in 330ms (262 modules)
+ ✓ Compiled in 265ms (262 modules)
+ ✓ Compiled in 248ms (262 modules)
+ ✓ Compiled in 236ms (262 modules)
+ ✓ Compiled in 240ms (262 modules)
+ ✓ Compiled in 222ms (262 modules)
+ ✓ Compiled in 243ms (262 modules)
+ ✓ Compiled in 442ms (262 modules)
+ ✓ Compiled in 286ms (262 modules)
+ ✓ Compiled in 226ms (262 modules)
+ ✓ Compiled in 263ms (262 modules)
+ ✓ Compiled in 255ms (262 modules)
+ ✓ Compiled in 279ms (262 modules)
+ ✓ Compiled in 296ms (262 modules)
+ ✓ Compiled in 296ms (262 modules)
+ ✓ Compiled in 294ms (262 modules)
+ ✓ Compiled in 278ms (262 modules)
+ ✓ Compiled in 257ms (262 modules)
+ ✓ Compiled in 266ms (262 modules)
+ ✓ Compiled in 248ms (262 modules)
+ ✓ Compiled in 242ms (262 modules)
+ ✓ Compiled in 268ms (262 modules)
+ ✓ Compiled in 243ms (262 modules)
+ ✓ Compiled in 287ms (262 modules)
+ ✓ Compiled in 249ms (262 modules)
+ ✓ Compiled in 243ms (262 modules)
+ ✓ Compiled in 256ms (262 modules)
+ ✓ Compiled in 245ms (262 modules)
+ ✓ Compiled in 245ms (262 modules)
+ ✓ Compiled in 258ms (262 modules)
+ ✓ Compiled in 258ms (262 modules)
+ ✓ Compiled in 251ms (262 modules)
+ ✓ Compiled in 255ms (262 modules)
+ ✓ Compiled in 254ms (262 modules)
+ ✓ Compiled in 215ms (262 modules)
+ ✓ Compiled in 285ms (262 modules)
+ ✓ Compiled in 232ms (262 modules)
+ ✓ Compiled in 516ms (262 modules)
+ ✓ Compiled in 244ms (262 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 817ms (665 modules)
+ ✓ Compiled in 188ms (262 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 219ms (262 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 204ms (262 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 288ms (262 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 333ms (262 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 269ms (262 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 324ms (262 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 537ms (665 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 507ms (667 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ⨯ ./app/best-mortgage-rates-toronto/page.tsx
+Error:   [31mx[0m Return statement is not allowed here
+     ,-[[36;1;4mC:\Users\Andreina\lending-seo\lending-seo-automation\app\best-mortgage-rates-toronto\page.tsx[0m:188:1]
+ [2m185[0m |         return `${percent.toFixed(1)}%`;
+ [2m186[0m |       };
+ [2m187[0m |     
+ [2m188[0m | [35;1m,[0m[35;1m-[0m[35;1m>[0m   return (
+ [2m189[0m | [35;1m|[0m       <div className="max-w-5xl mx-auto">
+ [2m190[0m | [35;1m|[0m         <div className="grid lg:grid-cols-2 gap-8">
+ [2m191[0m | [35;1m|[0m           {/* Input Controls */}
+ [2m192[0m | [35;1m|[0m           <div className="rounded-2xl shadow-xl backdrop-blur-sm border-2 p-8 hover:shadow-2xl transition-all duration-300" style={{backgroundColor: '#F8F9FA', borderColor: '#2A9D8F', background: 'linear-gradient(135deg, #F8F9FA 0%, #F4F4F4 100%)'}}>
+ [2m193[0m | [35;1m|[0m             <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+ [2m194[0m | [35;1m|[0m               Mortgage Details
+ [2m195[0m | [35;1m|[0m             </h3>
+ [2m196[0m | [35;1m|[0m             
+ [2m197[0m | [35;1m|[0m             <div className="space-y-6">
+ [2m198[0m | [35;1m|[0m               {/* Purchase Price Slider */}
+ [2m199[0m | [35;1m|[0m               <div>
+ [2m200[0m | [35;1m|[0m                 <label className="block text-xl font-bold mb-4 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+ [2m201[0m | [35;1m|[0m                   Purchase Price: <span className="font-bold" style={{color: '#264653'}}>{formatCurrency(purchasePrice)}</span>
+ [2m202[0m | [35;1m|[0m                 </label>
+ [2m203[0m | [35;1m|[0m                 <input
+ [2m204[0m | [35;1m|[0m                   type="range"
+ [2m205[0m | [35;1m|[0m                   min="500000"
+ [2m206[0m | [35;1m|[0m                   max="2000000"
+ [2m207[0m | [35;1m|[0m                   step="25000"
+ [2m208[0m | [35;1m|[0m                   value={purchasePrice}
+ [2m209[0m | [35;1m|[0m                   onChange={(e) => {
+ [2m210[0m | [35;1m|[0m                     const newPrice = Number(e.target.value);
+ [2m211[0m | [35;1m|[0m                     const currentDownPaymentPercent = downPayment / purchasePrice;
+ [2m212[0m | [35;1m|[0m                     
+ [2m213[0m | [35;1m|[0m                     setPurchasePrice(newPrice);
+ [2m214[0m | [35;1m|[0m                     
+ [2m215[0m | [35;1m|[0m                     // Keep the same down payment percentage, but respect minimum requirements
+ [2m216[0m | [35;1m|[0m                     const newDownPaymentAmount = newPrice * currentDownPaymentPercent;
+ [2m217[0m | [35;1m|[0m                     const minRequiredDown = calculateMinDownPayment(newPrice);
+ [2m218[0m | [35;1m|[0m                     setDownPayment(Math.max(newDownPaymentAmount, minRequiredDown));
+ [2m219[0m | [35;1m|[0m                   }}
+ [2m220[0m | [35;1m|[0m                   className="w-full h-4 bg-gradient-to-r from-teal-100 to-emerald-200 rounded-lg appearance-none cursor-pointer slider shadow-md hover:shadow-lg transition-shadow duration-200"
+ [2m221[0m | [35;1m|[0m                 />
+ [2m222[0m | [35;1m|[0m                 <div className="flex justify-between text-sm text-gray-500 mt-2">
+ [2m223[0m | [35;1m|[0m                   <span>$500K</span>
+ [2m224[0m | [35;1m|[0m                   <span>$2M</span>
+ [2m225[0m | [35;1m|[0m                 </div>
+ [2m226[0m | [35;1m|[0m               </div>
+ [2m227[0m | [35;1m|[0m   
+ [2m228[0m | [35;1m|[0m               {/* Down Payment Slider */}
+ [2m229[0m | [35;1m|[0m               <div>
+ [2m230[0m | [35;1m|[0m                 <label className="block text-xl font-bold mb-4 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+ [2m231[0m | [35;1m|[0m                   Down Payment: <span className="font-bold" style={{color: '#264653'}}>{formatCurrency(downPayment)} ({formatPercent((downPayment/purchasePrice)*100)})</span>
+ [2m232[0m | [35;1m|[0m                 </label>
+ [2m233[0m | [35;1m|[0m                 <input
+ [2m234[0m | [35;1m|[0m                   type="range"
+ [2m235[0m | [35;1m|[0m                   min={purchasePrice * 0.05}
+ [2m236[0m | [35;1m|[0m                   max={purchasePrice * 0.50}
+ [2m237[0m | [35;1m|[0m                   step="5000"
+ [2m238[0m | [35;1m|[0m                   value={downPayment}
+ [2m239[0m | [35;1m|[0m                   onChange={(e) => setDownPayment(Number(e.target.value))}
+ [2m240[0m | [35;1m|[0m                   className="w-full h-4 bg-gradient-to-r from-teal-100 to-emerald-200 rounded-lg appearance-none cursor-pointer slider shadow-md hover:shadow-lg transition-shadow duration-200"
+ [2m241[0m | [35;1m|[0m                 />
+ [2m242[0m | [35;1m|[0m                 <div className="flex justify-between text-base text-gray-600 mt-2 font-medium">
+ [2m243[0m | [35;1m|[0m                   <span>5%: {formatCurrency(purchasePrice * 0.05)}</span>
+ [2m244[0m | [35;1m|[0m                   <span>50%: {formatCurrency(purchasePrice * 0.50)}</span>
+ [2m245[0m | [35;1m|[0m                 </div>
+ [2m246[0m | [35;1m|[0m                 
+ [2m247[0m | [35;1m|[0m                 {/* Down Payment Info */}
+ [2m248[0m | [35;1m|[0m                 <div className="mt-3 space-y-2">
+ [2m249[0m | [35;1m|[0m                   
+ [2m250[0m | [35;1m|[0m                   {(downPayment/purchasePrice) > 0.20 && (
+ [2m251[0m | [35;1m|[0m                     <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+ [2m252[0m | [35;1m|[0m                       <p className="text-yellow-800 text-base font-semibold">
+ [2m253[0m | [35;1m|[0m                         ℹ️ High Down Payment Notice
+ [2m254[0m | [35;1m|[0m                       </p>
+ [2m255[0m | [35;1m|[0m                       <p className="text-yellow-700 text-base mt-2">
+ [2m256[0m | [35;1m|[0m                         Consider keeping more cash for closing costs, renovations, or investments
+ [2m257[0m | [35;1m|[0m                       </p>
+ [2m258[0m | [35;1m|[0m                     </div>
+ [2m259[0m | [35;1m|[0m                   )}
+ [2m260[0m | [35;1m|[0m                   
+ [2m261[0m | [35;1m|[0m                   {purchasePrice <= CMHC_RULES.downPaymentRules.maxInsurablePrice && (downPayment/purchasePrice) < 0.20 && downPayment >= minDownPayment && (
+ [2m262[0m | [35;1m|[0m                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+ [2m263[0m | [35;1m|[0m                       <p className="text-blue-800 text-base font-semibold">
+ [2m264[0m | [35;1m|[0m                         ✓ CMHC Insurance Available (Under $1.5M with &lt;20% down)
+ [2m265[0m | [35;1m|[0m                       </p>
+ [2m266[0m | [35;1m|[0m                       <p className="text-blue-700 text-base mt-2">
+ [2m267[0m | [35;1m|[0m                         Premium: {((Object.entries(CMHC_RULES.premiumRates).find(([ltv]) => ltvRatio <= parseFloat(ltv))?.[1] ?? 0) * 100).toFixed(2)}% of loan amount
+ [2m268[0m | [35;1m|[0m                       </p>
+ [2m269[0m | [35;1m|[0m                     </div>
+ [2m270[0m | [35;1m|[0m                   )}
+ [2m271[0m | [35;1m|[0m                   
+ [2m272[0m | [35;1m|[0m                   
+ [2m273[0m | [35;1m|[0m                   {(downPayment/purchasePrice) >= 0.20 && (
+ [2m274[0m | [35;1m|[0m                     <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+ [2m275[0m | [35;1m|[0m                       <p className="text-green-800 text-base font-semibold">
+ [2m276[0m | [35;1m|[0m                         ✓ Conventional Mortgage (20%+ down payment)
+ [2m277[0m | [35;1m|[0m                       </p>
+ [2m278[0m | [35;1m|[0m                       <p className="text-green-700 text-base mt-2">
+ [2m279[0m | [35;1m|[0m                         No CMHC insurance required - save on premium costs
+ [2m280[0m | [35;1m|[0m                       </p>
+ [2m281[0m | [35;1m|[0m                     </div>
+ [2m282[0m | [35;1m|[0m                   )}
+ [2m283[0m | [35;1m|[0m                 </div>
+ [2m284[0m | [35;1m|[0m               </div>
+ [2m285[0m | [35;1m|[0m   
+ [2m286[0m | [35;1m|[0m               {/* Interest Rate */}
+ [2m287[0m | [35;1m|[0m               <div>
+ [2m288[0m | [35;1m|[0m                 <label className="block text-xl font-bold mb-4 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+ [2m289[0m | [35;1m|[0m                   Interest Rate: <span className="font-bold" style={{color: '#264653'}}>{interestRate}%</span>
+ [2m290[0m | [35;1m|[0m                 </label>
+ [2m291[0m | [35;1m|[0m                 <input
+ [2m292[0m | [35;1m|[0m                   type="range"
+ [2m293[0m | [35;1m|[0m                   min="3"
+ [2m294[0m | [35;1m|[0m                   max="7"
+ [2m295[0m | [35;1m|[0m                   step="0.01"
+ [2m296[0m | [35;1m|[0m                   value={interestRate}
+ [2m297[0m | [35;1m|[0m                   onChange={(e) => setInterestRate(Number(e.target.value))}
+ [2m298[0m | [35;1m|[0m                   className="w-full h-4 bg-gradient-to-r from-teal-100 to-emerald-200 rounded-lg appearance-none cursor-pointer slider shadow-md hover:shadow-lg transition-shadow duration-200"
+ [2m299[0m | [35;1m|[0m                 />
+ [2m300[0m | [35;1m|[0m                 <div className="flex justify-between text-sm text-gray-500 mt-2">
+ [2m301[0m | [35;1m|[0m                   <span>3%</span>
+ [2m302[0m | [35;1m|[0m                   <span>7%</span>
+ [2m303[0m | [35;1m|[0m                 </div>
+ [2m304[0m | [35;1m|[0m               </div>
+ [2m305[0m | [35;1m|[0m               
+ [2m306[0m | [35;1m|[0m               {/* Amortization Period */}
+ [2m307[0m | [35;1m|[0m               <div>
+ [2m308[0m | [35;1m|[0m                 <label className="block text-xl font-bold mb-4 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+ [2m309[0m | [35;1m|[0m                   Amortization: <span className="font-bold" style={{color: '#264653'}}>{amortizationYears} years</span>
+ [2m310[0m | [35;1m|[0m                 </label>
+ [2m311[0m | [35;1m|[0m                 <input
+ [2m312[0m | [35;1m|[0m                   type="range"
+ [2m313[0m | [35;1m|[0m                   min="15"
+ [2m314[0m | [35;1m|[0m                   max="30"
+ [2m315[0m | [35;1m|[0m                   step="1"
+ [2m316[0m | [35;1m|[0m                   value={amortizationYears}
+ [2m317[0m | [35;1m|[0m                   onChange={(e) => setAmortizationYears(Number(e.target.value))}
+ [2m318[0m | [35;1m|[0m                   className="w-full h-4 bg-gradient-to-r from-teal-100 to-emerald-200 rounded-lg appearance-none cursor-pointer slider shadow-md hover:shadow-lg transition-shadow duration-200"
+ [2m319[0m | [35;1m|[0m                 />
+ [2m320[0m | [35;1m|[0m                 <div className="flex justify-between text-sm text-gray-500 mt-2">
+ [2m321[0m | [35;1m|[0m                   <span>15 years</span>
+ [2m322[0m | [35;1m|[0m                   <span>30 years</span>
+ [2m323[0m | [35;1m|[0m                 </div>
+ [2m324[0m | [35;1m|[0m                 {amortizationYears > 25 && (
+ [2m325[0m | [35;1m|[0m                   <p className="text-orange-600 text-base font-medium mt-2">
+ [2m326[0m | [35;1m|[0m                     ⚠️ CMHC charges 0.25% surcharge for amortization over 25 years
+ [2m327[0m | [35;1m|[0m                   </p>
+ [2m328[0m | [35;1m|[0m                 )}
+ [2m329[0m | [35;1m|[0m               </div>
+ [2m330[0m | [35;1m|[0m               
+ [2m331[0m | [35;1m|[0m               {/* First-Time Buyer Toggle */}
+ [2m332[0m | [35;1m|[0m               <div>
+ [2m333[0m | [35;1m|[0m                 <label className="flex items-center space-x-3 cursor-pointer">
+ [2m334[0m | [35;1m|[0m                   <input
+ [2m335[0m | [35;1m|[0m                     type="checkbox"
+ [2m336[0m | [35;1m|[0m                     checked={isFirstTimeBuyer}
+ [2m337[0m | [35;1m|[0m                     onChange={(e) => setIsFirstTimeBuyer(e.target.checked)}
+ [2m338[0m | [35;1m|[0m                     className="w-6 h-6 text-purple focus:ring-purple border-gray-300 rounded"
+ [2m339[0m | [35;1m|[0m                   />
+ [2m340[0m | [35;1m|[0m                   <span className="text-xl font-bold text-gray-800">
+ [2m341[0m | [35;1m|[0m                     First-time homebuyer
+ [2m342[0m | [35;1m|[0m                   </span>
+ [2m343[0m | [35;1m|[0m                 </label>
+ [2m344[0m | [35;1m|[0m                 {isFirstTimeBuyer && (
+ [2m345[0m | [35;1m|[0m                   <p className="text-green-600 text-base font-medium mt-2">
+ [2m346[0m | [35;1m|[0m                     ✓ Eligible for 30-year amortization on new builds & rebates up to $8,475
+ [2m347[0m | [35;1m|[0m                   </p>
+ [2m348[0m | [35;1m|[0m                 )}
+ [2m349[0m | [35;1m|[0m               </div>
+ [2m350[0m | [35;1m|[0m   
+ [2m351[0m | [35;1m|[0m               {/* New Build Toggle (for First-Time Buyers) */}
+ [2m352[0m | [35;1m|[0m               {isFirstTimeBuyer && (
+ [2m353[0m | [35;1m|[0m                 <div>
+ [2m354[0m | [35;1m|[0m                   <label className="flex items-center space-x-3 cursor-pointer">
+ [2m355[0m | [35;1m|[0m                     <input
+ [2m356[0m | [35;1m|[0m                       type="checkbox"
+ [2m357[0m | [35;1m|[0m                       checked={isNewBuild}
+ [2m358[0m | [35;1m|[0m                       onChange={(e) => setIsNewBuild(e.target.checked)}
+ [2m359[0m | [35;1m|[0m                       className="w-6 h-6 text-purple focus:ring-purple border-gray-300 rounded"
+ [2m360[0m | [35;1m|[0m                     />
+ [2m361[0m | [35;1m|[0m                     <span className="text-xl font-bold text-gray-800">
+ [2m362[0m | [35;1m|[0m                       New build home (First-time buyer)
+ [2m363[0m | [35;1m|[0m                     </span>
+ [2m364[0m | [35;1m|[0m                   </label>
+ [2m365[0m | [35;1m|[0m                   {isNewBuild && amortizationYears === 30 && (
+ [2m366[0m | [35;1m|[0m                     <p className="text-yellow-600 text-base font-medium mt-2">
+ [2m367[0m | [35;1m|[0m                       ⚠️ Additional 0.20% CMHC surcharge for 30-year new build
+ [2m368[0m | [35;1m|[0m                     </p>
+ [2m369[0m | [35;1m|[0m                   )}
+ [2m370[0m | [35;1m|[0m                 </div>
+ [2m371[0m | [35;1m|[0m               )}
+ [2m372[0m | [35;1m|[0m   
+ [2m373[0m | [35;1m|[0m               {/* Down Payment Source Toggle */}
+ [2m374[0m | [35;1m|[0m               <div>
+ [2m375[0m | [35;1m|[0m                 <label className="flex items-center space-x-3 cursor-pointer">
+ [2m376[0m | [35;1m|[0m                   <input
+ [2m377[0m | [35;1m|[0m                     type="checkbox"
+ [2m378[0m | [35;1m|[0m                     checked={!isTraditionalDownPayment}
+ [2m379[0m | [35;1m|[0m                     onChange={(e) => setIsTraditionalDownPayment(!e.target.checked)}
+ [2m380[0m | [35;1m|[0m                     className="w-6 h-6 text-purple focus:ring-purple border-gray-300 rounded"
+ [2m381[0m | [35;1m|[0m                   />
+ [2m382[0m | [35;1m|[0m                   <span className="text-xl font-bold text-gray-800">
+ [2m383[0m | [35;1m|[0m                     Borrowed down payment
+ [2m384[0m | [35;1m|[0m                   </span>
+ [2m385[0m | [35;1m|[0m                 </label>
+ [2m386[0m | [35;1m|[0m                 {!isTraditionalDownPayment && ltvRatio > 90 && (
+ [2m387[0m | [35;1m|[0m                   <p className="text-red-600 text-base font-medium mt-2">
+ [2m388[0m | [35;1m|[0m                     ⚠️ Higher CMHC premium rate (4.50%) for borrowed down payment
+ [2m389[0m | [35;1m|[0m                   </p>
+ [2m390[0m | [35;1m|[0m                 )}
+ [2m391[0m | [35;1m|[0m               </div>
+ [2m392[0m | [35;1m|[0m             </div>
+ [2m393[0m | [35;1m|[0m           </div>
+ [2m394[0m | [35;1m|[0m   
+ [2m395[0m | [35;1m|[0m           {/* Results Panel */}
+ [2m396[0m | [35;1m|[0m           <div className="space-y-4">
+ [2m397[0m | [35;1m|[0m             {/* Main Payment Result */}
+ [2m398[0m | [35;1m|[0m             <div className="rounded-2xl shadow-xl p-8 text-center text-white relative overflow-hidden hover:shadow-2xl transition-all duration-300" style={{background: 'linear-gradient(135deg, #264653 0%, #2A9D8F 50%, #43AA8B 100%)'}}>
+ [2m399[0m | [35;1m|[0m               <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+ [2m400[0m | [35;1m|[0m               <div className="absolute -top-4 -right-4 w-32 h-32 bg-white/5 rounded-full blur-2xl"></div>
+ [2m401[0m | [35;1m|[0m               <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-white/5 rounded-full blur-xl"></div>
+ [2m402[0m | [35;1m|[0m               <div className="relative z-10">
+ [2m403[0m | [35;1m|[0m               <h3 className="text-3xl font-bold mb-4">Monthly Payment</h3>
+ [2m404[0m | [35;1m|[0m               <div className="text-6xl font-bold mb-3">
+ [2m405[0m | [35;1m|[0m                 {formatCurrency(monthlyPayment)}
+ [2m406[0m | [35;1m|[0m               </div>
+ [2m407[0m | [35;1m|[0m               <p className="text-xl font-medium" style={{color: '#F4F4F4'}}>Principal & Interest</p>
+ [2m408[0m | [35;1m|[0m               </div>
+ [2m409[0m | [35;1m|[0m             </div>
+ [2m410[0m | [35;1m|[0m   
+ [2m411[0m | [35;1m|[0m             {/* Payment Breakdown */}
+ [2m412[0m | [35;1m|[0m             <div className="backdrop-blur-sm rounded-2xl shadow-xl p-6 border-2 hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]" style={{backgroundColor: '#F8F9FA', borderColor: '#2A9D8F', background: 'linear-gradient(135deg, #F8F9FA 0%, #F4F4F4 100%)'}}>
+ [2m413[0m | [35;1m|[0m               <h4 className="text-xl font-bold mb-4 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">CMHC Calculation Breakdown</h4>
+ [2m414[0m | [35;1m|[0m               <div className="space-y-4">
+ [2m415[0m | [35;1m|[0m                 <div className="flex justify-between">
+ [2m416[0m | [35;1m|[0m                   <span className="text-base font-medium" style={{color: '#264653'}}>Loan Amount:</span>
+ [2m417[0m | [35;1m|[0m                   <span className="font-bold text-base">{formatCurrency(loanAmount)}</span>
+ [2m418[0m | [35;1m|[0m                 </div>
+ [2m419[0m | [35;1m|[0m                 {requiresCMHC && (
+ [2m420[0m | [35;1m|[0m                   <>
+ [2m421[0m | [35;1m|[0m                     <div className="flex justify-between">
+ [2m422[0m | [35;1m|[0m                       <span className="text-base font-medium" style={{color: '#264653'}}>CMHC Premium Rate:</span>
+ [2m423[0m | [35;1m|[0m                       <span className="font-bold text-orange-600 text-base">
+ [2m424[0m | [35;1m|[0m                         {((Object.entries(CMHC_RULES.premiumRates).find(([ltv]) => ltvRatio <= parseFloat(ltv))?.[1] ?? 0) * 100).toFixed(2)}%
+ [2m425[0m | [35;1m|[0m                       </span>
+ [2m426[0m | [35;1m|[0m                     </div>
+ [2m427[0m | [35;1m|[0m                     <div className="flex justify-between">
+ [2m428[0m | [35;1m|[0m                       <span className="text-base font-medium" style={{color: '#264653'}}>CMHC Insurance:</span>
+ [2m429[0m | [35;1m|[0m                       <span className="font-bold text-orange-600 text-base">{formatCurrency(cmhcPremium)}</span>
+ [2m430[0m | [35;1m|[0m                     </div>
+ [2m431[0m | [35;1m|[0m                     {amortizationYears > 25 && (
+ [2m432[0m | [35;1m|[0m                       <div className="flex justify-between">
+ [2m433[0m | [35;1m|[0m                         <span className="text-base font-medium" style={{color: '#264653'}}>Amortization Surcharge:</span>
+ [2m434[0m | [35;1m|[0m                         <span className="font-bold text-orange-600 text-base">0.25%</span>
+ [2m435[0m | [35;1m|[0m                       </div>
+ [2m436[0m | [35;1m|[0m                     )}
+ [2m437[0m | [35;1m|[0m                   </>
+ [2m438[0m | [35;1m|[0m                 )}
+ [2m439[0m | [35;1m|[0m                 <div className="flex justify-between border-t pt-3">
+ [2m440[0m | [35;1m|[0m                   <span className="text-base font-medium" style={{color: '#264653'}}>Total Loan:</span>
+ [2m441[0m | [35;1m|[0m                   <span className="font-bold text-base">{formatCurrency(totalLoanAmount)}</span>
+ [2m442[0m | [35;1m|[0m                 </div>
+ [2m443[0m | [35;1m|[0m                 <div className="flex justify-between">
+ [2m444[0m | [35;1m|[0m                   <span className="text-base font-medium" style={{color: '#264653'}}>LTV Ratio:</span>
+ [2m445[0m | [35;1m|[0m                   <span className="font-bold text-base">{formatPercent(ltvRatio)}</span>
+ [2m446[0m | [35;1m|[0m                 </div>
+ [2m447[0m | [35;1m|[0m                 <div className="flex justify-between">
+ [2m448[0m | [35;1m|[0m                   <span className="text-base font-medium" style={{color: '#264653'}}>Amortization:</span>
+ [2m449[0m | [35;1m|[0m                   <span className="font-bold text-base">{amortizationYears} years</span>
+ [2m450[0m | [35;1m|[0m                 </div>
+ [2m451[0m | [35;1m|[0m               </div>
+ [2m452[0m | [35;1m|[0m             </div>
+ [2m453[0m | [35;1m|[0m             
+ [2m454[0m | [35;1m|[0m   
+ [2m455[0m | [35;1m|[0m             {/* CMHC Notice */}
+ [2m456[0m | [35;1m|[0m             {requiresCMHC && isEligibleForCMHC && (
+ [2m457[0m | [35;1m|[0m               <div className="bg-gradient-to-r from-orange-50 to-orange-100/50 border border-orange-200 rounded-xl p-4 shadow-sm">
+ [2m458[0m | [35;1m|[0m                 <div className="flex items-start space-x-3">
+ [2m459[0m | [35;1m|[0m                   <span className="text-orange-500 text-xl mt-0.5">ℹ️</span>
+ [2m460[0m | [35;1m|[0m                   <div>
+ [2m461[0m | [35;1m|[0m                     <h4 className="font-semibold text-orange-900">
+ [2m462[0m | [35;1m|[0m                       CMHC Insurance Required (Official 2025 Rates)
+ [2m463[0m | [35;1m|[0m                     </h4>
+ [2m464[0m | [35;1m|[0m                     <p className="text-sm mt-1 text-orange-800">
+ [2m465[0m | [35;1m|[0m                       LTV over 80% requires mortgage default insurance per CMHC rules.
+ [2m466[0m | [35;1m|[0m                       <br />Total Premium: {formatCurrency(cmhcPremium)}
+ [2m467[0m | [35;1m|[0m                       <br />Base Rate: {((Object.entries(CMHC_RULES.premiumRates).find(([ltv]) => ltvRatio <= parseFloat(ltv))?.[1] ?? 0) * 100).toFixed(2)}% of loan amount
+ [2m468[0m | [35;1m|[0m                       {amortizationYears > 25 && <><br />+ 0.25% amortization surcharge (26-30 years)</>}
+ [2m469[0m | [35;1m|[0m                       {isFirstTimeBuyer && isNewBuild && amortizationYears === 30 && <><br />+ 0.20% first-time buyer new build surcharge</>}
+ [2m470[0m | [35;1m|[0m                       {purchasePrice >= 1000000 && purchasePrice <= 1500000 && ltvRatio > 80 && <><br />+ 0.25% high-ratio surcharge ($1M-$1.5M)</>}
+ [2m471[0m | [35;1m|[0m                       {!isTraditionalDownPayment && ltvRatio > 90 && <><br />Higher rate (4.50%) for borrowed down payment</>}
+ [2m472[0m | [35;1m|[0m                     </p>
+ [2m473[0m | [35;1m|[0m                   </div>
+ [2m474[0m | [35;1m|[0m                 </div>
+ [2m475[0m | [35;1m|[0m               </div>
+ [2m476[0m | [35;1m|[0m             )}
+ [2m477[0m | [35;1m|[0m             
+ [2m478[0m | [35;1m|[0m             {/* CMHC Ineligible Notice */}
+ [2m479[0m | [35;1m|[0m             {!isEligibleForCMHC && (
+ [2m480[0m | [35;1m|[0m               <div className="bg-gradient-to-r from-red-50 to-red-100/50 border border-red-200 rounded-xl p-4 shadow-sm">
+ [2m481[0m | [35;1m|[0m                 <div className="flex items-start space-x-3">
+ [2m482[0m | [35;1m|[0m                   <span className="text-red-500 text-xl mt-0.5">⚠️</span>
+ [2m483[0m | [35;1m|[0m                   <div>
+ [2m484[0m | [35;1m|[0m                     <h4 className="font-semibold text-red-900">
+ [2m485[0m | [35;1m|[0m                       CMHC Insurance Not Available
+ [2m486[0m | [35;1m|[0m                     </h4>
+ [2m487[0m | [35;1m|[0m                     <p className="text-sm mt-1 text-red-800">
+ [2m488[0m | [35;1m|[0m                       Homes over $1.5M are not eligible for CMHC insurance.
+ [2m489[0m | [35;1m|[0m                       <br />Minimum 20% down payment required for conventional mortgage.
+ [2m490[0m | [35;1m|[0m                     </p>
+ [2m491[0m | [35;1m|[0m                   </div>
+ [2m492[0m | [35;1m|[0m                 </div>
+ [2m493[0m | [35;1m|[0m               </div>
+ [2m494[0m | [35;1m|[0m             )}
+ [2m495[0m | [35;1m|[0m   
+ [2m496[0m | [35;1m|[0m             {/* CTA */}
+ [2m497[0m | [35;1m|[0m             <div className="text-center">
+ [2m498[0m | [35;1m|[0m               <button
+ [2m499[0m | [35;1m|[0m                 onClick={onOpenContactForm}
+ [2m500[0m | [35;1m|[0m                 className="px-8 py-3 text-lg font-semibold inline-block rounded-lg text-white hover:opacity-90 transition-opacity"
+ [2m501[0m | [35;1m|[0m                 style={{backgroundColor: '#FF914D'}}
+ [2m502[0m | [35;1m|[0m               >
+ [2m503[0m | [35;1m|[0m                 Get Pre-Approved Now
+ [2m504[0m | [35;1m|[0m               </button>
+ [2m505[0m | [35;1m|[0m             </div>
+ [2m506[0m | [35;1m|[0m           </div>
+ [2m507[0m | [35;1m|[0m         </div>
+ [2m508[0m | [35;1m|[0m   
+ [2m509[0m | [35;1m|[0m         {/* Custom Slider Styles */}
+ [2m510[0m | [35;1m|[0m         <style jsx>{`
+ [2m511[0m | [35;1m|[0m           .slider::-webkit-slider-thumb {
+ [2m512[0m | [35;1m|[0m             appearance: none;
+ [2m513[0m | [35;1m|[0m             height: 24px;
+ [2m514[0m | [35;1m|[0m             width: 24px;
+ [2m515[0m | [35;1m|[0m             border-radius: 50%;
+ [2m516[0m | [35;1m|[0m             background: linear-gradient(135deg, #264653 0%, #2A9D8F 100%);
+ [2m517[0m | [35;1m|[0m             cursor: pointer;
+ [2m518[0m | [35;1m|[0m             box-shadow: 0 6px 15px rgba(38, 70, 83, 0.4);
+ [2m519[0m | [35;1m|[0m             transition: all 0.3s ease;
+ [2m520[0m | [35;1m|[0m             border: 2px solid white;
+ [2m521[0m | [35;1m|[0m           }
+ [2m522[0m | [35;1m|[0m           .slider::-webkit-slider-thumb:hover {
+ [2m523[0m | [35;1m|[0m             background: linear-gradient(135deg, #2A9D8F 0%, #43AA8B 100%);
+ [2m524[0m | [35;1m|[0m             transform: scale(1.2);
+ [2m525[0m | [35;1m|[0m             box-shadow: 0 8px 20px rgba(42, 157, 143, 0.6);
+ [2m526[0m | [35;1m|[0m           }
+ [2m527[0m | [35;1m|[0m           .slider::-webkit-slider-track {
+ [2m528[0m | [35;1m|[0m             height: 16px;
+ [2m529[0m | [35;1m|[0m             border-radius: 8px;
+ [2m530[0m | [35;1m|[0m             background: linear-gradient(to right, #2A9D8F 0%, #2A9D8F 50%, #E2E8F0 50%, #E2E8F0 100%);
+ [2m531[0m | [35;1m|[0m             box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+ [2m532[0m | [35;1m|[0m             border: 1px solid rgba(42, 157, 143, 0.2);
+ [2m533[0m | [35;1m|[0m           }
+ [2m534[0m | [35;1m|[0m           .slider::-moz-range-track {
+ [2m535[0m | [35;1m|[0m             height: 12px;
+ [2m536[0m | [35;1m|[0m             border-radius: 6px;
+ [2m537[0m | [35;1m|[0m             background: linear-gradient(to right, #7c3aed 0%, #7c3aed 50%, #e5e7eb 50%, #e5e7eb 100%);
+ [2m538[0m | [35;1m|[0m             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+ [2m539[0m | [35;1m|[0m             border: none;
+ [2m540[0m | [35;1m|[0m           }
+ [2m541[0m | [35;1m|[0m         `}</style>
+ [2m542[0m | [35;1m|[0m       </div>  
+ [2m543[0m | [35;1m`[0m[35;1m-[0m[35;1m>[0m   );
+ [2m544[0m |     }
+ [2m545[0m |     
+ [2m545[0m |     // Metadata moved to layout.tsx or handled via Head component for client components
+     `----
+  [31mx[0m Expression expected
+     ,-[[36;1;4mC:\Users\Andreina\lending-seo\lending-seo-automation\app\best-mortgage-rates-toronto\page.tsx[0m:544:1]
+ [2m541[0m |       `}</style>
+ [2m542[0m |     </div>  
+ [2m543[0m |   );
+ [2m544[0m | }
+     : [35;1m^[0m
+ [2m545[0m | 
+ [2m546[0m | // Metadata moved to layout.tsx or handled via Head component for client components
+ [2m546[0m | 
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/best-mortgage-rates-toronto/page.tsx
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 635ms (667 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 504ms (667 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 327ms (263 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 293ms (263 modules)
+ ✓ Compiled in 189ms (263 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 258ms (263 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 248ms (263 modules)
+ ✓ Compiled in 174ms (263 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 269ms (263 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 492ms (667 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 449ms (669 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 622ms (669 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 252ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 336ms (264 modules)
+ ✓ Compiled in 246ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 255ms (264 modules)
+ ✓ Compiled in 252ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 260ms (264 modules)
+ ✓ Compiled in 193ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 564ms (264 modules)
+ ✓ Compiled in 224ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 273ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 346ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 461ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 339ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 291ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 281ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 394ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 638ms (669 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 263ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 238ms (264 modules)
+ ✓ Compiled in 194ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 245ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 260ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 320ms (264 modules)
+ ✓ Compiled in 226ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 289ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 289ms (264 modules)
+ ✓ Compiled in 204ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 249ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 476ms (264 modules)
+ ✓ Compiled in 337ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 271ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 264ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 240ms (264 modules)
+ ✓ Compiled in 193ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 547ms (264 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\Andreina\lending-seo\lending-seo-automation\.next\cache\webpack\client-development\0.pack.gz'

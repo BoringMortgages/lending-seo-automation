@@ -2,14 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import Link from "next/link";
+import Footer from "../../components/Footer";
+import PreApprovalForm from "../../components/PreApprovalForm";
+import { CONTACT_CONFIG } from "../../config/contact";
 
 export default function MortgageAffordabilityCalculator() {
   const [income, setIncome] = useState(80000);
-  const [expenses, setExpenses] = useState(3000);
   const [downPayment, setDownPayment] = useState(50000);
   const [interestRate, setInterestRate] = useState(5.79);
   const [propertyTax, setPropertyTax] = useState(4000);
-  const [homeInsurance, setHomeInsurance] = useState(1200);
   const [otherDebts, setOtherDebts] = useState(500);
   
   const [maxMortgage, setMaxMortgage] = useState(0);
@@ -18,23 +19,23 @@ export default function MortgageAffordabilityCalculator() {
   const [tdsRatio, setTdsRatio] = useState(0);
   const [gdsRatio, setGdsRatio] = useState(0);
   const [showResults, setShowResults] = useState(false);
+  const [isPreApprovalFormOpen, setIsPreApprovalFormOpen] = useState(false);
 
   useEffect(() => {
     calculateAffordability();
-  }, [income, expenses, downPayment, interestRate, propertyTax, homeInsurance, otherDebts]);
+  }, [income, downPayment, interestRate, propertyTax, otherDebts]);
 
   const calculateAffordability = () => {
     const monthlyIncome = income / 12;
     const monthlyTax = propertyTax / 12;
-    const monthlyInsurance = homeInsurance / 12;
     
     // GDS (Gross Debt Service) - should not exceed 39%
     const maxGDSPayment = monthlyIncome * 0.39;
-    const maxMortgagePayment = maxGDSPayment - monthlyTax - monthlyInsurance;
+    const maxMortgagePayment = maxGDSPayment - monthlyTax;
     
     // TDS (Total Debt Service) - should not exceed 44%
     const maxTDSPayment = monthlyIncome * 0.44;
-    const maxMortgagePaymentTDS = maxTDSPayment - monthlyTax - monthlyInsurance - otherDebts;
+    const maxMortgagePaymentTDS = maxTDSPayment - monthlyTax - otherDebts;
     
     // Use the lower of the two
     const maxAllowedPayment = Math.min(maxMortgagePayment, maxMortgagePaymentTDS);
@@ -63,7 +64,7 @@ export default function MortgageAffordabilityCalculator() {
     }
     
     // Calculate ratios
-    const totalHousingCosts = actualPayment + monthlyTax + monthlyInsurance;
+    const totalHousingCosts = actualPayment + monthlyTax;
     const calculatedGDS = (totalHousingCosts / monthlyIncome) * 100;
     const calculatedTDS = ((totalHousingCosts + otherDebts) / monthlyIncome) * 100;
     
@@ -82,9 +83,9 @@ export default function MortgageAffordabilityCalculator() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-200">
+      <header className="backdrop-blur-md bg-white/80 shadow-lg border-b border-white/20 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
+          <div className="flex justify-between items-center py-4">
             <Link href="/" className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-gradient-to-r from-slate-600 to-slate-800 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-xl">B</span>
@@ -97,12 +98,14 @@ export default function MortgageAffordabilityCalculator() {
               </div>
             </Link>
             <div className="flex items-center space-x-4">
-              <Link
-                href="mailto:hello@mortgagewithford.ca"
+              <a
+                href={CONTACT_CONFIG.consultationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-300 transform hover:scale-105 font-medium"
               >
-                Get Pre-Approved
-              </Link>
+                {CONTACT_CONFIG.cta.consultation}
+              </a>
             </div>
           </div>
         </div>
@@ -151,25 +154,6 @@ export default function MortgageAffordabilityCalculator() {
                 </div>
               </div>
 
-              {/* Monthly Expenses */}
-              <div>
-                <label className="block text-lg font-semibold text-gray-700 mb-4">
-                  Monthly Living Expenses: <span className="text-green-600 font-bold">${formatCurrency(expenses)}</span>
-                </label>
-                <input
-                  type="range"
-                  min="1000"
-                  max="8000"
-                  step="100"
-                  value={expenses}
-                  onChange={(e) => setExpenses(Number(e.target.value))}
-                  className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-                />
-                <div className="flex justify-between text-sm text-gray-500 mt-2">
-                  <span>$1K</span>
-                  <span>$8K</span>
-                </div>
-              </div>
 
               {/* Down Payment */}
               <div>
@@ -227,21 +211,6 @@ export default function MortgageAffordabilityCalculator() {
                 />
               </div>
 
-              {/* Home Insurance */}
-              <div>
-                <label className="block text-lg font-semibold text-gray-700 mb-4">
-                  Annual Home Insurance: <span className="text-green-600 font-bold">${formatCurrency(homeInsurance)}</span>
-                </label>
-                <input
-                  type="range"
-                  min="500"
-                  max="5000"
-                  step="100"
-                  value={homeInsurance}
-                  onChange={(e) => setHomeInsurance(Number(e.target.value))}
-                  className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-                />
-              </div>
 
               {/* Other Monthly Debts */}
               <div>
@@ -353,14 +322,14 @@ export default function MortgageAffordabilityCalculator() {
 
             {/* CTA */}
             <div className="text-center">
-              <Link
-                href="mailto:hello@mortgagewithford.ca?subject=Mortgage Pre-Approval Request"
+              <button
+                onClick={() => setIsPreApprovalFormOpen(true)}
                 className="inline-block bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-green-600 hover:to-emerald-700 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
               >
-                Get Pre-Approved Now →
-              </Link>
+                Get Pre-Approved
+              </button>
               <p className="mt-3 text-sm text-gray-500">
-                Turn your affordability into approval • Contact Andreina directly
+                Turn your affordability into approval • Licensed Mortgage Agent
               </p>
             </div>
           </div>
@@ -493,6 +462,13 @@ export default function MortgageAffordabilityCalculator() {
           background: linear-gradient(to right, #059669 0%, #059669 var(--value, 0%), #E5E7EB var(--value, 0%), #E5E7EB 100%);
         }
       `}</style>
+      
+      <Footer />
+      
+      <PreApprovalForm 
+        isOpen={isPreApprovalFormOpen} 
+        onClose={() => setIsPreApprovalFormOpen(false)} 
+      />
     </div>
   );
 } 

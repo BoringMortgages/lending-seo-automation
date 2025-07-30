@@ -42,12 +42,34 @@ const CMHC_RULES = {
 };
 
 // Mississauga Mortgage Calculator Component
-function MississaugaMortgageCalculator({ onOpenContactForm }: { onOpenContactForm: () => void }) {
+function MississaugaMortgageCalculator({ onOpenContactForm, currentRates }: { onOpenContactForm: () => void, currentRates: MortgageRate[] }) {
   const [purchasePrice, setPurchasePrice] = React.useState(925000);
   const [downPayment, setDownPayment] = React.useState(185000);
-  const [interestRate, setInterestRate] = React.useState(3.94);
+  const [interestRate, setInterestRate] = React.useState(4.5);
+
+  // Update interest rate when API rates are loaded
+  React.useEffect(() => {
+    if (currentRates.length > 0) {
+      const fiveYearFixed = currentRates.find(r => r.term === "5 Year" && r.type === "Fixed");
+      if (fiveYearFixed) {
+        const rateNumber = parseFloat(fiveYearFixed.rate.replace('%', ''));
+        setInterestRate(rateNumber);
+      }
+    }
+  }, [currentRates]);
+
+  // Auto-adjust down payment when purchase price changes
+  React.useEffect(() => {
+    const minDown = calculateMinDownPayment(purchasePrice);
+    if (downPayment < minDown) {
+      setDownPayment(minDown);
+    }
+  }, [purchasePrice]);
+
   const [amortizationYears, setAmortizationYears] = React.useState(25);
   const [isFirstTimeBuyer, setIsFirstTimeBuyer] = React.useState(false);
+  const [isNewBuild, setIsNewBuild] = React.useState(false);
+  const [isTraditionalDownPayment, setIsTraditionalDownPayment] = React.useState(true);
 
   // Calculate minimum down payment based on official CMHC rules (2024)
   const calculateMinDownPayment = (price: number): number => {
@@ -63,8 +85,8 @@ function MississaugaMortgageCalculator({ onOpenContactForm }: { onOpenContactFor
     }
   };
 
-  // Calculate CMHC premium based on official 2024 premium rates
-  const calculateCMHCPremium = (loanAmount: number, price: number, isTraditionalDownPayment: boolean = true): number => {
+  // Calculate CMHC premium based on official 2025 premium rates and surcharges
+  const calculateCMHCPremium = (loanAmount: number, price: number, isTraditionalDownPayment: boolean = true, isNewBuild: boolean = false): number => {
     const ltv = (loanAmount / price) * 100;
     const rules = CMHC_RULES;
     
@@ -73,31 +95,41 @@ function MississaugaMortgageCalculator({ onOpenContactForm }: { onOpenContactFor
       return 0;
     }
     
-    // Determine premium rate based on official CMHC table
+    // Determine base premium rate based on official 2025 CMHC LTV table
     let premiumRate = 0;
     if (ltv <= 65) {
-      premiumRate = rules.premiumRates[65.00];
+      premiumRate = rules.premiumRates[65.00];       // 0.60%
     } else if (ltv <= 75) {
-      premiumRate = rules.premiumRates[75.00];
+      premiumRate = rules.premiumRates[75.00];       // 1.70%
     } else if (ltv <= 80) {
-      premiumRate = rules.premiumRates[80.00];
+      premiumRate = rules.premiumRates[80.00];       // 2.40%
     } else if (ltv <= 85) {
-      premiumRate = rules.premiumRates[85.00];
+      premiumRate = rules.premiumRates[85.00];       // 2.80%
     } else if (ltv <= 90) {
-      premiumRate = rules.premiumRates[90.00];
+      premiumRate = rules.premiumRates[90.00];       // 3.10%
     } else if (ltv <= 95) {
-      // Use higher rate for non-traditional down payment
-      premiumRate = isTraditionalDownPayment ? rules.premiumRates[95.00] : rules.premiumRates[95.01];
+      // Use higher rate for non-traditional/borrowed down payment
+      premiumRate = isTraditionalDownPayment ? rules.premiumRates[95.00] : rules.premiumRates[95.01]; // 4.00% or 4.50%
     }
     
-    let premium = loanAmount * premiumRate;
+    let totalPremiumRate = premiumRate;
     
-    // Add amortization surcharge if > 25 years
+    // Add 2025 amortization surcharges
     if (amortizationYears > 25) {
-      premium += loanAmount * rules.additionalRules.amortizationSurcharge;
+      totalPremiumRate += 0.0025; // +0.25%
+      
+      // Additional surcharge for first-time buyers with new builds (30-year amortization)  
+      if (isFirstTimeBuyer && isNewBuild && amortizationYears === 30) {
+        totalPremiumRate += 0.0020; // +0.20%
+      }
     }
     
-    return premium;
+    // Add 2025 high-ratio surcharge for homes $1M-$1.5M (high-ratio mortgages only)
+    if (price >= 1000000 && price <= 1500000 && ltv > 80) {
+      totalPremiumRate += 0.0025; // +0.25%
+    }
+    
+    return loanAmount * totalPremiumRate;
   };
 
   // Calculate monthly payment
@@ -113,7 +145,7 @@ function MississaugaMortgageCalculator({ onOpenContactForm }: { onOpenContactFor
 
   const minDownPayment = calculateMinDownPayment(purchasePrice);
   const loanAmount = purchasePrice - downPayment;
-  const cmhcPremium = calculateCMHCPremium(loanAmount, purchasePrice, true);
+  const cmhcPremium = calculateCMHCPremium(loanAmount, purchasePrice, isTraditionalDownPayment, isNewBuild);
   const totalLoanAmount = loanAmount + cmhcPremium;
   const monthlyPayment = calculatePayment(totalLoanAmount, interestRate, amortizationYears);
   const ltvRatio = (loanAmount / purchasePrice) * 100;
@@ -663,7 +695,7 @@ export default function MississaugaMortgageRates() {
   return (
     <div className="min-h-screen bg-white" style={{backgroundColor: '#FAFAFA'}}>
       {/* Header */}
-      <header className="backdrop-blur-sm shadow-subtle border-b sticky top-0 z-50" style={{backgroundColor: '#FAFAFA'}}>
+      <header className="backdrop-blur-md bg-white/80 shadow-lg border-b border-white/20 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <Link href="/" className="flex items-center space-x-3">
@@ -888,7 +920,10 @@ export default function MississaugaMortgageRates() {
             </p>
           </div>
           
-          <MississaugaMortgageCalculator onOpenContactForm={() => setIsContactFormOpen(true)} />
+          <MississaugaMortgageCalculator 
+            onOpenContactForm={() => setIsContactFormOpen(true)} 
+            currentRates={currentRates} 
+          />
         </div>
       </section>
 
@@ -1250,7 +1285,7 @@ export default function MississaugaMortgageRates() {
           </h2>
           <p className="text-xl mb-8" style={{color: '#F4F4F4'}}>
             Our tools give you the details. When you're ready for personalized Mississauga guidance, 
-            connect with <strong>Andreina Ford</strong> - Licensed Mortgage Agent Level 2, BRX Mortgage #13463, specializing in the GTA market.
+            connect with our Licensed Mortgage Agent specializing in the GTA market.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
@@ -1274,10 +1309,6 @@ export default function MississaugaMortgageRates() {
             <div className="flex items-center space-x-2">
               <span style={{color: '#2A9D8F'}}>✓</span>
               <span>GTA Market Expert</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <span style={{color: '#2A9D8F'}}>✓</span>
-              <span>BRX Mortgage #13463</span>
             </div>
           </div>
         </div>

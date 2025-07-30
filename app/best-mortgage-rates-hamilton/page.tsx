@@ -64,7 +64,7 @@ const CMHC_RULES = {
 
 // Metadata moved to layout.tsx or handled via Head component for client components
 
-export default function TorontoMortgageRates() {
+export default function HamiltonMortgageRates() {
   const [selectedFilter, setSelectedFilter] = React.useState('all');
   const [showRateAlert, setShowRateAlert] = React.useState(false);
   const [showLockRate, setShowLockRate] = React.useState(false);
@@ -185,7 +185,7 @@ export default function TorontoMortgageRates() {
       email: formData.get('email'),
       mortgageType: formData.get('mortgageType'),
       timestamp: new Date().toISOString(),
-      location: 'Toronto'
+      location: 'Hamilton'
     };
     
     try {
@@ -195,8 +195,8 @@ export default function TorontoMortgageRates() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           to: 'hello@boringmortgages.ca',
-          subject: `New Rate Alert Set - Toronto`,
-          message: `Rate Alert Request:\n\nTarget Rate: ${data.targetRate}%\nEmail: ${data.email}\nMortgage Type: ${data.mortgageType}\nLocation: Toronto\nTimestamp: ${data.timestamp}`
+          subject: `New Rate Alert Set - Hamilton`,
+          message: `Rate Alert Request:\n\nTarget Rate: ${data.targetRate}%\nEmail: ${data.email}\nMortgage Type: ${data.mortgageType}\nLocation: Hamilton\nTimestamp: ${data.timestamp}`
         })
       });
       
@@ -216,7 +216,7 @@ export default function TorontoMortgageRates() {
       phone: formData.get('phone') || 'Not provided',
       rate: selectedRate,
       timestamp: new Date().toISOString(),
-      location: 'Toronto'
+      location: 'Hamilton'
     };
     
     try {
@@ -226,8 +226,8 @@ export default function TorontoMortgageRates() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           to: 'hello@boringmortgages.ca',
-          subject: `🔒 New Rate Lock Lead - Toronto`,
-          message: `New Rate Lock Request:\n\n👤 Name: ${data.name}\n📧 Email: ${data.email}\n📱 Phone: ${data.phone}\n💰 Rate: ${data.rate}\n📍 Location: Toronto\n⏰ Timestamp: ${data.timestamp}\n\nPlease reach out to this lead promptly!`
+          subject: `🔒 New Rate Lock Lead - Hamilton`,
+          message: `New Rate Lock Request:\n\n👤 Name: ${data.name}\n📧 Email: ${data.email}\n📱 Phone: ${data.phone}\n💰 Rate: ${data.rate}\n📍 Location: Hamilton\n⏰ Timestamp: ${data.timestamp}\n\nPlease reach out to this lead promptly!`
         })
       });
       
@@ -515,7 +515,7 @@ export default function TorontoMortgageRates() {
         </div>
       </section>
 
-      {/* Toronto Mortgage Calculator */}
+      {/* Hamilton Mortgage Calculator */}
       <section className="py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -533,7 +533,7 @@ export default function TorontoMortgageRates() {
         </div>
       </section>
 
-      {/* Toronto Market Insights */}
+      {/* Hamilton Market Insights */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Floating Insights Card */}
@@ -561,7 +561,7 @@ export default function TorontoMortgageRates() {
         </div>
       </section>
 
-      {/* Toronto Programs */}
+      {/* Hamilton Programs */}
       <section className="py-20 bg-gradient-to-br from-yellow-100/25 via-orange-100/20 via-emerald-100/15 to-violet-100/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -670,7 +670,7 @@ export default function TorontoMortgageRates() {
             {!rateAlertSubmitted ? (
               <>
                 <p className="text-gray-600 mb-4">
-                  Get notified when Toronto mortgage rates drop to your target level.
+                  Get notified when Hamilton mortgage rates drop to your target level.
                 </p>
                 <form onSubmit={handleRateAlertSubmit} className="space-y-4">
                   <div>
@@ -847,10 +847,6 @@ export default function TorontoMortgageRates() {
               <span style={{color: '#2A9D8F'}}>✓</span>
               <span>Hamilton Market Expert</span>
             </div>
-            <div className="flex items-center space-x-2">
-              <span style={{color: '#2A9D8F'}}>✓</span>
-              <span>BRX Mortgage #13463</span>
-            </div>
           </div>
         </div>
       </section>
@@ -896,7 +892,7 @@ export default function TorontoMortgageRates() {
               <h3 className="text-lg font-semibold mb-4">Get Help</h3>
               <ul className="space-y-2 text-gray-400">
                 <li><a href="https://callme.mortgagewithford.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">Book Consultation</a></li>
-                <li><a href="mailto:hello@boringmortgages.ca?subject=Mortgage questions from Toronto" className="hover:text-white">Email Us</a></li>
+                <li><a href="mailto:hello@boringmortgages.ca?subject=Mortgage questions from Hamilton" className="hover:text-white">Email Us</a></li>
                 <li><a href="https://mortgagewithford.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">About Us</a></li>
                 <li><a href="https://boringmortgages.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">Home</a></li>
               </ul>

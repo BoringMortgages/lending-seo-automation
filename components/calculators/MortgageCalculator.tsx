@@ -501,7 +501,7 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
                 onClick={onOpenContactForm}
                 className="px-8 py-3 text-lg font-semibold inline-block rounded-lg text-white hover:opacity-90 transition-opacity bg-orange-500"
               >
-                {CONTACT_CONFIG.cta.getPreApproved}
+                Get Pre-Approved
               </button>
             ) : (
               <a 

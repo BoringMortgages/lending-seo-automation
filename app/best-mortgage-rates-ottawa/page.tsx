@@ -1364,7 +1364,7 @@ export default function OttawaMortgageRates() {
           </h2>
           <p className="text-xl mb-8" style={{color: '#F4F4F4'}}>
             Our tools give you the details. When you're ready for personalized Ottawa guidance, 
-            connect with <strong>Andreina Ford</strong> - Licensed Mortgage Agent Level 2, BRX Mortgage #13463, specializing in federal employee programs.
+            connect with our Licensed Mortgage Agent specializing in federal employee programs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
@@ -1388,10 +1388,6 @@ export default function OttawaMortgageRates() {
             <div className="flex items-center space-x-2">
               <span style={{color: '#2A9D8F'}}>✓</span>
               <span>Federal Employee Expert</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <span style={{color: '#2A9D8F'}}>✓</span>
-              <span>BRX Mortgage #13463</span>
             </div>
           </div>
         </div>
