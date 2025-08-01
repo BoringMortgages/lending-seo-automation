@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from "next/link";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
+import Button from "../../components/ui/Button";
 
 export default function HELOCPaymentCalculator() {
   const [homeValue, setHomeValue] = useState(500000);
@@ -167,13 +168,15 @@ export default function HELOCPaymentCalculator() {
 
               {/* Calculate Button */}
               <div className="flex gap-4">
-                <button
+                <Button
                   onClick={calculateHELOC}
-                  className="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105"
+                  variant="primary"
+                  size="lg"
+                  className="flex-1"
                 >
                   Calculate
-                </button>
-                <button
+                </Button>
+                <Button
                   onClick={() => {
                     setHomeValue(500000);
                     setMortgageBalance(300000);
@@ -181,10 +184,11 @@ export default function HELOCPaymentCalculator() {
                     setDesiredAmount(0);
                     setShowResults(false);
                   }}
-                  className="px-8 py-4 rounded-xl font-bold text-lg bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all duration-300"
+                  variant="ghost"
+                  size="lg"
                 >
                   Reset
-                </button>
+                </Button>
               </div>
             </div>
           </div>
@@ -278,12 +282,13 @@ export default function HELOCPaymentCalculator() {
 
             {/* CTA */}
             <div className="text-center">
-              <Link
+              <Button
                 href="mailto:hello@mortgagewithford.ca?subject=HELOC Inquiry"
-                className="inline-block bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-purple-600 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+                variant="primary"
+                size="lg"
               >
                 Get HELOC Consultation →
-              </Link>
+              </Button>
               <p className="mt-3 text-sm text-gray-500">
                 Maximize your home equity • Contact us directly
               </p>
@@ -431,6 +436,8 @@ export default function HELOCPaymentCalculator() {
           background: linear-gradient(to right, #9333EA 0%, #9333EA var(--value, 0%), #E5E7EB var(--value, 0%), #E5E7EB 100%);
         }
       `}</style>
+
+      <Footer showRegulatory={true} />
     </div>
   );
 } 
