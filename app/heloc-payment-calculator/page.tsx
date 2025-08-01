@@ -6,70 +6,45 @@ import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
 
 export default function HELOCPaymentCalculator() {
-  const [homeValue, setHomeValue] = useState(800000);
-  const [mortgageBalance, setMortgageBalance] = useState(400000);
-  const [interestRate, setInterestRate] = useState(6.45);
-  const [creditLimit, setCreditLimit] = useState(200000);
-  const [currentBalance, setCurrentBalance] = useState(50000);
-  const [paymentType, setPaymentType] = useState('interest-only');
-  const [paymentAmount, setPaymentAmount] = useState(0);
-  
-  const [monthlyPayment, setMonthlyPayment] = useState(0);
-  const [interestPayment, setInterestPayment] = useState(0);
-  const [principalPayment, setPrincipalPayment] = useState(0);
-  const [payoffTime, setPayoffTime] = useState(0);
-  const [totalInterest, setTotalInterest] = useState(0);
+  const [homeValue, setHomeValue] = useState(500000);
+  const [mortgageBalance, setMortgageBalance] = useState(300000);
+  const [creditScore, setCreditScore] = useState(720);
+  const [desiredAmount, setDesiredAmount] = useState(0);
   const [showResults, setShowResults] = useState(false);
 
-  const availableEquity = homeValue * 0.80 - mortgageBalance;
-  const maxHELOC = Math.min(availableEquity, creditLimit);
-  const utilizationRate = currentBalance > 0 ? (currentBalance / maxHELOC) * 100 : 0;
+  // Calculate equity percentage
+  const currentEquity = homeValue > 0 ? ((homeValue - mortgageBalance) / homeValue) * 100 : 0;
+  
+  // Calculate maximum combined limit (80% LTV)
+  const maxCombinedLimit = homeValue * 0.80;
+  
+  // Calculate maximum HELOC available using two methods, take the lower
+  const maxHELOC_Method1 = (homeValue * 0.65) - mortgageBalance; // 65% LTV standalone
+  const maxHELOC_Method2 = maxCombinedLimit - mortgageBalance; // 80% combined minus mortgage
+  const maxHELOC = Math.max(0, Math.min(maxHELOC_Method1, maxHELOC_Method2));
 
-  useEffect(() => {
-    calculatePayment();
-  }, [homeValue, mortgageBalance, interestRate, creditLimit, currentBalance, paymentType, paymentAmount]);
+  // Calculate monthly interest for desired amount or max HELOC
+  const calculateMonthlyInterest = () => {
+    const amountForInterest = desiredAmount > 0 ? Math.min(desiredAmount, maxHELOC) : maxHELOC;
+    if (amountForInterest > 0) {
+      const annualRate = 0.075; // Prime + 0.5% estimate
+      const monthlyRate = annualRate / 12;
+      return amountForInterest * monthlyRate;
+    }
+    return 0;
+  };
 
-  const calculatePayment = () => {
-    if (currentBalance <= 0) {
-      setMonthlyPayment(0);
-      setInterestPayment(0);
-      setPrincipalPayment(0);
-      setPayoffTime(0);
-      setTotalInterest(0);
-      setShowResults(true);
+  const monthlyInterest = calculateMonthlyInterest();
+
+  const calculateHELOC = () => {
+    if (homeValue <= 0 || mortgageBalance < 0) {
+      alert('Please enter valid home value and mortgage balance.');
       return;
     }
-
-    const monthlyRate = interestRate / 100 / 12;
-    const monthlyInterest = currentBalance * monthlyRate;
-
-    if (paymentType === 'interest-only') {
-      setMonthlyPayment(monthlyInterest);
-      setInterestPayment(monthlyInterest);
-      setPrincipalPayment(0);
-      setPayoffTime(0);
-      setTotalInterest(0);
-    } else if (paymentType === 'fixed-payment') {
-      const payment = paymentAmount || monthlyInterest * 1.5; // Default to 150% of interest
-      const principal = Math.max(0, payment - monthlyInterest);
-      
-      setMonthlyPayment(payment);
-      setInterestPayment(monthlyInterest);
-      setPrincipalPayment(principal);
-      
-      // Calculate payoff time if principal is being paid
-      if (principal > 0) {
-        const months = Math.log(1 + (currentBalance * monthlyRate) / principal) / Math.log(1 + monthlyRate);
-        const totalInterestPaid = (payment * months) - currentBalance;
-        
-        setPayoffTime(months);
-        setTotalInterest(totalInterestPaid);
-      } else {
-        setPayoffTime(0);
-        setTotalInterest(0);
-      }
+    if (mortgageBalance > homeValue) {
+      alert('Mortgage balance cannot exceed home value.');
+      return;
     }
-    
     setShowResults(true);
   };
 
@@ -89,14 +64,13 @@ export default function HELOCPaymentCalculator() {
         {/* Hero Section */}
         <div className="text-center mb-16">
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-            HELOC Payment Calculator
+            Welcome to the Ontario HELOC Calculator
             <span className="block text-3xl md:text-4xl bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mt-2">
-              Home Equity Line of Credit
+              Calculate Your Available Home Equity
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-            Calculate payments for your Home Equity Line of Credit (HELOC). 
-            Compare interest-only vs. principal + interest payments and plan your <strong>home equity strategy</strong>.
+            Determine your maximum HELOC amount and estimated monthly interest costs for your <strong>home equity line of credit</strong>.
           </p>
         </div>
 
@@ -104,18 +78,18 @@ export default function HELOCPaymentCalculator() {
           {/* Calculator Form */}
           <div className="bg-white rounded-2xl shadow-2xl p-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-8">
-              Calculate HELOC Payments
+              Please enter:
             </h2>
             
             <div className="space-y-8">
               {/* Home Value */}
               <div>
                 <label className="block text-lg font-semibold text-gray-700 mb-4">
-                  Current Home Value: <span className="text-purple-600 font-bold">${formatCurrency(homeValue)}</span>
+                  Current Home Market Value ($): <span className="text-purple-600 font-bold">${formatCurrency(homeValue)}</span>
                 </label>
                 <input
                   type="range"
-                  min="300000"
+                  min="200000"
                   max="2000000"
                   step="25000"
                   value={homeValue}
@@ -123,7 +97,7 @@ export default function HELOCPaymentCalculator() {
                   className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
                 />
                 <div className="flex justify-between text-sm text-gray-500 mt-2">
-                  <span>$300K</span>
+                  <span>$200K</span>
                   <span>$2M</span>
                 </div>
               </div>
@@ -131,12 +105,12 @@ export default function HELOCPaymentCalculator() {
               {/* Mortgage Balance */}
               <div>
                 <label className="block text-lg font-semibold text-gray-700 mb-4">
-                  Remaining Mortgage Balance: <span className="text-purple-600 font-bold">${formatCurrency(mortgageBalance)}</span>
+                  Remaining Mortgage Balance ($): <span className="text-purple-600 font-bold">${formatCurrency(mortgageBalance)}</span>
                 </label>
                 <input
                   type="range"
                   min="0"
-                  max={homeValue * 0.8}
+                  max={homeValue * 0.9}
                   step="10000"
                   value={mortgageBalance}
                   onChange={(e) => setMortgageBalance(Number(e.target.value))}
@@ -144,221 +118,161 @@ export default function HELOCPaymentCalculator() {
                 />
                 <div className="flex justify-between text-sm text-gray-500 mt-2">
                   <span>$0</span>
-                  <span>${formatCurrency(homeValue * 0.8)}</span>
+                  <span>${formatCurrency(homeValue * 0.9)}</span>
                 </div>
               </div>
 
-              {/* Available Equity Display */}
-              <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-700 font-medium">Available Home Equity (80% LTV):</span>
-                  <span className="text-purple-600 font-bold text-lg">${formatCurrency(availableEquity)}</span>
-                </div>
-                <div className="flex justify-between items-center mt-2">
-                  <span className="text-gray-700 font-medium">Maximum HELOC Available:</span>
-                  <span className="text-purple-600 font-bold text-lg">${formatCurrency(maxHELOC)}</span>
-                </div>
-              </div>
-
-              {/* HELOC Interest Rate */}
+              {/* Credit Score */}
               <div>
                 <label className="block text-lg font-semibold text-gray-700 mb-4">
-                  HELOC Interest Rate: <span className="text-purple-600 font-bold">{interestRate}%</span>
+                  Credit Score (optional): <span className="text-purple-600 font-bold">{creditScore}</span>
                 </label>
                 <input
                   type="range"
-                  min="4"
-                  max="10"
-                  step="0.01"
-                  value={interestRate}
-                  onChange={(e) => setInterestRate(Number(e.target.value))}
+                  min="300"
+                  max="900"
+                  step="10"
+                  value={creditScore}
+                  onChange={(e) => setCreditScore(Number(e.target.value))}
                   className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
                 />
                 <div className="flex justify-between text-sm text-gray-500 mt-2">
-                  <span>4%</span>
-                  <span>10%</span>
+                  <span>300</span>
+                  <span>900</span>
                 </div>
                 <p className="text-sm text-gray-600 mt-2">
-                  HELOC rates are typically Prime + 0.5% to Prime + 1.5%
+                  Most banks require a credit score of 680 or above
                 </p>
               </div>
 
-              {/* Current HELOC Balance */}
+              {/* Desired HELOC Amount */}
               <div>
                 <label className="block text-lg font-semibold text-gray-700 mb-4">
-                  Current HELOC Balance: <span className="text-purple-600 font-bold">${formatCurrency(currentBalance)}</span>
+                  Desired HELOC Draw Amount ($) (optional): <span className="text-purple-600 font-bold">${formatCurrency(desiredAmount)}</span>
                 </label>
                 <input
                   type="range"
                   min="0"
-                  max={maxHELOC}
+                  max="500000"
                   step="5000"
-                  value={currentBalance}
-                  onChange={(e) => setCurrentBalance(Number(e.target.value))}
+                  value={desiredAmount}
+                  onChange={(e) => setDesiredAmount(Number(e.target.value))}
                   className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
                 />
                 <div className="flex justify-between text-sm text-gray-500 mt-2">
                   <span>$0</span>
-                  <span>${formatCurrency(maxHELOC)}</span>
-                </div>
-                {utilizationRate > 0 && (
-                  <p className="text-sm text-gray-600 mt-2">
-                    Utilization: {formatPercent(utilizationRate)}% of available credit
-                  </p>
-                )}
-              </div>
-
-              {/* Payment Type */}
-              <div>
-                <label className="block text-lg font-semibold text-gray-700 mb-4">
-                  Payment Type
-                </label>
-                <div className="grid grid-cols-1 gap-3">
-                  <button
-                    onClick={() => setPaymentType('interest-only')}
-                    className={`py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${
-                      paymentType === 'interest-only'
-                        ? 'bg-purple-600 text-white shadow-lg transform scale-105'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  >
-                    Interest-Only Payments
-                  </button>
-                  <button
-                    onClick={() => setPaymentType('fixed-payment')}
-                    className={`py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${
-                      paymentType === 'fixed-payment'
-                        ? 'bg-purple-600 text-white shadow-lg transform scale-105'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  >
-                    Fixed Monthly Payment
-                  </button>
+                  <span>$500K</span>
                 </div>
               </div>
 
-              {/* Fixed Payment Amount */}
-              {paymentType === 'fixed-payment' && (
-                <div>
-                  <label className="block text-lg font-semibold text-gray-700 mb-4">
-                    Monthly Payment Amount: <span className="text-purple-600 font-bold">${formatCurrency(paymentAmount)}</span>
-                  </label>
-                  <input
-                    type="range"
-                    min={currentBalance * (interestRate / 100 / 12)}
-                    max={currentBalance * (interestRate / 100 / 12) * 5}
-                    step="25"
-                    value={paymentAmount}
-                    onChange={(e) => setPaymentAmount(Number(e.target.value))}
-                    className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-                  />
-                  <div className="flex justify-between text-sm text-gray-500 mt-2">
-                    <span>Interest Only</span>
-                    <span>5x Interest</span>
-                  </div>
-                </div>
-              )}
+              {/* Calculate Button */}
+              <div className="flex gap-4">
+                <button
+                  onClick={calculateHELOC}
+                  className="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105"
+                >
+                  Calculate
+                </button>
+                <button
+                  onClick={() => {
+                    setHomeValue(500000);
+                    setMortgageBalance(300000);
+                    setCreditScore(720);
+                    setDesiredAmount(0);
+                    setShowResults(false);
+                  }}
+                  className="px-8 py-4 rounded-xl font-bold text-lg bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all duration-300"
+                >
+                  Reset
+                </button>
+              </div>
             </div>
           </div>
 
           {/* Results Panel */}
           <div className="space-y-6">
-            {/* Main Result */}
-            <div className="bg-gradient-to-br from-purple-600 to-indigo-600 rounded-2xl shadow-2xl p-8 text-center text-white">
-              <h3 className="text-2xl font-bold mb-4">Monthly HELOC Payment</h3>
-              <div className="text-6xl font-bold mb-2">
-                ${formatCurrency(monthlyPayment)}
-              </div>
-              <p className="text-purple-100 text-lg">
-                {paymentType === 'interest-only' ? 'Interest-only payment' : 'Principal + Interest'}
-              </p>
-            </div>
-
-            {/* Payment Breakdown */}
-            <div className="bg-white rounded-2xl shadow-xl p-6">
-              <h4 className="text-xl font-bold text-gray-900 mb-6">
-                Payment Breakdown
-              </h4>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Interest Payment</span>
-                  <span className="font-bold text-red-600">
-                    ${formatCurrency(interestPayment)}
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Principal Payment</span>
-                  <span className="font-bold text-blue-600">
-                    ${formatCurrency(principalPayment)}
-                  </span>
-                </div>
-                <hr className="border-gray-200" />
-                <div className="flex justify-between items-center text-lg">
-                  <span className="font-bold text-gray-900">Total Monthly Payment</span>
-                  <span className="font-bold text-purple-600">${formatCurrency(monthlyPayment)}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* HELOC Summary */}
-            <div className="bg-white rounded-2xl shadow-xl p-6">
-              <h4 className="text-xl font-bold text-gray-900 mb-6">
-                HELOC Summary
-              </h4>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Current Balance</span>
-                  <span className="font-bold text-gray-900">
-                    ${formatCurrency(currentBalance)}
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Available Credit</span>
-                  <span className="font-bold text-green-600">
-                    ${formatCurrency(maxHELOC - currentBalance)}
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Credit Utilization</span>
-                  <span className={`font-bold ${utilizationRate > 80 ? 'text-red-600' : utilizationRate > 50 ? 'text-orange-600' : 'text-green-600'}`}>
-                    {formatPercent(utilizationRate)}%
-                  </span>
-                </div>
-                {payoffTime > 0 && (
-                  <>
-                    <hr className="border-gray-200" />
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Payoff Time</span>
-                      <span className="font-bold text-blue-600">
-                        {Math.floor(payoffTime / 12)} years {Math.floor(payoffTime % 12)} months
-                      </span>
+            {showResults && (
+              <>
+                {/* Main Results */}
+                <div className="bg-gradient-to-br from-purple-600 to-indigo-600 rounded-2xl shadow-2xl p-8 text-white">
+                  <h3 className="text-2xl font-bold mb-6 text-center">Your HELOC Calculation Results</h3>
+                  <div className="space-y-4">
+                    <div className="bg-white/10 rounded-lg p-4">
+                      <p className="text-purple-100 mb-2">Based on your inputs, your maximum combined mortgage + HELOC limit is:</p>
+                      <p className="text-3xl font-bold">
+                        ${formatCurrency(maxCombinedLimit)}
+                        {creditScore < 680 && <span className="text-sm text-yellow-300 block mt-1">(Note: Your credit score may not meet minimum requirements)</span>}
+                      </p>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Total Interest</span>
-                      <span className="font-bold text-red-600">
-                        ${formatCurrency(totalInterest)}
-                      </span>
+                    <div className="bg-white/10 rounded-lg p-4">
+                      <p className="text-purple-100 mb-2">Your estimated maximum HELOC available is:</p>
+                      <p className="text-3xl font-bold">${formatCurrency(maxHELOC)}</p>
                     </div>
-                  </>
-                )}
-              </div>
-            </div>
-
-            {/* Interest-Only Warning */}
-            {paymentType === 'interest-only' && currentBalance > 0 && (
-              <div className="bg-orange-50 rounded-2xl shadow-xl p-6 border border-orange-200">
-                <div className="flex items-start space-x-3">
-                  <span className="text-orange-500 text-xl mt-0.5">⚠️</span>
-                  <div>
-                    <h4 className="font-semibold text-orange-900 mb-2">
-                      Interest-Only Payment Notice
-                    </h4>
-                    <p className="text-orange-800 text-sm">
-                      With interest-only payments, your balance never decreases. Consider making 
-                      additional principal payments to reduce your debt over time.
-                    </p>
+                    <div className="bg-white/10 rounded-lg p-4">
+                      <p className="text-purple-100 mb-2">Current equity in your home is:</p>
+                      <p className="text-3xl font-bold">{currentEquity.toFixed(1)}%</p>
+                    </div>
                   </div>
                 </div>
+
+                {/* Interest Estimate */}
+                {monthlyInterest > 0 && (
+                  <div className="bg-white rounded-2xl shadow-xl p-6">
+                    <h4 className="text-xl font-bold text-gray-900 mb-6">
+                      Estimated Monthly Interest Costs
+                    </h4>
+                    <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-700">Monthly interest at prime + 0.5% (~7.5%):</span>
+                        <span className="text-2xl font-bold text-purple-600">${formatCurrency(monthlyInterest)}</span>
+                      </div>
+                      <p className="text-sm text-gray-600 mt-2">
+                        *Interest rates vary by lender and are subject to change. This is an estimate only.
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Important Notes */}
+                <div className="bg-yellow-50 rounded-2xl shadow-xl p-6 border border-yellow-200">
+                  <h4 className="font-semibold text-yellow-900 mb-4">Important Notes:</h4>
+                  <ul className="space-y-2 text-yellow-800 text-sm">
+                    <li className="flex items-start">
+                      <span className="text-yellow-600 mr-2">•</span>
+                      Most banks require a credit score of 680 or above.
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-yellow-600 mr-2">•</span>
+                      Maximum borrowing combined mortgage & HELOC typically capped at 80% LTV.
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-yellow-600 mr-2">•</span>
+                      HELOC standalone max is usually 65% LTV.
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-yellow-600 mr-2">•</span>
+                      Rates and terms vary by lender and individual circumstances.
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-yellow-600 mr-2">•</span>
+                      This calculator provides estimates only and should not be considered financial advice.
+                    </li>
+                  </ul>
+                </div>
+              </>
+            )}
+
+            {!showResults && (
+              <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
+                <div className="text-gray-400 mb-4">
+                  <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-700 mb-2">Calculate Your HELOC</h3>
+                <p className="text-gray-500">
+                  Enter your home value and mortgage balance, then click Calculate to see your results.
+                </p>
               </div>
             )}
 
