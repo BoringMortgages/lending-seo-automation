@@ -3,6 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import ContactForm from "../../components/ContactForm";
+import Header from "../../components/layout/Header";
+import Footer from "../../components/layout/Footer";
 
 // CMHC Official Mortgage Calculation Rules (2024)
 const CMHC_RULES = {
@@ -693,94 +695,85 @@ export default function MississaugaMortgageRates() {
   ];
 
   return (
-    <div className="min-h-screen bg-white" style={{backgroundColor: '#FAFAFA'}}>
-      {/* Header */}
-      <header className="backdrop-blur-md bg-white/80 shadow-lg border-b border-white/20 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{background: 'linear-gradient(to right, #264653, #2A9D8F)'}}>
-                <span className="text-white font-bold text-xl">M</span>
-              </div>
-              <div>
-                <h1 className="text-2xl font-heading" style={{color: '#222831'}}>
-                  Boring Mortgages Ontario
-                </h1>
-                <p className="text-sm" style={{color: '#264653'}}>Making complex mortgages boringly simple</p>
-              </div>
-            </Link>
-            <div className="hidden md:flex items-center space-x-6">
-              <Link href="/" className="font-medium hover:opacity-80" style={{color: '#264653'}}>Home</Link>
-              <button
-                onClick={() => setIsContactFormOpen(true)}
-                className="px-6 py-2 text-sm font-medium rounded-lg text-white hover:opacity-90 transition-opacity"
-                style={{backgroundColor: '#FF914D'}}
-              >
-                Book Consultation →
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen relative" style={{
+      background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%, #f8fafc 100%)',
+      backgroundSize: '400% 400%',
+      animation: 'gradientShift 15s ease infinite'
+    }}>
+      {/* Noise Overlay */}
+      <div className="fixed inset-0 opacity-[0.015] pointer-events-none" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+        backgroundRepeat: 'repeat',
+        backgroundSize: '128px 128px'
+      }}></div>
+      
+      {/* Global Animations */}
+      <style jsx global>{`
+        @keyframes gradientShift {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+      `}</style>
+      <Header variant="city" currentPage="mississauga" />
 
       {/* Hero Section */}
-      <section className="py-20 lg:py-28 relative overflow-hidden" style={{background: 'linear-gradient(to bottom right, #FAFAFA, #F4F4F4)'}}>
-        <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
+      <section className="py-4 lg:py-6 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="flex flex-col items-center text-center mb-16">
+          {/* Floating Hero Card */}
+          <div className="backdrop-blur-lg bg-white/20 border border-white/30 rounded-3xl p-6 shadow-2xl">
+            <div className="flex flex-col items-center text-center mb-6">
             <div className="inline-flex items-center px-4 py-2 backdrop-blur-sm border rounded-full text-sm font-medium mb-6 shadow-sm" style={{backgroundColor: '#FAFAFA', borderColor: '#2A9D8F', color: '#264653'}}>
-              🏙️ Mississauga, Ontario - GTA West
+              🏙️ Mississauga, Ontario
             </div>
             <div className="mb-6">
-              <h1 className="text-5xl md:text-6xl font-bold mb-4" style={{color: '#222831'}}>
-                Best Mortgage Rates
-                <span className="block text-4xl md:text-5xl" style={{color: '#2A9D8F'}}>
-                  Mississauga
-                </span>
-              </h1>
+              <Image
+                src="/logos/mississauga-mortgages-gradient.png"
+                alt="Best Mortgage Rates Mississauga"
+                width={500}
+                height={120}
+                priority
+                className="mx-auto"
+              />
             </div>
             <p className="text-xl mb-8 leading-relaxed max-w-3xl" style={{color: '#264653'}}>
-              Compare current Mississauga mortgage rates with GTA West expertise. Prime location, 
-              no municipal land transfer tax, and better value than Toronto. <strong>No bank lineups required.</strong>
+              Access Mississauga's most competitive mortgage rates, navigate GTA West market dynamics, and unlock 
+              exclusive Mississauga homebuyer programs. <strong>Skip the bank queues, get pre-approved online.</strong>
             </p>
             
             {/* Key Stats */}
             <div className="grid grid-cols-2 gap-6 mb-8 max-w-md">
-              <div className="text-center p-4 backdrop-blur-sm rounded-xl border shadow-professional hover:shadow-lg transition-all duration-300" style={{backgroundColor: '#F4F4F4', borderColor: '#2A9D8F'}}>
+              <div className="text-center p-4 backdrop-blur-sm rounded-xl border-2 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105" style={{backgroundColor: '#F8F9FA', borderColor: '#2A9D8F', background: 'linear-gradient(135deg, #F8F9FA 0%, #F4F4F4 100%)'}}>
                 <div className="text-2xl font-bold" style={{color: '#264653'}}>
-                  {currentRates.find(r => r.term === "5 Year" && r.type === "Fixed")?.rate || "3.94%"}
+                  {currentRates.find(r => r.term === "5 Year" && r.type === "Fixed")?.rate || "3.74%"}
                 </div>
                 <div className="text-sm" style={{color: '#264653'}}>Best 5-Year Fixed</div>
               </div>
-              <div className="text-center p-4 backdrop-blur-sm rounded-xl border shadow-professional hover:shadow-lg transition-all duration-300" style={{backgroundColor: '#F4F4F4', borderColor: '#2A9D8F'}}>
+              <div className="text-center p-4 backdrop-blur-sm rounded-xl border-2 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105" style={{backgroundColor: '#F8F9FA', borderColor: '#2A9D8F', background: 'linear-gradient(135deg, #F8F9FA 0%, #F4F4F4 100%)'}}>
                 <div className="text-2xl font-bold" style={{color: '#2A9D8F'}}>$925K</div>
                 <div className="text-sm" style={{color: '#264653'}}>Average Home Price</div>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-6 mb-16">
-              <Link
-                href="/mortgage-payment-calculator"
-                className="px-8 py-4 text-lg text-center shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 rounded-lg text-white font-semibold"
-                style={{backgroundColor: '#FF914D'}}
-              >
-                Calculate Mississauga Payments
-              </Link>
-              <button
-                onClick={() => setIsContactFormOpen(true)}
+            <div className="flex justify-center mb-8">
+              <a
+                href="https://andreina-ford.mtg-app.com/signup?brokerName=andreina.ford&brokerId=7208e0a3-3590-47b7-a99d-4704d9c75268"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-8 py-4 text-lg text-center shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 rounded-lg border-2 font-semibold hover:opacity-80"
                 style={{borderColor: '#264653', color: '#264653', backgroundColor: 'transparent'}}
               >
-                Talk to GTA Expert
-              </button>
+                Apply Now for Pre-Approval!
+              </a>
+            </div>
             </div>
           </div>
+          
           {/* Interactive Rate Comparison Table */}
-          <div className="max-w-5xl mx-auto">
-            <div className="rounded-2xl shadow-professional backdrop-blur-sm border hover:shadow-lg transition-shadow" style={{backgroundColor: '#F4F4F4', borderColor: '#2A9D8F'}}>
+          <div className="max-w-5xl mx-auto mt-16">
+            <div className="rounded-3xl shadow-2xl backdrop-blur-lg bg-white/20 border-2 border-white/30 p-8">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
                 <div>
-                  <h3 className="text-2xl font-bold mb-2" style={{color: '#222831'}}>
+                  <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
                     Live Mississauga Mortgage Rates
                   </h3>
                   <p className="text-sm" style={{color: '#264653'}}>
@@ -788,118 +781,119 @@ export default function MississaugaMortgageRates() {
                     {rateDataAge && ` (${rateDataAge} old)`}
                   </p>
                 </div>
-                <div className="flex gap-2 mt-4 sm:mt-0">
-                  <button 
-                    onClick={() => setSelectedFilter('all')}
-                    className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 shadow-sm"
-                    style={selectedFilter === 'all' 
-                      ? {backgroundColor: '#264653', color: 'white'} 
-                      : {backgroundColor: '#F4F4F4', color: '#264653', border: '1px solid #2A9D8F'}}
-                  >
-                    All
-                  </button>
-                  <button 
-                    onClick={() => setSelectedFilter('fixed')}
-                    className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 shadow-sm"
-                    style={selectedFilter === 'fixed' 
-                      ? {backgroundColor: '#264653', color: 'white'} 
-                      : {backgroundColor: '#F4F4F4', color: '#264653', border: '1px solid #2A9D8F'}}
-                  >
-                    Fixed
-                  </button>
-                  <button 
-                    onClick={() => setSelectedFilter('variable')}
-                    className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 shadow-sm"
-                    style={selectedFilter === 'variable' 
-                      ? {backgroundColor: '#264653', color: 'white'} 
-                      : {backgroundColor: '#F4F4F4', color: '#264653', border: '1px solid #2A9D8F'}}
-                  >
-                    Variable
-                  </button>
-                </div>
               </div>
               
               {/* Rate Table */}
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-slate-200">
-                      <th className="text-left py-3 px-2 text-sm font-medium" style={{color: '#264653'}}>Term</th>
-                      <th className="text-left py-3 px-2 text-sm font-medium" style={{color: '#264653'}}>Rate</th>
-                      <th className="text-left py-3 px-2 text-sm font-medium hidden sm:table-cell" style={{color: '#264653'}}>Payment*</th>
-                      <th className="text-left py-3 px-2 text-sm font-medium hidden md:table-cell" style={{color: '#264653'}}>Lender Type</th>
-                      <th className="text-left py-3 px-2 text-sm font-medium" style={{color: '#264653'}}>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredRates.map((rate, index) => (
-                      <tr key={index} className="border-b transition-colors hover:opacity-80" style={{
-                        borderColor: '#2A9D8F',
-                        backgroundColor: rate.popular ? '#F4F4F4' : 'transparent'
-                      }}>
-                        <td className="py-4 px-2">
-                          <div className="flex items-center gap-2">
-                            <span className="font-semibold" style={{color: '#222831'}}>{rate.term}</span>
+              <div className="w-full">
+                <div className="hidden md:block">
+                  <table className="w-full table-fixed">
+                    <thead>
+                      <tr className="border-b border-slate-200">
+                        <th className="text-left py-3 px-4 text-sm font-medium w-2/5" style={{color: '#264653'}}>Term</th>
+                        <th className="text-left py-3 px-4 text-sm font-medium w-1/5" style={{color: '#264653'}}>Rate</th>
+                        <th className="text-center py-3 px-4 text-sm font-medium w-2/5" style={{color: '#264653'}}>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredRates.filter(rate => rate.term !== "10 Year").map((rate, index) => (
+                        <tr key={index} className="border-b hover:bg-gray-50 transition-all duration-300 hover:scale-[1.01]" style={{
+                          borderColor: '#2A9D8F',
+                          backgroundColor: rate.popular ? '#F4F4F4' : 'transparent'
+                        }}>
+                          <td className="py-4 px-4">
+                            <div className="flex items-center gap-3 mb-2">
+                              <span className="text-lg font-bold" style={{color: '#222831'}}>{rate.term}</span>
+                              {rate.popular && (
+                                <span className="text-white px-2 py-1 rounded-full text-xs font-medium" style={{backgroundColor: '#9B5DE5'}}>
+                                  POPULAR
+                                </span>
+                              )}
+                            </div>
+                            <div className="text-sm font-medium" style={{color: '#264653'}}>{rate.type}</div>
+                          </td>
+                          <td className="py-4 px-4">
+                            <div className="space-y-1">
+                              <div className="text-xl font-bold" style={{color: '#264653'}}>{rate.rate}</div>
+                              <div className="text-sm font-bold" style={{color: '#264653'}}>{rate.lender}</div>
+                            </div>
+                          </td>
+                          <td className="py-4 px-4 text-center">
+                            <button 
+                              onClick={() => {
+                                setSelectedRate(`${rate.term} - ${rate.rate}`);
+                                setShowLockRate(true);
+                                setLockRateSubmitted(false);
+                              }}
+                              className="px-4 py-2 text-sm inline-block shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200 rounded-lg text-white font-medium"
+                              style={{backgroundColor: '#2A9D8F'}}
+                            >
+                              Lock Rate
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                
+                {/* Mobile/Tablet Layout */}
+                <div className="md:hidden space-y-4">
+                  {filteredRates.filter(rate => rate.term !== "10 Year").map((rate, index) => (
+                    <div key={index} className="border border-slate-200 rounded-lg p-4 hover:bg-gray-50 transition-all duration-300" style={{
+                      borderColor: '#2A9D8F',
+                      backgroundColor: rate.popular ? '#F4F4F4' : 'white'
+                    }}>
+                      <div className="flex justify-between items-start mb-3">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-xl font-bold" style={{color: '#222831'}}>{rate.term}</span>
                             {rate.popular && (
                               <span className="text-white px-2 py-1 rounded-full text-xs font-medium" style={{backgroundColor: '#9B5DE5'}}>
                                 POPULAR
                               </span>
                             )}
                           </div>
-                          <div className="text-sm" style={{color: '#264653'}}>{rate.bestFor}</div>
-                        </td>
-                        <td className="py-4 px-2">
-                          <div className="text-xl font-bold" style={{color: '#264653'}}>{rate.rate}</div>
-                        </td>
-                        <td className="py-4 px-2 hidden sm:table-cell">
-                          <div className="font-semibold" style={{color: '#222831'}}>{rate.payment}</div>
-                          <div className="text-xs" style={{color: '#264653'}}>per month</div>
-                        </td>
-                        <td className="py-4 px-2 hidden md:table-cell">
-                          <span className="text-sm" style={{color: '#264653'}}>{rate.lender}</span>
-                        </td>
-                        <td className="py-4 px-2">
-                          <button 
-                            onClick={() => {
-                              setSelectedRate(`${rate.term} - ${rate.rate}`);
-                              setShowLockRate(true);
-                              setLockRateSubmitted(false);
-                            }}
-                            className="px-4 py-2 text-sm inline-block shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200 rounded-lg text-white font-medium"
-                            style={{backgroundColor: '#FF914D'}}
-                          >
-                            Lock Rate
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                          <div className="text-sm font-medium" style={{color: '#264653'}}>{rate.type}</div>
+                        </div>
+                        <div className="text-right space-y-1">
+                          <div className="text-2xl font-bold" style={{color: '#264653'}}>{rate.rate}</div>
+                          <div className="text-sm font-bold" style={{color: '#264653'}}>{rate.lender}</div>
+                        </div>
+                      </div>
+                      <button 
+                        onClick={() => {
+                          setSelectedRate(`${rate.term} - ${rate.rate}`);
+                          setShowLockRate(true);
+                          setLockRateSubmitted(false);
+                        }}
+                        className="w-full px-4 py-3 text-sm shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200 rounded-lg text-white font-medium"
+                        style={{backgroundColor: '#2A9D8F'}}
+                      >
+                        Lock Rate
+                      </button>
+                    </div>
+                  ))}
+                </div>
               </div>
               
-              <div className="mt-10 grid md:grid-cols-2 gap-8">
-                <div className="p-5 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200/30 shadow-sm">
-                  <p className="text-sm text-muted mb-2">
-                    <strong>*Payment calculation:</strong> $740,000 mortgage (80% of Mississauga average), 25-year amortization.
-                  </p>
-                  <p className="text-xs text-muted">
-                    Rates shown are best available for insured mortgages. Your rate may vary based on credit score and property details.
-                  </p>
-                </div>
-                <div className="p-5 bg-white/80 backdrop-blur-sm rounded-xl border border-purple-200/30 shadow-sm">
-                  <h4 className="font-semibold text-gray-900 mb-2">📈 Rate Alert</h4>
-                  <p className="text-sm text-muted mb-3">
-                    Get notified when Mississauga rates drop below your target.
-                  </p>
-                  <button 
-                    onClick={() => {
-                      setShowRateAlert(true);
-                      setRateAlertSubmitted(false);
-                    }}
-                    className="text-purple hover:text-purple/80 font-medium text-sm"
-                  >
-                    Set Rate Alert →
-                  </button>
+              <div className="mt-8">
+                <div className="p-5 bg-white/80 backdrop-blur-sm rounded-xl border border-purple-200/30 shadow-sm text-center relative overflow-hidden" style={{boxShadow: '0 0 20px rgba(147, 51, 234, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1)'}}>
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-purple-500/5 animate-pulse"></div>
+                  <div className="relative z-10">
+                    <h4 className="font-semibold text-gray-900 mb-2">📈 Rate Alert</h4>
+                    <p className="text-sm text-muted mb-3">
+                      Get notified when Mississauga rates drop below your target.
+                    </p>
+                    <button 
+                      onClick={() => {
+                        setShowRateAlert(true);
+                        setRateAlertSubmitted(false);
+                      }}
+                      className="text-purple hover:text-purple/80 font-medium text-sm transition-all duration-200 hover:scale-105"
+                    >
+                      Set Rate Alert →
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -907,19 +901,17 @@ export default function MississaugaMortgageRates() {
         </div>
       </section>
 
-      {/* Interactive Calculator Section */}
-      <section className="py-20 relative overflow-hidden" style={{background: 'linear-gradient(to bottom right, #FAFAFA, #F4F4F4)'}}>
-        <div className="absolute inset-0 bg-gradient-to-r from-white/15 to-transparent"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      {/* Mississauga Mortgage Calculator */}
+      <section className="py-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-heading mb-4" style={{color: '#222831'}}>
-              Calculate Your Mississauga Mortgage Payment
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Mississauga Mortgage Calculator
             </h2>
-            <p className="text-lg" style={{color: '#264653'}}>
-              Uses official CMHC 2024 rules including premium rates, debt service ratios, and Ontario PST
+            <p className="text-xl text-gray-600">
+              Calculate your monthly payments with current Mississauga rates and official CMHC rules
             </p>
           </div>
-          
           <MississaugaMortgageCalculator 
             onOpenContactForm={() => setIsContactFormOpen(true)} 
             currentRates={currentRates} 
@@ -928,26 +920,29 @@ export default function MississaugaMortgageRates() {
       </section>
 
       {/* Mississauga Market Insights */}
-      <section className="py-20" style={{background: 'linear-gradient(to bottom right, #F4F4F4, #FAFAFA)'}}>
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-heading mb-4" style={{color: '#222831'}}>
-              Mississauga Market Insights
-            </h2>
-            <p className="text-lg" style={{color: '#264653'}}>
-              The details that actually affect your mortgage
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {mississaugaInsights.map((insight, index) => (
-              <div key={index} className="backdrop-blur-sm p-6 rounded-xl border shadow-professional hover:shadow-lg transition-all duration-300 hover:scale-105" style={{backgroundColor: '#F4F4F4', borderColor: '#2A9D8F'}}>
-                <div className="text-3xl mb-3">{insight.icon}</div>
-                <h3 className="font-semibold mb-2" style={{color: '#222831'}}>{insight.title}</h3>
-                <div className="text-2xl font-bold mb-1" style={{color: '#264653'}}>{insight.value}</div>
-                <p className="text-sm" style={{color: '#264653'}}>{insight.description}</p>
-              </div>
-            ))}
+          {/* Floating Insights Card */}
+          <div className="backdrop-blur-lg bg-white/20 border border-white/30 rounded-3xl p-12 shadow-2xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-heading mb-4" style={{color: '#222831'}}>
+                Mississauga Market Insights
+              </h2>
+              <p className="text-lg" style={{color: '#264653'}}>
+                The details that actually affect your mortgage
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {mississaugaInsights.map((insight, index) => (
+                <div key={index} className="backdrop-blur-md bg-white/30 p-6 rounded-2xl border border-white/40 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+                  <div className="text-3xl mb-3">{insight.icon}</div>
+                  <h3 className="font-semibold mb-2 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent group-hover:from-teal-700 group-hover:to-teal-500 transition-all duration-300">{insight.title}</h3>
+                  <div className="text-2xl font-bold mb-1" style={{color: '#264653'}}>{insight.value}</div>
+                  <p className="text-sm" style={{color: '#264653'}}>{insight.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -992,98 +987,24 @@ export default function MississaugaMortgageRates() {
         </div>
       </section>
 
-      {/* Calculator Section */}
-      <section className="py-16" style={{background: 'linear-gradient(to bottom right, #F4F4F4, #FAFAFA)'}}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-heading mb-4" style={{color: '#222831'}}>
-              Mississauga Mortgage Calculators
-            </h2>
-            <p className="text-lg" style={{color: '#264653'}}>
-              Free tools for Mississauga homebuyers who value accuracy
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <Link
-              href="/mortgage-payment-calculator"
-              className="group bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-xl hover:shadow-lg transition-all border border-purple-200 hover:border-purple-300"
-            >
-              <div className="text-purple mb-4">
-                <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"/>
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-purple">
-                Payment Calculator
-              </h3>
-              <p className="text-gray-600 mb-4">
-                Calculate monthly payments with Mississauga's tax advantages
-              </p>
-              <div className="text-purple font-medium">
-                Calculate Mississauga payments →
-              </div>
-            </Link>
-
-            <Link
-              href="/mortgage-affordability-calculator"
-              className="group bg-gradient-to-br from-emerald-50 to-emerald-100 p-8 rounded-xl hover:shadow-lg transition-all border border-emerald-200 hover:border-emerald-300"
-            >
-              <div className="text-emerald-600 mb-4">
-                <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
-                  <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd"/>
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-emerald-600">
-                Affordability Calculator
-              </h3>
-              <p className="text-gray-600 mb-4">
-                See how much home you can afford in Mississauga's market
-              </p>
-              <div className="text-emerald-600 font-medium">
-                Check Mississauga affordability →
-              </div>
-            </Link>
-
-            <Link
-              href="/heloc-payment-calculator"
-              className="group bg-gradient-to-br from-slate-50 to-slate-100 p-8 rounded-xl hover:shadow-lg transition-all border border-slate-200 hover:border-slate-300"
-            >
-              <div className="text-teal mb-4">
-                <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/>
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-teal">
-                HELOC Calculator
-              </h3>
-              <p className="text-gray-600 mb-4">
-                Calculate home equity access for Mississauga homeowners
-              </p>
-              <div className="text-teal font-medium">
-                Calculate HELOC →
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-gradient-to-br from-orange-100/20 via-yellow-100/15 via-green-100/20 to-violet-100/25">
+      <section className="py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-heading text-gray-900 mb-4">
-              Mississauga Mortgage FAQs
-            </h2>
-            <p className="text-lg text-gray-600">
-              The questions Mississauga homebuyers actually ask
-            </p>
-          </div>
+          {/* Floating FAQ Card */}
+          <div className="backdrop-blur-lg bg-white/20 border border-white/30 rounded-3xl p-12 shadow-2xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-heading text-gray-900 mb-4">
+                Mississauga Mortgage FAQs
+              </h2>
+              <p className="text-lg text-gray-600">
+                The questions Mississauga homebuyers actually ask
+              </p>
+            </div>
           
           <div className="space-y-6">
-            <div className="backdrop-blur-sm p-8 rounded-xl shadow-professional border hover:shadow-lg transition-all duration-300" style={{backgroundColor: '#F4F4F4', borderColor: '#2A9D8F'}}>
-              <h3 className="text-lg font-semibold mb-3" style={{color: '#222831'}}>
+            <div className="backdrop-blur-md bg-white/30 p-8 rounded-2xl border border-white/40 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] group">
+              <h3 className="text-lg font-semibold mb-3 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent group-hover:from-teal-700 group-hover:to-teal-500 transition-all duration-300">
                 How much can I save on land transfer tax in Mississauga vs Toronto?
               </h3>
               <p style={{color: '#264653'}}>
@@ -1091,8 +1012,8 @@ export default function MississaugaMortgageRates() {
               </p>
             </div>
             
-            <div className="backdrop-blur-sm p-8 rounded-xl shadow-professional border hover:shadow-lg transition-all duration-300" style={{backgroundColor: '#F4F4F4', borderColor: '#2A9D8F'}}>
-              <h3 className="text-lg font-semibold mb-3" style={{color: '#222831'}}>
+            <div className="backdrop-blur-md bg-white/30 p-8 rounded-2xl border border-white/40 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] group">
+              <h3 className="text-lg font-semibold mb-3 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent group-hover:from-teal-700 group-hover:to-teal-500 transition-all duration-300">
                 What's the minimum down payment for Mississauga's average home price?
               </h3>
               <p style={{color: '#264653'}}>
@@ -1100,8 +1021,8 @@ export default function MississaugaMortgageRates() {
               </p>
             </div>
             
-            <div className="backdrop-blur-sm p-8 rounded-xl shadow-professional border hover:shadow-lg transition-all duration-300" style={{backgroundColor: '#F4F4F4', borderColor: '#2A9D8F'}}>
-              <h3 className="text-lg font-semibold mb-3" style={{color: '#222831'}}>
+            <div className="backdrop-blur-md bg-white/30 p-8 rounded-2xl border border-white/40 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] group">
+              <h3 className="text-lg font-semibold mb-3 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent group-hover:from-teal-700 group-hover:to-teal-500 transition-all duration-300">
                 Is Mississauga a good alternative to Toronto for homebuyers?
               </h3>
               <p className="text-gray-600 mb-3">
@@ -1113,6 +1034,7 @@ export default function MississaugaMortgageRates() {
                 </p>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </section>
@@ -1260,19 +1182,15 @@ export default function MississaugaMortgageRates() {
       
       {/* Sticky CTA Bar */}
       <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t shadow-lg z-40 p-4 lg:hidden">
-        <div className="flex gap-3">
-          <button
-            onClick={() => setIsContactFormOpen(true)}
-            className="flex-1 btn-primary py-3 text-center text-sm font-semibold"
+        <div className="flex justify-center">
+          <a
+            href="https://andreina-ford.mtg-app.com/signup?brokerName=andreina.ford&brokerId=7208e0a3-3590-47b7-a99d-4704d9c75268"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 btn-primary py-3 text-center text-sm font-semibold"
           >
-            Book Consultation
-          </button>
-          <Link
-            href="/mortgage-payment-calculator"
-            className="flex-1 btn-secondary py-3 text-center text-sm font-semibold"
-          >
-            Calculate Payment
-          </Link>
+            Apply for Pre-Approval
+          </a>
         </div>
       </div>
 
@@ -1287,19 +1205,15 @@ export default function MississaugaMortgageRates() {
             Our tools give you the details. When you're ready for personalized Mississauga guidance, 
             connect with our Licensed Mortgage Agent specializing in the GTA market.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => setIsContactFormOpen(true)}
-              className="px-8 py-4 rounded-lg text-lg font-semibold transition-colors shadow-lg" style={{backgroundColor: '#FAFAFA', color: '#264653'}}
+          <div className="flex justify-center">
+            <a
+              href="https://andreina-ford.mtg-app.com/signup?brokerName=andreina.ford&brokerId=7208e0a3-3590-47b7-a99d-4704d9c75268"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105" style={{backgroundColor: '#FAFAFA', color: '#264653'}}
             >
-              Book Mississauga Consultation
-            </button>
-            <button
-              onClick={() => setIsContactFormOpen(true)}
-              className="border-2 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors hover:opacity-80" style={{borderColor: '#FAFAFA'}}
-            >
-              Email About Mississauga Rates
-            </button>
+              Apply Now for Pre-Approval!
+            </a>
           </div>
           <div className="mt-6 flex items-center justify-center space-x-6 text-sm" style={{color: '#F4F4F4'}}>
             <div className="flex items-center space-x-2">
@@ -1314,117 +1228,7 @@ export default function MississaugaMortgageRates() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 grain-texture" style={{backgroundColor: '#222831', color: '#F4F4F4'}}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{background: 'linear-gradient(to right, #264653, #2A9D8F)'}}>
-                  <span className="text-white font-bold">B</span>
-                </div>
-                <h3 className="text-lg font-semibold">Boring Mortgages Ontario</h3>
-              </div>
-              <p className="text-sm mb-4" style={{color: '#264653'}}>
-                Making complex mortgages boringly simple for Ontario residents.
-              </p>
-              <p className="text-xs" style={{color: '#264653'}}>
-                <strong>Andreina Ford</strong><br/>
-                Licensed Mortgage Agent Level 2<br/>
-                BRX Mortgage #13463
-              </p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Free Calculators</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="/mortgage-payment-calculator" className="hover:text-white">Payment Calculator</Link></li>
-                <li><Link href="/mortgage-affordability-calculator" className="hover:text-white">Affordability Calculator</Link></li>
-                <li><Link href="/heloc-payment-calculator" className="hover:text-white">HELOC Calculator</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Ontario Cities</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="/best-mortgage-rates-toronto" className="hover:text-white">Toronto</Link></li>
-                <li><Link href="/best-mortgage-rates-ottawa" className="hover:text-white">Ottawa</Link></li>
-                <li><Link href="/best-mortgage-rates-mississauga" className="hover:text-boring-light-gray text-boring-bright-green">Mississauga</Link></li>
-                <li><Link href="/best-mortgage-rates-hamilton" className="hover:text-white">Hamilton</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Get Help</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="https://callme.mortgagewithford.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">Book Consultation</a></li>
-                <li><a href="mailto:hello@boringmortgages.ca?subject=Mortgage questions from Mississauga" className="hover:text-white">Email Us</a></li>
-                <li><a href="https://mortgagewithford.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">About Us</a></li>
-                <li><a href="https://boringmortgages.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">Home</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          {/* Regulatory Logos */}
-          <div className="border-t border-gray-800 mt-8 pt-8">
-            <div className="flex flex-col items-center space-y-6">
-              <div className="flex items-center justify-center space-x-8 flex-wrap">
-                {/* BRX Mortgage Logo */}
-                <div className="flex items-center space-x-2">
-                  <div className="text-emerald-500 text-xl font-bold">
-                    BRX
-                  </div>
-                  <div className="text-gray-400 text-xs">
-                    MORTGAGE<br/>
-                    #13463
-                  </div>
-                </div>
-                
-                {/* Proudly Canadian */}
-                <div className="flex items-center space-x-2">
-                  <div className="text-red-600 text-2xl">
-                    🍁
-                  </div>
-                  <div className="text-gray-400 text-xs">
-                    PROUDLY<br/>
-                    CANADIAN
-                  </div>
-                </div>
-                
-                {/* CMHC */}
-                <div className="flex items-center space-x-2">
-                  <div className="text-indigo-600 font-bold text-sm">
-                    CMHC
-                  </div>
-                  <div className="text-gray-400 text-xs">
-                    CANADA MORTGAGE<br/>
-                    & HOUSING CORP
-                  </div>
-                </div>
-                
-                {/* FSRA */}
-                <div className="flex items-center space-x-2">
-                  <div className="text-cyan-600 font-bold text-sm">
-                    FSRA
-                  </div>
-                  <div className="text-gray-400 text-xs">
-                    FINANCIAL SERVICES<br/>
-                    REGULATORY AUTHORITY
-                  </div>
-                </div>
-              </div>
-              
-              <div className="flex flex-col md:flex-row justify-between items-center w-full">
-                <p className="text-gray-400 text-sm">
-                  © {new Date().getFullYear()} Boring Mortgages Ontario. Making Mississauga mortgages boringly simple.
-                </p>
-                <div className="flex space-x-6 mt-4 md:mt-0">
-                  <Link href="/privacy" className="text-gray-400 hover:text-white text-sm">Privacy</Link>
-                  <Link href="/terms" className="text-gray-400 hover:text-white text-sm">Terms</Link>
-                  <Link href="/disclaimer" className="text-gray-400 hover:text-white text-sm">Disclaimer</Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer showRegulatory={true} />
 
       {/* Contact Form Modal */}
       <ContactForm isOpen={isContactFormOpen} onClose={() => setIsContactFormOpen(false)} />
