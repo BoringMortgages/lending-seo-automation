@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://boringmortgages.ca/sitemap.xml
+
+# Block admin/private areas if any exist
+# Disallow: /admin/
+# Disallow: /api/
+
+# Allow search engines to crawl all mortgage content
+Allow: /best-mortgage-rates-*
+Allow: /mortgage-*
+Allow: /heloc-*
