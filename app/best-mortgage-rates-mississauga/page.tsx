@@ -714,7 +714,7 @@ export default function MississaugaMortgageRates() {
           50% { background-position: 100% 50%; }
         }
       `}</style>
-      <Header variant="city" currentPage="mississauga" />
+      <Header />
 
       {/* Hero Section */}
       <section className="py-4 lg:py-6 relative">
