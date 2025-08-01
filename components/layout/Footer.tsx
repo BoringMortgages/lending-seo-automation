@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { CONTACT_CONFIG } from '../../config/contact';
 
 interface FooterProps {
   showRegulatory?: boolean;
@@ -7,43 +8,43 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ showRegulatory = true }) => {
   return (
-    <footer className="bg-boring-dark-gray/90 dark:bg-boring-charcoal text-boring-light-gray py-12 grain-texture-subtle">
+    <footer className="py-12 grain-texture" style={{backgroundColor: '#222831', color: '#F4F4F4'}}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-boring-teal to-boring-purple rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{background: 'linear-gradient(to right, #264653, #2A9D8F)'}}>
                 <span className="text-white font-bold">B</span>
               </div>
-              <h3 className="text-lg font-semibold text-boring-light-gray">
-                Boring Mortgages Ontario
+              <h3 className="text-lg font-semibold">
+                {CONTACT_CONFIG.business.name}
               </h3>
             </div>
-            <p className="text-boring-light-gray/70 text-sm mb-4">
-              Making complex mortgages boringly simple for Ontario residents.
+            <p className="text-sm mb-4" style={{color: '#9CA3AF'}}>
+              {CONTACT_CONFIG.business.tagline} for Ontario residents.
               <br />
               Not affiliated with any specific lender.
             </p>
             {showRegulatory && (
-              <p className="text-boring-light-gray/60 text-xs">
-                <strong className="text-boring-light-gray">Andreina Ford</strong><br/>
-                Mortgage Agent Level 2 • M24000357<br/>
-                BRX Mortgage #13463
+              <p className="text-xs" style={{color: '#6B7280'}}>
+                <strong style={{color: '#9CA3AF'}}>{CONTACT_CONFIG.business.agentName}</strong><br/>
+                {CONTACT_CONFIG.business.licenseTitle}<br/>
+                {CONTACT_CONFIG.business.licenseNumber}
               </p>
             )}
           </div>
 
           {/* Free Tools */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-boring-light-gray">
+            <h3 className="text-lg font-semibold mb-4">
               Free Calculators
             </h3>
-            <ul className="space-y-2 text-boring-light-gray/70">
+            <ul className="space-y-2 text-gray-400">
               <li>
                 <Link 
                   href="/mortgage-payment-calculator" 
-                  className="hover:text-boring-light-gray transition-colors"
+                  className="hover:text-white transition-colors"
                 >
                   Payment Calculator
                 </Link>
@@ -51,7 +52,7 @@ const Footer: React.FC<FooterProps> = ({ showRegulatory = true }) => {
               <li>
                 <Link 
                   href="/mortgage-affordability-calculator" 
-                  className="hover:text-boring-light-gray transition-colors"
+                  className="hover:text-white transition-colors"
                 >
                   Affordability Calculator
                 </Link>
@@ -59,7 +60,7 @@ const Footer: React.FC<FooterProps> = ({ showRegulatory = true }) => {
               <li>
                 <Link 
                   href="/heloc-payment-calculator" 
-                  className="hover:text-boring-light-gray transition-colors"
+                  className="hover:text-white transition-colors"
                 >
                   HELOC Calculator
                 </Link>
@@ -69,14 +70,14 @@ const Footer: React.FC<FooterProps> = ({ showRegulatory = true }) => {
 
           {/* Ontario Cities */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-boring-light-gray">
+            <h3 className="text-lg font-semibold mb-4">
               Ontario Cities
             </h3>
-            <ul className="space-y-2 text-boring-light-gray/70">
+            <ul className="space-y-2 text-gray-400">
               <li>
                 <Link 
                   href="/best-mortgage-rates-toronto" 
-                  className="hover:text-boring-light-gray transition-colors"
+                  className="hover:text-white transition-colors"
                 >
                   Toronto
                 </Link>
@@ -84,7 +85,7 @@ const Footer: React.FC<FooterProps> = ({ showRegulatory = true }) => {
               <li>
                 <Link 
                   href="/best-mortgage-rates-ottawa" 
-                  className="hover:text-boring-light-gray transition-colors"
+                  className="hover:text-white transition-colors"
                 >
                   Ottawa
                 </Link>
@@ -92,7 +93,7 @@ const Footer: React.FC<FooterProps> = ({ showRegulatory = true }) => {
               <li>
                 <Link 
                   href="/best-mortgage-rates-mississauga" 
-                  className="hover:text-boring-light-gray transition-colors"
+                  className="hover:text-white transition-colors"
                 >
                   Mississauga
                 </Link>
@@ -100,7 +101,7 @@ const Footer: React.FC<FooterProps> = ({ showRegulatory = true }) => {
               <li>
                 <Link 
                   href="/best-mortgage-rates-hamilton" 
-                  className="hover:text-boring-light-gray transition-colors"
+                  className="hover:text-white transition-colors"
                 >
                   Hamilton
                 </Link>
@@ -110,30 +111,42 @@ const Footer: React.FC<FooterProps> = ({ showRegulatory = true }) => {
 
           {/* Get Help */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-boring-light-gray">
+            <h3 className="text-lg font-semibold mb-4">
               Get Help
             </h3>
-            <ul className="space-y-2 text-boring-light-gray/70">
+            <ul className="space-y-2 text-gray-400">
               <li>
-                <Link 
-                  href="https://callme.mortgagewithford.ca" 
-                  className="hover:text-boring-light-gray transition-colors"
+                <a 
+                  href={CONTACT_CONFIG.consultationUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-white transition-colors"
                 >
-                  Book Consultation
-                </Link>
+                  {CONTACT_CONFIG.cta.consultation}
+                </a>
               </li>
               <li>
-                <Link 
-                  href="mailto:hello@mortgagewithford.ca" 
-                  className="hover:text-boring-light-gray transition-colors"
+                <a 
+                  href={`mailto:${CONTACT_CONFIG.email}?subject=Mortgage questions`} 
+                  className="hover:text-white transition-colors"
                 >
-                  Email Us
-                </Link>
+                  {CONTACT_CONFIG.cta.email}
+                </a>
+              </li>
+              <li>
+                <a 
+                  href={CONTACT_CONFIG.websiteUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-white transition-colors"
+                >
+                  About Us
+                </a>
               </li>
               <li>
                 <Link 
                   href="/" 
-                  className="hover:text-boring-light-gray transition-colors"
+                  className="hover:text-white transition-colors"
                 >
                   Home
                 </Link>
@@ -193,25 +206,25 @@ const Footer: React.FC<FooterProps> = ({ showRegulatory = true }) => {
               </div>
               
               <div className="flex flex-col md:flex-row justify-between items-center w-full">
-                <p className="text-boring-light-gray/60 text-sm">
-                  © {new Date().getFullYear()} Boring Mortgages Ontario. Making mortgages boringly simple.
+                <p className="text-gray-400 text-sm">
+                  © {new Date().getFullYear()} {CONTACT_CONFIG.business.name}. Making Ontario mortgages boringly simple.
                 </p>
                 <div className="flex space-x-6 mt-4 md:mt-0">
                   <Link 
                     href="/privacy" 
-                    className="text-boring-light-gray/60 hover:text-boring-light-gray text-sm transition-colors"
+                    className="text-gray-400 hover:text-white text-sm transition-colors"
                   >
                     Privacy
                   </Link>
                   <Link 
                     href="/terms" 
-                    className="text-boring-light-gray/60 hover:text-boring-light-gray text-sm transition-colors"
+                    className="text-gray-400 hover:text-white text-sm transition-colors"
                   >
                     Terms
                   </Link>
                   <Link 
                     href="/disclaimer" 
-                    className="text-boring-light-gray/60 hover:text-boring-light-gray text-sm transition-colors"
+                    className="text-gray-400 hover:text-white text-sm transition-colors"
                   >
                     Disclaimer
                   </Link>

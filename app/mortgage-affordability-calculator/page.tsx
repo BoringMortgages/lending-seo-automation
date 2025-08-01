@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from "next/link";
-import Footer from "../../components/Footer";
+import Footer from "../../components/layout/Footer";
+import Header from "../../components/layout/Header";
 import PreApprovalForm from "../../components/PreApprovalForm";
 import { CONTACT_CONFIG } from "../../config/contact";
 

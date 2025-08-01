@@ -4,6 +4,8 @@ import Image from "next/image";
 import React from "react";
 import ContactForm from "../../components/ContactForm";
 import MortgageCalculator from "../../components/calculators/MortgageCalculator";
+import Header from "../../components/layout/Header";
+import Footer from "../../components/layout/Footer";
 
 // Rate interface
 interface MortgageRate {
@@ -280,36 +282,7 @@ export default function TorontoMortgageRates() {
           50% { background-position: 100% 50%; }
         }
       `}</style>
-      {/* Header */}
-      <header className="backdrop-blur-md bg-white/80 shadow-lg border-b border-white/20 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{background: 'linear-gradient(to right, #264653, #2A9D8F)'}}>
-                <span className="text-white font-bold text-xl">B</span>
-              </div>
-              <div>
-                <h1 className="text-3xl font-heading" style={{color: '#222831'}}>
-                  Boring Mortgages Ontario
-                </h1>
-                <p className="text-1xl" style={{color: '#264653'}}>Making complex mortgages boringly simple</p>
-              </div>
-            </Link>
-            <div className="hidden md:flex items-center space-x-6">
-              <Link href="/" className="font-medium hover:opacity-80" style={{color: '#264653'}}>Home</Link>
-              <a
-                href="https://callme.mortgagewithford.ca"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-2 text-sm font-medium rounded-lg text-white hover:opacity-90 transition-opacity"
-                style={{backgroundColor: '#FF914D'}}
-              >
-                Book Consultation →
-              </a>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header variant="city" currentPage="toronto" />
 
       {/* Hero Section */}
       <section className="py-4 lg:py-6 relative">
@@ -851,117 +824,7 @@ export default function TorontoMortgageRates() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 grain-texture" style={{backgroundColor: '#222831', color: '#F4F4F4'}}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{background: 'linear-gradient(to right, #264653, #2A9D8F)'}}>
-                  <span className="text-white font-bold">B</span>
-                </div>
-                <h3 className="text-lg font-semibold">Boring Mortgages Ontario</h3>
-              </div>
-              <p className="text-sm mb-4" style={{color: '#264653'}}>
-                Making complex mortgages boringly simple for Ontario residents.
-              </p>
-              <p className="text-xs" style={{color: '#264653'}}>
-                <strong>Andreina Ford</strong><br/>
-                Licensed Mortgage Agent Level 2<br/>
-                BRX Mortgage #13463
-              </p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Free Calculators</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="/mortgage-payment-calculator" className="hover:text-white">Payment Calculator</Link></li>
-                <li><Link href="/mortgage-affordability-calculator" className="hover:text-white">Affordability Calculator</Link></li>
-                <li><Link href="/heloc-payment-calculator" className="hover:text-white">HELOC Calculator</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Ontario Cities</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="/best-mortgage-rates-toronto" className="hover:text-boring-light-gray text-boring-bright-green">Toronto</Link></li>
-                <li><Link href="/best-mortgage-rates-ottawa" className="hover:text-white">Ottawa</Link></li>
-                <li><Link href="/best-mortgage-rates-mississauga" className="hover:text-white">Mississauga</Link></li>
-                <li><Link href="/best-mortgage-rates-hamilton" className="hover:text-white">Hamilton</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Get Help</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="https://callme.mortgagewithford.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">Book Consultation</a></li>
-                <li><a href="mailto:hello@boringmortgages.ca?subject=Mortgage questions from Toronto" className="hover:text-white">Email Us</a></li>
-                <li><a href="https://mortgagewithford.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">About Us</a></li>
-                <li><a href="https://boringmortgages.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">Home</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          {/* Regulatory Logos */}
-          <div className="border-t border-gray-800 mt-8 pt-8">
-            <div className="flex flex-col items-center space-y-6">
-              <div className="flex items-center justify-center space-x-8 flex-wrap">
-                {/* BRX Mortgage Logo */}
-                <div className="flex items-center space-x-2">
-                  <div className="text-emerald-500 text-xl font-bold">
-                    BRX
-                  </div>
-                  <div className="text-gray-400 text-xs">
-                    BRX MORTGAGE<br/>
-                    #13463
-                  </div>
-                </div>
-                
-                {/* Proudly Canadian */}
-                <div className="flex items-center space-x-2">
-                  <div className="text-red-600 text-2xl">
-                    🍁
-                  </div>
-                  <div className="text-gray-400 text-xs">
-                    PROUDLY<br/>
-                    CANADIAN
-                  </div>
-                </div>
-                
-                {/* CMHC */}
-                <div className="flex items-center space-x-2">
-                  <div className="text-indigo-600 font-bold text-sm">
-                    CMHC
-                  </div>
-                  <div className="text-gray-400 text-xs">
-                    CANADA MORTGAGE<br/>
-                    & HOUSING CORP
-                  </div>
-                </div>
-                
-                {/* FSRA */}
-                <div className="flex items-center space-x-2">
-                  <div className="text-cyan-600 font-bold text-sm">
-                    FSRA
-                  </div>
-                  <div className="text-gray-400 text-xs">
-                    FINANCIAL SERVICES<br/>
-                    REGULATORY AUTHORITY
-                  </div>
-                </div>
-              </div>
-              
-              <div className="flex flex-col md:flex-row justify-between items-center w-full">
-                <p className="text-gray-400 text-sm">
-                  © {new Date().getFullYear()} Boring Mortgages Ontario. Making Toronto mortgages boringly simple.
-                </p>
-                <div className="flex space-x-6 mt-4 md:mt-0">
-                  <Link href="/privacy" className="text-gray-400 hover:text-white text-sm">Privacy</Link>
-                  <Link href="/terms" className="text-gray-400 hover:text-white text-sm">Terms</Link>
-                  <Link href="/disclaimer" className="text-gray-400 hover:text-white text-sm">Disclaimer</Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer showRegulatory={true} />
       
       <ContactForm 
         isOpen={isContactFormOpen} 

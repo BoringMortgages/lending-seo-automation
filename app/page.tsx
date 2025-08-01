@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import ContactForm from "../components/ContactForm";
 import PreApprovalForm from "../components/PreApprovalForm";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
 import { CONTACT_CONFIG } from '../config/contact';
 
 // Rate interface
@@ -97,36 +99,7 @@ export default function Home() {
         }
       `}</style>
 
-      {/* Header */}
-      <header className="backdrop-blur-md bg-white/80 shadow-lg border-b border-white/20 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{background: 'linear-gradient(to right, #264653, #2A9D8F)'}}>
-                <span className="text-white font-bold text-xl">B</span>
-              </div>
-              <div>
-                <h1 className="text-3xl font-heading" style={{color: '#222831'}}>
-                  Boring Mortgages Ontario
-                </h1>
-                <p className="text-1xl" style={{color: '#264653'}}>Making complex mortgages boringly simple</p>
-              </div>
-            </Link>
-            <div className="hidden md:flex items-center space-x-6">
-              <Link href="/" className="font-medium hover:opacity-80" style={{color: '#264653'}}>Home</Link>
-              <a
-                href={CONTACT_CONFIG.consultationUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-2 text-sm font-medium rounded-lg text-white hover:opacity-90 transition-opacity"
-                style={{backgroundColor: '#FF914D'}}
-              >
-                Book Consultation &rarr;
-              </a>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header variant="default" currentPage="home" />
 
       {/* Hero Section */}
       <section className="py-4 lg:py-6 relative">
@@ -438,68 +411,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 grain-texture" style={{backgroundColor: '#222831', color: '#F4F4F4'}}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{background: 'linear-gradient(to right, #264653, #2A9D8F)'}}>
-                  <span className="text-white font-bold">B</span>
-                </div>
-                <h3 className="text-lg font-semibold">Boring Mortgages Ontario</h3>
-              </div>
-              <p className="text-sm mb-4" style={{color: '#264653'}}>
-                Making complex mortgages boringly simple for Ontario residents.
-              </p>
-              <p className="text-xs" style={{color: '#264653'}}>
-                <strong>Andreina Ford</strong><br/>
-                Licensed Mortgage Agent Level 2<br/>
-                BRX Mortgage #13463
-              </p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Free Calculators</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="/mortgage-payment-calculator" className="hover:text-white">Payment Calculator</Link></li>
-                <li><Link href="/mortgage-affordability-calculator" className="hover:text-white">Affordability Calculator</Link></li>
-                <li><Link href="/heloc-payment-calculator" className="hover:text-white">HELOC Calculator</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Ontario Cities</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="/best-mortgage-rates-toronto" className="hover:text-white">Toronto</Link></li>
-                <li><Link href="/best-mortgage-rates-ottawa" className="hover:text-white">Ottawa</Link></li>
-                <li><Link href="/best-mortgage-rates-mississauga" className="hover:text-white">Mississauga</Link></li>
-                <li><Link href="/best-mortgage-rates-hamilton" className="hover:text-white">Hamilton</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Get Help</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href={CONTACT_CONFIG.consultationUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white">Book Consultation</a></li>
-                <li><a href="mailto:hello@boringmortgages.ca?subject=Mortgage questions from Ontario" className="hover:text-white">Email Us</a></li>
-                <li><a href="https://mortgagewithford.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">About Us</a></li>
-                <li><a href="https://boringmortgages.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white">Home</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-800 mt-8 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <p className="text-gray-400 text-sm">
-                © {new Date().getFullYear()} Boring Mortgages Ontario. Making Ontario mortgages boringly simple.
-              </p>
-              <div className="flex space-x-6 mt-4 md:mt-0">
-                <Link href="/privacy" className="text-gray-400 hover:text-white text-sm">Privacy</Link>
-                <Link href="/terms" className="text-gray-400 hover:text-white text-sm">Terms</Link>
-                <Link href="/disclaimer" className="text-gray-400 hover:text-white text-sm">Disclaimer</Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer showRegulatory={false} />
       
       <ContactForm 
         isOpen={isContactFormOpen} 

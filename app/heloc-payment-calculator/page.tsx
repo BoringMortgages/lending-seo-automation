@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from "next/link";
+import Header from "../../components/layout/Header";
+import Footer from "../../components/layout/Footer";
 
 export default function HELOCPaymentCalculator() {
   const [homeValue, setHomeValue] = useState(800000);
@@ -81,32 +83,7 @@ export default function HELOCPaymentCalculator() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-indigo-50">
-      {/* Header */}
-      <header className="backdrop-blur-md bg-white/80 shadow-lg border-b border-white/20 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-slate-600 to-slate-800 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">B</span>
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900">
-                  Boring Mortgages Ontario
-                </h1>
-                <p className="text-sm text-gray-600">Making complex mortgages boringly simple</p>
-              </div>
-            </Link>
-            <div className="flex items-center space-x-4">
-              <Link
-                href="mailto:hello@mortgagewithford.ca"
-                className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 font-medium"
-              >
-                Get HELOC Quote
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header variant="calculator" currentPage="heloc" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Hero Section */}

@@ -3,6 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import ContactForm from "../../components/ContactForm";
+import Header from "../../components/layout/Header";
+import Footer from "../../components/layout/Footer";
 
 // Rate interface
 interface MortgageRate {
