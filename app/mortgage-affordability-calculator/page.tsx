@@ -5,6 +5,7 @@ import Link from "next/link";
 import Footer from "../../components/layout/Footer";
 import Header from "../../components/layout/Header";
 import PreApprovalForm from "../../components/PreApprovalForm";
+import Button from "../../components/ui/Button";
 import { CONTACT_CONFIG } from "../../config/contact";
 
 export default function MortgageAffordabilityCalculator() {
@@ -83,34 +84,7 @@ export default function MortgageAffordabilityCalculator() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50">
-      {/* Header */}
-      <header className="backdrop-blur-md bg-white/80 shadow-lg border-b border-white/20 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-slate-600 to-slate-800 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">B</span>
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900">
-                  Boring Mortgages Ontario
-                </h1>
-                <p className="text-sm text-gray-600">Making complex mortgages boringly simple</p>
-              </div>
-            </Link>
-            <div className="flex items-center space-x-4">
-              <a
-                href={CONTACT_CONFIG.consultationUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-300 transform hover:scale-105 font-medium"
-              >
-                {CONTACT_CONFIG.cta.consultation}
-              </a>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header variant="calculator" currentPage="calculator" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Hero Section */}
@@ -323,12 +297,13 @@ export default function MortgageAffordabilityCalculator() {
 
             {/* CTA */}
             <div className="text-center">
-              <button
+              <Button
                 onClick={() => setIsPreApprovalFormOpen(true)}
-                className="inline-block bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-green-600 hover:to-emerald-700 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+                variant="accent"
+                size="lg"
               >
                 Get Pre-Approved
-              </button>
+              </Button>
               <p className="mt-3 text-sm text-gray-500">
                 Turn your affordability into approval • Licensed Mortgage Agent
               </p>

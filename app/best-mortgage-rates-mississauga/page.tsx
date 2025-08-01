@@ -5,6 +5,8 @@ import React, { useState, useEffect } from "react";
 import ContactForm from "../../components/ContactForm";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
+import Button from "../../components/ui/Button";
+import { CMHC_RULES, getBestFor, type MortgageRate } from "../../lib/constants/cmhc";
 
 // CMHC Official Mortgage Calculation Rules (2024)
 const CMHC_RULES = {

@@ -6,61 +6,8 @@ import ContactForm from "../../components/ContactForm";
 import MortgageCalculator from "../../components/calculators/MortgageCalculator";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
-
-// Rate interface
-interface MortgageRate {
-  term: string;
-  rate: string;
-  type: string;
-  bestFor?: string;
-  lender: string;
-  payment?: string;
-  popular?: boolean;
-}
-
-// CMHC Official Mortgage Calculation Rules (2025)
-const CMHC_RULES = {
-  // Official CMHC Mortgage Insurance Premium Rates (2025)
-  premiumRates: {
-    65.00: 0.0060,   // Up to 65% LTV
-    75.00: 0.0170,   // 65.01% to 75% LTV
-    80.00: 0.0240,   // 75.01% to 80% LTV
-    85.00: 0.0280,   // 80.01% to 85% LTV
-    90.00: 0.0310,   // 85.01% to 90% LTV
-    95.00: 0.0400,   // 90.01% to 95% LTV (traditional down payment)
-    95.01: 0.0450    // 90.01% to 95% LTV (non-traditional down payment)
-  },
-  
-  // CMHC Down Payment Requirements (Official 2025 Rules)
-  downPaymentRules: {
-    minDownPayment5Percent: 500000,     // 5% minimum on first $500k
-    minDownPayment10Percent: 1000000,   // 10% on $500k-$1M portion
-    minDownPayment20Percent: 1500000,   // 20% minimum on homes over $1M
-    maxInsurablePrice: 1500000          // CMHC insurance available up to $1.5M
-  },
-  
-  
-  // 2025 Amortization Surcharges
-  amortizationSurcharges: {
-    standard: 0.0000,                   // Up to 25 years: 0.00%
-    extended: 0.0025,                   // 26-30 years: +0.25%
-    firstTimeBuyerNewBuild: 0.0020,     // Additional +0.20% for FTB new builds (30yr)
-  },
-
-  // 2025 High-Ratio Surcharges ($1M-$1.5M)
-  highRatioSurcharges: {
-    millionToOneFiveM: 0.0025,          // +0.25% for homes $1M-$1.5M (high-ratio only)
-  },
-
-  // Additional CMHC Rules (2025 Update)
-  additionalRules: {
-    minCreditScore: 680,
-    maxAmortization: 30,                // Max 30 years
-    standardAmortization: 25,           // Standard amortization period
-    firstTimeBuyerMaxAmortization: 30,  // 30 years for first-time buyers on new builds
-    nonTraditionalSourcePremium: 0.0450, // 4.50% for borrowed down payments
- }
-};
+import Button from "../../components/ui/Button";
+import { CMHC_RULES, getBestFor, type MortgageRate } from "../../lib/constants/cmhc";
 
 
 
@@ -129,16 +76,6 @@ export default function TorontoMortgageRates() {
     return () => clearInterval(interval);
   }, []);
 
-  // Helper function to determine best for description
-  const getBestFor = (term: string, type: string) => {
-    if (term === "5-years-fixed") return "Most popular";
-    if (term === "3-years-fixed") return "Medium-term security";
-    if (term === "1-year-fixed") return "Rate speculation";
-    if (type === "Variable") return "Rate optimists";
-    if (term === "2-years-fixed") return "Short commitment";
-    if (term === "10-years-fixed") return "Long-term security";
-    return "Flexible option";
-  };
   
   const filteredRates = currentRates;
   
@@ -323,15 +260,13 @@ export default function TorontoMortgageRates() {
             </div>
 
             <div className="flex justify-center mb-8">
-              <a
+              <Button
                 href="https://andreina-ford.mtg-app.com/signup?brokerName=andreina.ford&brokerId=7208e0a3-3590-47b7-a99d-4704d9c75268"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-4 text-lg text-center shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 rounded-lg border-2 font-semibold hover:opacity-80"
-                style={{borderColor: '#264653', color: '#264653', backgroundColor: 'transparent'}}
+                variant="secondary"
+                size="lg"
               >
                 Apply Now for Pre-Approval!
-              </a>
+              </Button>
             </div>
             </div>
           </div>
@@ -360,13 +295,14 @@ export default function TorontoMortgageRates() {
                     <div className="text-2xl mb-4">⚠️</div>
                     <p className="text-lg font-medium" style={{color: '#264653'}}>Rates temporarily unavailable</p>
                     <p className="text-sm mt-2" style={{color: '#264653'}}>Please contact us directly for current rates</p>
-                    <button 
+                    <Button
                       onClick={() => setIsContactFormOpen(true)}
-                      className="mt-4 px-6 py-2 text-sm shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200 rounded-lg text-white font-medium"
-                      style={{backgroundColor: '#FF914D'}}
+                      variant="primary"
+                      size="sm"
+                      className="mt-4"
                     >
                       Contact Us
-                    </button>
+                    </Button>
                   </div>
                 ) : (
                   <div className="w-full">
@@ -403,17 +339,17 @@ export default function TorontoMortgageRates() {
                                 </div>
                               </td>
                               <td className="py-4 px-4 text-center">
-                                <button 
+                                <Button
                                   onClick={() => {
                                     setSelectedRate(`${rate.term} - ${rate.rate}`);
                                     setShowLockRate(true);
                                     setLockRateSubmitted(false);
                                   }}
-                                  className="px-4 py-2 text-sm inline-block shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200 rounded-lg text-white font-medium"
-                                  style={{backgroundColor: '#2A9D8F'}}
+                                  variant="secondary"
+                                  size="sm"
                                 >
                                   Lock Rate
-                                </button>
+                                </Button>
                               </td>
                             </tr>
                           ))}
@@ -445,17 +381,18 @@ export default function TorontoMortgageRates() {
                               <div className="text-sm font-bold" style={{color: '#264653'}}>{rate.lender}</div>
                             </div>
                           </div>
-                          <button 
+                          <Button
                             onClick={() => {
                               setSelectedRate(`${rate.term} - ${rate.rate}`);
                               setShowLockRate(true);
                               setLockRateSubmitted(false);
                             }}
-                            className="w-full px-4 py-3 text-sm shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200 rounded-lg text-white font-medium"
-                            style={{backgroundColor: '#2A9D8F'}}
+                            variant="secondary"
+                            size="sm"
+                            className="w-full"
                           >
                             Lock Rate
-                          </button>
+                          </Button>
                         </div>
                       ))}
                     </div>
@@ -564,12 +501,13 @@ export default function TorontoMortgageRates() {
             <p className="mb-4" style={{color: '#264653'}}>
               Need help navigating Toronto's programs? Our experts know the details.
             </p>
-            <button 
+            <Button
               onClick={() => setIsContactFormOpen(true)}
-              className="btn-primary px-8 py-3 font-semibold inline-block"
+              variant="primary"
+              size="lg"
             >
               Get Toronto Program Help
-            </button>
+            </Button>
           </div>
         </div>
       </section>
@@ -676,12 +614,14 @@ export default function TorontoMortgageRates() {
                       <option>1 Year Fixed</option>
                     </select>
                   </div>
-                  <button 
+                  <Button
                     type="submit"
-                    className="w-full btn-primary py-3 text-center"
+                    variant="primary"
+                    size="md"
+                    className="w-full"
                   >
                     Set Alert
-                  </button>
+                  </Button>
                 </form>
                 <p className="text-xs text-gray-500 mt-4 text-center">
                   We'll email you when rates hit your target. Unsubscribe anytime.
@@ -752,12 +692,14 @@ export default function TorontoMortgageRates() {
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple focus:border-transparent"
                     />
                   </div>
-                  <button 
+                  <Button
                     type="submit"
-                    className="w-full btn-primary py-3 text-center"
+                    variant="primary"
+                    size="md"
+                    className="w-full"
                   >
                     Lock This Rate
-                  </button>
+                  </Button>
                 </form>
                 <p className="text-xs text-gray-500 mt-4 text-center">
                   Rate lock subject to qualification and approval.
@@ -779,14 +721,13 @@ export default function TorontoMortgageRates() {
       {/* Sticky CTA Bar */}
       <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t shadow-lg z-40 p-4 lg:hidden">
         <div className="flex justify-center">
-          <a
+          <Button
             href="https://andreina-ford.mtg-app.com/signup?brokerName=andreina.ford&brokerId=7208e0a3-3590-47b7-a99d-4704d9c75268"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 btn-primary py-3 text-center text-sm font-semibold"
+            variant="primary"
+            size="md"
           >
             Apply for Pre-Approval
-          </a>
+          </Button>
         </div>
       </div>
 
@@ -802,14 +743,14 @@ export default function TorontoMortgageRates() {
             connect with our Licensed Mortgage Agent specializing in the GTA market.
           </p>
           <div className="flex justify-center">
-            <a
+            <Button
               href="https://andreina-ford.mtg-app.com/signup?brokerName=andreina.ford&brokerId=7208e0a3-3590-47b7-a99d-4704d9c75268"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105" style={{backgroundColor: '#FAFAFA', color: '#264653'}}
+              variant="secondary"
+              size="lg"
+              className="text-lg"
             >
               Apply Now for Pre-Approval!
-            </a>
+            </Button>
           </div>
           <div className="mt-6 flex items-center justify-center space-x-6 text-sm" style={{color: '#F4F4F4'}}>
             <div className="flex items-center space-x-2">
