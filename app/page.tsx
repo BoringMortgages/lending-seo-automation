@@ -411,7 +411,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Footer showRegulatory={false} />
+      <Footer showRegulatory={true} />
       
       <ContactForm 
         isOpen={isContactFormOpen} 
