@@ -66,7 +66,7 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
     <div className="max-w-5xl mx-auto">
       <div className="grid lg:grid-cols-2 gap-8">
         {/* Input Controls */}
-        <div className="rounded-2xl shadow-xl backdrop-blur-sm border-2 p-8 hover:shadow-2xl transition-all duration-300 bg-gray-50 border-teal-500">
+        <div className="rounded-2xl shadow-xl backdrop-blur-sm border-2 p-8 hover:shadow-2xl transition-all duration-300 bg-gray-50 border-green-500">
           <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
             Mortgage Details
           </h3>
@@ -94,7 +94,7 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
                   const minRequiredDown = calculateMinDownPayment(newPrice);
                   setDownPayment(Math.max(newDownPaymentAmount, minRequiredDown));
                 }}
-                className="w-full h-4 bg-gradient-to-r from-teal-100 to-emerald-200 rounded-lg appearance-none cursor-pointer"
+                className="w-full h-4 bg-gradient-to-r from-green-100 to-emerald-200 rounded-lg appearance-none cursor-pointer"
               />
               <div className="flex justify-between text-sm text-gray-500 mt-2">
                 <span>$500K</span>
@@ -114,7 +114,7 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
                 step="5000"
                 value={downPayment}
                 onChange={(e) => setDownPayment(Number(e.target.value))}
-                className="w-full h-4 bg-gradient-to-r from-teal-100 to-emerald-200 rounded-lg appearance-none cursor-pointer"
+                className="w-full h-4 bg-gradient-to-r from-green-100 to-emerald-200 rounded-lg appearance-none cursor-pointer"
               />
               <div className="flex justify-between text-base text-gray-600 mt-2 font-medium">
                 <span>Minimum: {formatCurrency(minDownPayment)}</span>
@@ -172,7 +172,7 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
                 step="0.01"
                 value={interestRate}
                 onChange={(e) => setInterestRate(Number(e.target.value))}
-                className="w-full h-4 bg-gradient-to-r from-teal-100 to-emerald-200 rounded-lg appearance-none cursor-pointer"
+                className="w-full h-4 bg-gradient-to-r from-green-100 to-emerald-200 rounded-lg appearance-none cursor-pointer"
               />
               <div className="flex justify-between text-sm text-gray-500 mt-2">
                 <span>3%</span>
@@ -192,7 +192,7 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
                 step="1"
                 value={amortizationYears}
                 onChange={(e) => setAmortizationYears(Number(e.target.value))}
-                className="w-full h-4 bg-gradient-to-r from-teal-100 to-emerald-200 rounded-lg appearance-none cursor-pointer"
+                className="w-full h-4 bg-gradient-to-r from-green-100 to-emerald-200 rounded-lg appearance-none cursor-pointer"
               />
               <div className="flex justify-between text-sm text-gray-500 mt-2">
                 <span>15 years</span>
@@ -272,7 +272,7 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
         {/* Results Panel */}
         <div className="space-y-4">
           {/* Main Payment Result */}
-          <div className="rounded-2xl shadow-xl p-8 text-center text-white relative overflow-hidden hover:shadow-2xl transition-all duration-300 bg-gradient-to-br from-slate-700 via-teal-600 to-emerald-600">
+          <div className="rounded-2xl shadow-xl p-8 text-center text-white relative overflow-hidden hover:shadow-2xl transition-all duration-300 bg-gradient-to-br from-green-700 via-green-600 to-emerald-600">
             <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
             <div className="absolute -top-4 -right-4 w-32 h-32 bg-white/5 rounded-full blur-2xl"></div>
             <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-white/5 rounded-full blur-xl"></div>
@@ -286,7 +286,7 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
           </div>
 
           {/* Payment Breakdown */}
-          <div className="backdrop-blur-sm rounded-2xl shadow-xl p-6 border-2 hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] bg-gray-50 border-teal-500">
+          <div className="backdrop-blur-sm rounded-2xl shadow-xl p-6 border-2 hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] bg-gray-50 border-green-500">
             <h4 className="text-xl font-bold mb-4 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">CMHC Calculation Breakdown</h4>
             <div className="space-y-4">
               <div className="flex justify-between">
@@ -375,7 +375,7 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
             {onOpenContactForm ? (
               <button
                 onClick={onOpenContactForm}
-                className="px-8 py-3 text-lg font-semibold inline-block rounded-lg text-white hover:opacity-90 transition-opacity bg-orange-500"
+                className="px-8 py-3 text-lg font-semibold inline-block rounded-lg text-white hover:opacity-90 transition-opacity bg-green-600"
               >
                 Get Pre-Approved
               </button>
@@ -384,7 +384,7 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
                 href={CONTACT_CONFIG.applicationUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-3 text-lg font-semibold inline-block rounded-lg text-white hover:opacity-90 transition-opacity bg-slate-700"
+                className="px-8 py-3 text-lg font-semibold inline-block rounded-lg text-white hover:opacity-90 transition-opacity bg-green-600"
               >
                 {CONTACT_CONFIG.cta.primary}
               </a>

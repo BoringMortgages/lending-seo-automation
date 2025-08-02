@@ -426,16 +426,16 @@ export default function OttawaMortgageRates() {
                     <input
                       type="email"
                       placeholder="Your email"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       required
                     />
                     <input
                       type="text"
                       placeholder="Target rate (e.g. 4.5%)"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       required
                     />
-                    <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple focus:border-transparent">
+                    <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
                       <option>5 Year Fixed</option>
                       <option>3 Year Fixed</option>
                       <option>Variable Rate</option>
@@ -450,10 +450,10 @@ export default function OttawaMortgageRates() {
                   >
                     Set Alert
                   </Button>
+                  <p className="text-xs text-gray-500 mt-4 text-center">
+                    We'll email you when rates hit your target. Unsubscribe anytime.
+                  </p>
                 </form>
-                <p className="text-xs text-gray-500 mt-4 text-center">
-                  We'll email you when rates hit your target. Unsubscribe anytime.
-                </p>
               )}
             </div>
             
@@ -502,25 +502,25 @@ export default function OttawaMortgageRates() {
                     <input
                       type="text"
                       placeholder="Full name"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       required
                     />
                     <input
                       type="email"
                       placeholder="Email"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       required
                     />
                     <input
                       type="tel"
                       placeholder="Phone"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       required
                     />
                     <input
                       type="text"
                       placeholder="Property price (Ottawa)"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     />
                   </div>
                   <Button
@@ -531,10 +531,10 @@ export default function OttawaMortgageRates() {
                   >
                     Lock This Rate
                   </Button>
+                  <p className="text-xs text-gray-500 mt-4 text-center">
+                    Rate lock subject to qualification and approval.
+                  </p>
                 </form>
-                <p className="text-xs text-gray-500 mt-4 text-center">
-                  Rate lock subject to qualification and approval.
-                </p>
               )}
             </div>
             
@@ -555,7 +555,6 @@ export default function OttawaMortgageRates() {
         <ContactForm 
           isOpen={isContactFormOpen}
           onClose={() => setIsContactFormOpen(false)}
-          source="Ottawa Mortgage Rates Page"
         />
       )}
 
