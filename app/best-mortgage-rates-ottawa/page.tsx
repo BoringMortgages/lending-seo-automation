@@ -8,60 +8,7 @@ import Footer from "../../components/layout/Footer";
 import Button from "../../components/ui/Button";
 import { CMHC_RULES, getBestFor, type MortgageRate } from "../../lib/constants/cmhc";
 
-// Rate interface
-interface MortgageRate {
-  term: string;
-  rate: string;
-  type: string;
-  bestFor?: string;
-  lender: string;
-  payment?: string;
-  popular?: boolean;
-}
 
-// CMHC Official Mortgage Calculation Rules (2025)
-const CMHC_RULES = {
-  // Official CMHC Mortgage Insurance Premium Rates (2025)
-  premiumRates: {
-    65.00: 0.0060,   // Up to 65% LTV
-    75.00: 0.0170,   // 65.01% to 75% LTV
-    80.00: 0.0240,   // 75.01% to 80% LTV
-    85.00: 0.0280,   // 80.01% to 85% LTV
-    90.00: 0.0310,   // 85.01% to 90% LTV
-    95.00: 0.0400,   // 90.01% to 95% LTV (traditional down payment)
-    95.01: 0.0450    // 90.01% to 95% LTV (non-traditional down payment)
-  },
-  
-  // CMHC Down Payment Requirements (Official 2025 Rules)
-  downPaymentRules: {
-    minDownPayment5Percent: 500000,     // 5% minimum on first $500k
-    minDownPayment10Percent: 1000000,   // 10% on $500k-$1M portion
-    minDownPayment20Percent: 1500000,   // 20% minimum on homes over $1M
-    maxInsurablePrice: 1500000          // CMHC insurance available up to $1.5M
-  },
-  
-  
-  // 2025 Amortization Surcharges
-  amortizationSurcharges: {
-    standard: 0.0000,                   // Up to 25 years: 0.00%
-    extended: 0.0025,                   // 26-30 years: +0.25%
-    firstTimeBuyerNewBuild: 0.0020,     // Additional +0.20% for FTB new builds (30yr)
-  },
-
-  // 2025 High-Ratio Surcharges ($1M-$1.5M)
-  highRatioSurcharges: {
-    millionToOneFiveM: 0.0025,          // +0.25% for homes $1M-$1.5M (high-ratio only)
-  },
-
-  // Additional CMHC Rules (2025 Update)
-  additionalRules: {
-    minCreditScore: 680,
-    maxAmortization: 30,                // Max 30 years
-    standardAmortization: 25,           // Standard amortization period
-    firstTimeBuyerMaxAmortization: 30,  // 30 years for first-time buyers on new builds
-    nonTraditionalSourcePremium: 0.0450, // 4.50% for borrowed down payments
- }
-};
 
 // Ottawa Mortgage Calculator Component
 function OttawaMortgageCalculator({ onOpenContactForm, currentRates }: { onOpenContactForm: () => void, currentRates: MortgageRate[] }) {

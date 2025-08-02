@@ -8,42 +8,6 @@ import Footer from "../../components/layout/Footer";
 import Button from "../../components/ui/Button";
 import { CMHC_RULES, getBestFor, type MortgageRate } from "../../lib/constants/cmhc";
 
-// CMHC Official Mortgage Calculation Rules (2024)
-const CMHC_RULES = {
-  // Official CMHC Mortgage Insurance Premium Rates (2024)
-  premiumRates: {
-    65.00: 0.0060,   // Up to 65% LTV
-    75.00: 0.0170,   // 65.01% to 75% LTV
-    80.00: 0.0240,   // 75.01% to 80% LTV
-    85.00: 0.0280,   // 80.01% to 85% LTV
-    90.00: 0.0310,   // 85.01% to 90% LTV
-    95.00: 0.0400,   // 90.01% to 95% LTV (traditional down payment)
-    95.01: 0.0450    // 90.01% to 95% LTV (non-traditional down payment)
-  },
-  
-  // CMHC Down Payment Requirements (Official 2024 Rules)
-  downPaymentRules: {
-    minDownPayment5Percent: 500000,     // 5% minimum on first $500k
-    minDownPayment10Percent: 1000000,   // 10% on $500k-$1M portion
-    minDownPayment20Percent: 1500000,   // 20% minimum on homes over $1M
-    maxInsurablePrice: 1500000          // CMHC insurance not available over $1.5M
-  },
-  
-  
-  // Additional CMHC Rules for Future Use
-  additionalRules: {
-    minCreditScore: 680,
-    maxAmortization: 30,              // 30 years for first-time buyers on new builds
-    standardAmortization: 25,         // Standard amortization period
-    amortizationSurcharge: 0.0020,    // 0.20% surcharge for >25 year amortization
-    blendedAmortizationSurcharge: 0.0060, // 0.60% surcharge for blended amortization
-    provincialTaxProvinces: ['ON', 'QC', 'SK', 'MB'], // Provinces with PST on CMHC premiums
-    ontarioTaxRate: 0.08,             // 8% PST in Ontario
-    quebecTaxRate: 0.09975,           // 9.975% PST in Quebec
-    saskatchewanTaxRate: 0.06,        // 6% PST in Saskatchewan
-    manitobaTaxRate: 0.07             // 7% PST in Manitoba
-  }
-};
 
 // Mississauga Mortgage Calculator Component
 function MississaugaMortgageCalculator({ onOpenContactForm, currentRates }: { onOpenContactForm: () => void, currentRates: MortgageRate[] }) {
@@ -477,16 +441,6 @@ function MississaugaMortgageCalculator({ onOpenContactForm, currentRates }: { on
   );
 }
 
-// Interface for rate data
-interface MortgageRate {
-  term: string;
-  rate: string;
-  type: string;
-  lender: string;
-  payment?: string;
-  popular?: boolean;
-  bestFor?: string;
-}
 
 export default function MississaugaMortgageRates() {
   const [selectedFilter, setSelectedFilter] = React.useState('all');
