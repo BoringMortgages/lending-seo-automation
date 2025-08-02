@@ -231,12 +231,11 @@ export default function TorontoMortgageRates() {
               🏙️ Toronto, Ontario
             </div>
             <div className="mb-6">
-              <Image
+              <img
                 src="/logos/toronto-mortgages-gradient.png"
                 alt="Best Mortgage Rates Toronto"
                 width={500}
                 height={120}
-                priority
                 className="mx-auto"
               />
             </div>
