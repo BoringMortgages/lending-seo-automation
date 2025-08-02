@@ -28,7 +28,7 @@ const Footer: React.FC<FooterProps> = ({ showRegulatory = true }) => {
             </p>
             {showRegulatory && (
               <p className="text-xs" style={{color: '#6B7280'}}>
-                <strong style={{color: '#9CA3AF'}}>{CONTACT_CONFIG.business.agentName}</strong><br/>
+                <strong style={{color: '#6B7280'}}>{CONTACT_CONFIG.business.agentName}</strong><br/>
                 {CONTACT_CONFIG.business.licenseTitle}<br/>
                 {CONTACT_CONFIG.business.licenseNumber}
               </p>

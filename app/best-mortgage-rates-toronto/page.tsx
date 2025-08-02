@@ -260,13 +260,15 @@ export default function TorontoMortgageRates() {
             </div>
 
             <div className="flex justify-center mb-8">
-              <Button
+              <a
                 href="https://andreina-ford.mtg-app.com/signup?brokerName=andreina.ford&brokerId=7208e0a3-3590-47b7-a99d-4704d9c75268"
-                variant="secondary"
-                size="lg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-4 text-lg text-center shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 rounded-lg border-2 font-semibold hover:opacity-80"
+                style={{borderColor: '#264653', color: '#264653', backgroundColor: 'transparent'}}
               >
                 Apply Now for Pre-Approval!
-              </Button>
+              </a>
             </div>
             </div>
           </div>
