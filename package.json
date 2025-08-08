@@ -9,7 +9,8 @@
     "build": "next build",
     "start": "next start --port 3006",
     "lint": "next lint",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "update-rates": "node scripts/quick-scrape.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.5.10",

@@ -1,50 +1,38 @@
 {
-  "source": "RateHub - Best Mortgage Rates",
+  "source": "RateHub - Live Rates",
   "url": "https://www.ratehub.ca/best-mortgage-rates",
-  "scrapedAt": "2025-07-28T21:55:19.256Z",
+  "scrapedAt": "2025-08-08T16:47:48.495Z",
   "rates": [
     {
       "term": "5 Year Variable",
-      "rate": "3.75%",
+      "rate": "3.95%",
       "type": "Variable",
-      "lender": "Scotiabank",
-      "lenderLogo": "https://www.ratehub.ca/assets/images/lenders/scotiabank.png"
+      "lender": "Major Canadian Bank"
     },
     {
       "term": "5 Year",
-      "rate": "3.74%",
+      "rate": "4.64%",
       "type": "Fixed",
-      "lender": "RBC Royal Bank",
-      "lenderLogo": "https://www.ratehub.ca/assets/images/lenders/rbc.png"
+      "lender": "RBC Royal Bank"
     },
     {
       "term": "3 Year",
-      "rate": "3.84%",
+      "rate": "4.44%",
       "type": "Fixed",
-      "lender": "TD Bank",
-      "lenderLogo": "https://www.ratehub.ca/assets/images/lenders/td.png"
+      "lender": "TD Bank"
     },
     {
-      "term": "2 Year",
-      "rate": "4.14%",
-      "type": "Fixed",
-      "lender": "MCAP",
-      "lenderLogo": "https://www.ratehub.ca/assets/images/lenders/mcap.png"
+      "term": "5 Year Variable",
+      "rate": "5.25%",
+      "type": "Variable",
+      "lender": "Scotiabank"
     },
     {
       "term": "1 Year",
-      "rate": "4.49%",
+      "rate": "5.99%",
       "type": "Fixed",
-      "lender": "First National",
-      "lenderLogo": "https://www.ratehub.ca/assets/images/lenders/first-national.png"
-    },
-    {
-      "term": "6 Month",
-      "rate": "4.89%",
-      "type": "Open",
-      "lender": "HSBC Bank Canada",
-      "lenderLogo": "https://www.ratehub.ca/assets/images/lenders/hsbc.png"
+      "lender": "CIBC"
     }
   ],
-  "rawContent": "Updated manually with current Canadian mortgage rates"
+  "rawContent": "[Skip to main content](https://www.ratehub.ca/best-mortgage-rates#main-content)\n\n✕\nRatehub.ca is the home of the lowest mortgage rates in Canada - [3.95% 5-yr variable](https://www.ratehub.ca/best-mortgage-rates/5-year/variable)\n\n## Best mortgage rates in Canada\n\nTo see the current best Canada mortgage rates from the Big 5 Banks, click on the \"Best bank rates\" tab.\n\n**ratehub.ca insights:** Several lenders have increased their fixed mortgage rates this week, despite bond yields softening to the 2.9% range; markets are reacting to the latest Canadian job numbers, which came in softer than expected. Some lenders have also decreased their spread to prime with variable mortgage rates. In a rate-rising environment, consider getting a pre-approval and rate hold to lock in a rate for up to 120 days.\n\n- Best market rates\n\n- Best bank rates\n\n\nTransaction type\n\n- Buying a home\n- Renewing\n- Refinancing\n- Home equity line of credit\n\nPurchase price\n\n%\n\nDown payment $\n\nHELOC Amount\n\nCurrent mortgage"
 }
