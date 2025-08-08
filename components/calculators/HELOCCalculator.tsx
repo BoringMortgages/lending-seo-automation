@@ -31,7 +31,7 @@ const HELOCCalculator: React.FC<HELOCCalculatorProps> = ({
   const calculateMonthlyInterest = () => {
     const amountForInterest = desiredAmount > 0 ? Math.min(desiredAmount, maxHELOC) : maxHELOC;
     if (amountForInterest > 0) {
-      const annualRate = 0.075; // Prime + 0.5% estimate
+      const annualRate = 0.0545; // Prime (4.95%) + 0.5% = 5.45%
       const monthlyRate = annualRate / 12;
       return amountForInterest * monthlyRate;
     }
@@ -151,14 +151,13 @@ const HELOCCalculator: React.FC<HELOCCalculatorProps> = ({
 
             {/* Calculate Button */}
             <div className="flex gap-4">
-              <Button
+              <button
                 onClick={calculateHELOC}
-                variant="primary"
-                size="lg"
-                className="flex-1"
+                className="flex-1 px-8 py-3 text-lg font-semibold rounded-lg text-white hover:opacity-90 transition-all duration-200"
+                style={{backgroundColor: '#FF914D'}}
               >
                 Calculate
-              </Button>
+              </button>
               <Button
                 onClick={() => {
                   setHomeValue(500000);
@@ -210,7 +209,7 @@ const HELOCCalculator: React.FC<HELOCCalculatorProps> = ({
                   </h4>
                   <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-700">Monthly interest at prime + 0.5% (~7.5%):</span>
+                      <span className="text-gray-700">Monthly interest at prime + 0.5% (5.45%):</span>
                       <span className="text-2xl font-bold text-green-600">${formatCurrency(monthlyInterest)}</span>
                     </div>
                     <p className="text-sm text-gray-600 mt-2">

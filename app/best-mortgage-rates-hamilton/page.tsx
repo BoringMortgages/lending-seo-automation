@@ -8,6 +8,7 @@ import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
 import Button from "../../components/ui/Button";
 import { CMHC_RULES, getBestFor, type MortgageRate } from "../../lib/constants/cmhc";
+import { fetchMortgageRates, getFallbackRates } from "../../lib/utils/rates";
 
 
 
@@ -26,54 +27,22 @@ export default function HamiltonMortgageRates() {
   const [ratesLoading, setRatesLoading] = React.useState(true);
   const [lastUpdated, setLastUpdated] = React.useState<string | null>(null);
 
-  // Fetch live rates on component mount
+  // Fetch live mortgage rates using centralized utility
   React.useEffect(() => {
-    const fetchLiveRates = async () => {
-      setRatesLoading(true);
-      try {
-        const response = await fetch('/api/mortgage-rates');
-        const data = await response.json();
-        
-        if (data.rates && data.rates.length > 0) {
-          // Transform API data to match our format
-          const transformedRates = data.rates.flatMap((provider: any) => 
-            provider.rates?.map((rate: any) => ({
-              term: rate.term,
-              rate: rate.rate,
-              type: rate.type,
-              bestFor: getBestFor(rate.term, rate.type),
-              lender: rate.lender,
-              payment: rate.payment,
-              popular: rate.term === "5-years-fixed" && rate.type === "Fixed"
-            })) || []
-          );
-          
-          setCurrentRates(transformedRates);
-          setLastUpdated(data.lastUpdated || new Date().toLocaleString('en-CA', { 
-            timeZone: 'America/Toronto',
-            month: 'short', 
-            day: 'numeric', 
-            hour: '2-digit', 
-            minute: '2-digit'
-          }));
-        } else {
-          // If no rates from API, show error message
-          console.error('No rates available from API');
-        }
-      } catch (error) {
-        console.error('Error fetching live rates:', error);
-        // Show error state if API fails
-        setCurrentRates([]);
-      } finally {
-        setRatesLoading(false);
-      }
+    const loadRates = async () => {
+      const rates = await fetchMortgageRates();
+      setCurrentRates(rates);
+      setLastUpdated(new Date().toLocaleString('en-CA', {
+        timeZone: 'America/Toronto',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      }));
+      setRatesLoading(false);
     };
-
-    fetchLiveRates();
     
-    // Refresh rates every 4 hours
-    const interval = setInterval(fetchLiveRates, 4 * 60 * 60 * 1000);
-    return () => clearInterval(interval);
+    loadRates();
   }, []);
 
   

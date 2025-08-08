@@ -136,17 +136,6 @@ export default function HELOCPaymentCalculator() {
               </p>
             </Link>
             
-            <Link
-              href="/refinancing-calculator"
-              className="p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-            >
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                Refinancing Calculator
-              </h3>
-              <p className="text-gray-600">
-                Compare refinancing vs. HELOC for accessing home equity.
-              </p>
-            </Link>
           </div>
         </div>
       </div>
