@@ -52,7 +52,7 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ onOpenContactFo
   const requiresCMHC = downPayment < (purchasePrice * 0.20);
   const isEligibleForCMHC = purchasePrice <= 1500000;
   const cmhcPremium = requiresCMHC && isEligibleForCMHC ? 
-    calculateCMHCPremium(loanAmount, purchasePrice, amortizationYears, isFirstTimeBuyer, isNewBuild, isTraditionalDownPayment) : 0;
+    calculateCMHCPremium(loanAmount, purchasePrice, isTraditionalDownPayment, isNewBuild, amortizationYears, isFirstTimeBuyer) : 0;
   const totalLoanAmount = loanAmount + cmhcPremium;
   const monthlyPayment = calculatePayment(totalLoanAmount, interestRate, amortizationYears);
   const ltvRatio = (loanAmount / purchasePrice) * 100;

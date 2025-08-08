@@ -10,7 +10,7 @@
   /* Accent & Chart Colors */
   --accent-lime-green: #D4ED3D;
   --accent-lavender: #E3E1FC;
-  --primary-purple: #8c7fff
+  --primary-purple: #8c7fff;
   --accent-bright-yellow: #FBEB6A;
   --accent-light-pink: #EBC2E4;
   --accent-pill-green: #B3D428;
@@ -320,4 +320,84 @@ input[type="range"] {
   font-weight: 700;
   color: var(--primary-purple);
   font-family: 'Inter', sans-serif;
+}
+
+/* Critical performance styles - prevent layout shift and improve loading */
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%, #f8fafc 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  opacity: 0.015;
+  pointer-events: none;
+  background-color: rgb(156 163 175);
+}
+
+/* Prevent layout shift with fixed dimensions */
+.rate-table-container {
+  min-height: 400px; /* Prevent layout shift */
+}
+
+/* Optimize font loading */
+.font-heading {
+  font-display: swap;
+}
+
+/* Critical above-the-fold optimizations */
+.hero-section {
+  contain: layout style paint;
+}
+
+.rate-table-row {
+  contain: layout;
+}
+
+/* Mobile-specific performance optimizations */
+@media (max-width: 768px) {
+  .gradient-bg {
+    background-attachment: scroll; /* Fix for mobile performance */
+    transform: translateZ(0); /* Hardware acceleration */
+  }
+  
+  /* Optimize touch targets */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Reduce animations on mobile for better performance */
+  .hero-section {
+    animation: none;
+  }
+  
+  /* Optimize mobile table rendering */
+  .rate-table-container {
+    min-height: 300px; /* Smaller on mobile */
+  }
+}
+
+/* Improve scroll performance */
+.smooth-scroll {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Critical Web Vitals optimizations */
+.prevent-cls {
+  aspect-ratio: 16 / 9; /* Prevent layout shift for dynamic content */
+}
+
+/* Optimize images for performance */
+img {
+  content-visibility: auto;
+  contain: layout;
 }

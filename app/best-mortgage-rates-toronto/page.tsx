@@ -239,9 +239,11 @@ export default function TorontoMortgageRates() {
                 className="mx-auto"
               />
             </div>
+            <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center" style={{color: '#264653'}}>
+              Best Mortgage Rates Toronto 2025 - Compare 40+ Lenders
+            </h1>
             <p className="text-xl mb-8 leading-relaxed max-w-3xl" style={{color: '#264653'}}>
-              Access Toronto's most competitive mortgage rates, navigate GTA market dynamics, and unlock 
-              exclusive Toronto homebuyer programs. <strong>Skip the bank queues, get pre-approved online.</strong>
+              Get Toronto's lowest mortgage rates from 40+ top lenders. Compare live rates, calculate payments with Toronto land transfer tax, and save thousands. Licensed Ontario mortgage brokers specializing in GTA market dynamics. <strong>Free pre-approval in 2 minutes.</strong>
             </p>
             
             {/* Key Stats */}
@@ -277,9 +279,9 @@ export default function TorontoMortgageRates() {
             <div className="rounded-3xl shadow-2xl backdrop-blur-lg bg-white/20 border-2 border-white/30 p-8">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
                 <div>
-                  <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
-                    Live Toronto Mortgage Rates
-                  </h3>
+                  <h2 className="text-2xl font-bold mb-2 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+                    Live Toronto Mortgage Rates - Updated Daily
+                  </h2>
                   {ratesLoading && <p className="text-sm" style={{color: '#264653'}}><span className="text-orange-600">🔄 Updating...</span></p>}
                 </div>
               </div>
@@ -431,10 +433,10 @@ export default function TorontoMortgageRates() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Toronto Mortgage Calculator
+              Toronto Mortgage Calculator - CMHC Rules 2025
             </h2>
             <p className="text-xl text-gray-600">
-              Calculate your monthly payments with current Toronto rates and official CMHC rules
+              Calculate your monthly payments with current Toronto mortgage rates and official CMHC rules. Includes Toronto land transfer tax, down payment requirements, and CMHC insurance calculations for homes up to $1.5M.
             </p>
           </div>
           <MortgageCalculator 
@@ -451,7 +453,7 @@ export default function TorontoMortgageRates() {
           <div className="backdrop-blur-lg bg-white/20 border border-white/30 rounded-3xl p-12 shadow-2xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-heading mb-4" style={{color: '#222831'}}>
-                Toronto Market Insights
+                Toronto Real Estate Market Insights 2025
               </h2>
               <p className="text-lg" style={{color: '#264653'}}>
                 The details that actually affect your mortgage
@@ -477,7 +479,7 @@ export default function TorontoMortgageRates() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-heading text-gray-900 mb-4">
-              Toronto Home Buying Programs
+              Toronto First-Time Home Buyer Programs 2025
             </h2>
             <p className="text-lg text-gray-600">
               Government programs that could save you thousands
@@ -521,7 +523,7 @@ export default function TorontoMortgageRates() {
           <div className="backdrop-blur-lg bg-white/20 border border-white/30 rounded-3xl p-12 shadow-2xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-heading text-gray-900 mb-4">
-                Toronto Mortgage FAQs
+                Toronto Mortgage FAQs - Common Questions
               </h2>
               <p className="text-lg text-gray-600">
                 The questions Toronto homebuyers actually ask
@@ -534,7 +536,7 @@ export default function TorontoMortgageRates() {
                 Are mortgage rates different across Ontario cities?
               </h3>
               <p style={{color: '#264653'}}>
-                No, mortgage rates are the same across Ontario. A 5-year fixed rate in Toronto is the same as in Ottawa or Hamilton. The difference is in qualification requirements due to varying home prices and local market conditions.
+                No, mortgage rates are the same across Ontario. A 5-year fixed rate in Toronto is the same as in Ottawa or Hamilton. The difference is in qualification requirements due to varying home prices and local market conditions. However, Toronto's high average home price of $1.16M means you'll need larger down payments and higher income to qualify for the same rate.
               </p>
             </div>
             
@@ -543,7 +545,7 @@ export default function TorontoMortgageRates() {
                 How much is land transfer tax in Toronto?
               </h3>
               <p style={{color: '#264653'}}>
-                Toronto has both provincial and municipal land transfer tax. For a $1M home, you'll pay approximately $32,950 total ($16,475 provincial + $16,475 municipal). First-time buyers can get up to $8,475 in rebates.
+                Toronto has both provincial and municipal land transfer tax, making it the most expensive in Ontario. For a $1.16M home (Toronto average), you'll pay approximately $36,400 total ($18,200 provincial + $18,200 municipal). First-time buyers can get up to $8,475 in combined rebates ($4,475 municipal + $4,000 provincial), but this still leaves significant costs compared to other GTA cities.
               </p>
             </div>
             

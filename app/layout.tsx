@@ -7,11 +7,15 @@ import "./globals.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: 'swap',
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: 'swap',
+  preload: false, // Only preload primary font
 });
 
 export const metadata: Metadata = {
@@ -57,6 +61,15 @@ export default function RootLayout({
       <head>
         <link rel="canonical" href="https://boringmortgages.ca" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        {/* Critical resource preloading for performance */}
+        <link rel="preload" href="/api/mortgage-rates" as="fetch" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="//vercel.live" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        
+        {/* Performance hints */}
+        <meta httpEquiv="x-dns-prefetch-control" content="on" />
+        <meta name="format-detection" content="telephone=no" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

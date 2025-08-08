@@ -95,89 +95,63 @@ export default function OttawaMortgageRates() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <div className="flex items-center justify-center mb-6">
-            <div className="w-16 h-16 rounded-xl flex items-center justify-center mr-4" style={{background: 'linear-gradient(to right, #264653, #2A9D8F)'}}>
-              <span className="text-white font-bold text-2xl">O</span>
-            </div>
-            <div className="text-left">
-              <h1 className="text-4xl md:text-5xl font-bold" style={{color: '#222831'}}>
-                Best Mortgage Rates Ottawa
-              </h1>
-              <p className="text-lg md:text-xl" style={{color: '#264653'}}>
-                Capital Region's Premier Mortgage Solutions
-              </p>
-            </div>
+          <div className="inline-flex items-center px-4 py-2 backdrop-blur-sm border rounded-full text-sm font-medium mb-6 shadow-sm" style={{backgroundColor: '#FAFAFA', borderColor: '#2A9D8F', color: '#264653'}}>
+            🏛️ Ottawa, Ontario
+          </div>
+          <div className="mb-6">
+            <img
+              src="/logos/ottawa-mortgages-gradient.png"
+              alt="Best Mortgage Rates Ottawa"
+              width={500}
+              height={120}
+              className="mx-auto"
+            />
           </div>
           
+          <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center" style={{color: '#264653'}}>
+            Best Mortgage Rates Ottawa 2025 - Compare 35+ Lenders
+          </h1>
           <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mb-8" style={{color: '#6B7280'}}>
-            Compare <strong>today's lowest mortgage rates</strong> in Ottawa. Get pre-approved with rates starting from <strong>{filteredRates.length > 0 ? filteredRates[0]?.rate : '4.99'}%</strong> from Canada's top lenders.
+            Compare <strong>Ottawa's lowest mortgage rates</strong> from 35+ top lenders. Get pre-approved with rates starting from <strong>{filteredRates.length > 0 ? filteredRates[0]?.rate : '3.94'}%</strong>. Special programs for federal employees and no municipal land transfer tax. <strong>Free pre-approval in 2 minutes.</strong>
           </p>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <div className="text-center">
-              <div className="text-3xl font-bold mb-2" style={{color: '#2A9D8F'}}>15+</div>
-              <div className="text-gray-600">Lender Partners</div>
+          {/* Key Stats */}
+          <div className="grid grid-cols-2 gap-6 mb-8 max-w-md mx-auto">
+            <div className="text-center p-4 backdrop-blur-sm rounded-xl border-2 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105" style={{backgroundColor: '#F8F9FA', borderColor: '#2A9D8F', background: 'linear-gradient(135deg, #F8F9FA 0%, #F4F4F4 100%)'}}>
+              <div className="text-2xl font-bold" style={{color: '#264653'}}>
+                {currentRates.find(r => r.term === "5 Year" && r.type === "Fixed")?.rate || "3.94%"}
+              </div>
+              <div className="text-sm" style={{color: '#264653'}}>Best 5-Year Fixed</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold mb-2" style={{color: '#2A9D8F'}}>500+</div>
-              <div className="text-gray-600">Ottawa Families Helped</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold mb-2" style={{color: '#2A9D8F'}}>$50M+</div>
-              <div className="text-gray-600">Mortgages Funded</div>
+            <div className="text-center p-4 backdrop-blur-sm rounded-xl border-2 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105" style={{backgroundColor: '#F8F9FA', borderColor: '#2A9D8F', background: 'linear-gradient(135deg, #F8F9FA 0%, #F4F4F4 100%)'}}>
+              <div className="text-2xl font-bold" style={{color: '#2A9D8F'}}>$720K</div>
+              <div className="text-sm" style={{color: '#264653'}}>Average Home Price</div>
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-xl p-8 mb-12">
-            <div className="grid md:grid-cols-3 gap-6 text-center">
-              <div>
-                <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
-                  Ottawa Market Expertise
-                </h3>
-                <p className="text-gray-600">
-                  Deep knowledge of the National Capital Region's unique real estate landscape and lending requirements.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
-                  Government Employee Specialists
-                </h3>
-                <p className="text-gray-600">
-                  Specialized programs for federal government employees with unique income structures and benefits.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
-                  Bilingual Service
-                </h3>
-                <p className="text-gray-600">
-                  Comprehensive mortgage services available in both English and French for Ottawa's diverse community.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex justify-center mb-8">
-              <a
-                href="https://andreina-ford.mtg-app.com/signup?brokerName=andreina.ford&brokerId=7208e0a3-3590-47b7-a99d-4704d9c75268"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-4 text-lg text-center shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 rounded-lg border-2 font-semibold hover:opacity-80"
-                style={{borderColor: '#264653', color: '#264653', backgroundColor: 'transparent'}}
-              >
-                Apply Now for Pre-Approval!
-              </a>
-            </div>
-            </div>
+          <div className="flex justify-center mb-8">
+            <a
+              href="https://andreina-ford.mtg-app.com/signup?brokerName=andreina.ford&brokerId=7208e0a3-3590-47b7-a99d-4704d9c75268"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 text-lg text-center shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 rounded-lg font-semibold text-white hover:opacity-90"
+              style={{backgroundColor: '#ff8203'}}
+            >
+              Apply Now for Pre-Approval!
+            </a>
           </div>
+          </div>
+        </div>
           
-          {/* Interactive Rate Comparison Table */}
-          <div className="bg-white rounded-2xl shadow-xl p-8 mb-12">
-            <div className="flex justify-between items-center mb-8">
-              <h2 className="text-3xl font-bold" style={{color: '#222831'}}>
-                Live Ottawa Mortgage Rates
-              </h2>
-              <div className="text-sm" style={{color: '#6B7280'}}>
-                Updated: {new Date().toLocaleDateString('en-CA')}
+        {/* Interactive Rate Comparison Table */}
+        <div className="max-w-5xl mx-auto mt-16">
+          <div className="rounded-3xl shadow-2xl backdrop-blur-lg bg-white/20 border-2 border-white/30 p-8">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+              <div>
+                <h2 className="text-2xl font-bold mb-2 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+                  Live Ottawa Mortgage Rates - Updated Daily
+                </h2>
+                {ratesLoading && <p className="text-sm" style={{color: '#264653'}}><span className="text-orange-600">🔄 Updating...</span></p>}
               </div>
             </div>
 
@@ -187,99 +161,107 @@ export default function OttawaMortgageRates() {
               </div>
             ) : (
               <div>
-                {filteredRates.length === 0 ? (
+                {currentRates.length === 0 ? (
                   <div className="text-center py-12">
                     <div className="text-2xl mb-4">⚠️</div>
                     <p className="text-lg font-medium" style={{color: '#264653'}}>Rates temporarily unavailable</p>
                     <p className="text-sm mt-2" style={{color: '#264653'}}>Please contact us directly for current rates</p>
-                    <Button
+                    <button
                       onClick={() => setIsContactFormOpen(true)}
-                      variant="primary"
-                      size="sm"
-                      className="mt-4"
+                      className="mt-4 px-6 py-3 text-sm font-semibold rounded-lg text-white hover:opacity-90 transition-all duration-200"
+                      style={{backgroundColor: '#ff8203'}}
                     >
                       Contact Us
-                    </Button>
+                    </button>
                   </div>
                 ) : (
                   <div className="w-full">
-                    {/* Desktop Table */}
-                    <div className="hidden md:block overflow-x-auto">
-                      <table className="w-full">
+                    <div className="hidden md:block">
+                      <table className="w-full table-fixed">
                         <thead>
-                          <tr className="border-b" style={{borderColor: '#E5E7EB'}}>
-                            <th className="text-left py-4 px-4 font-semibold" style={{color: '#374151'}}>Term</th>
-                            <th className="text-left py-4 px-4 font-semibold" style={{color: '#374151'}}>Rate</th>
-                            <th className="text-left py-4 px-4 font-semibold" style={{color: '#374151'}}>Type</th>
-                            <th className="text-left py-4 px-4 font-semibold" style={{color: '#374151'}}>Best For</th>
-                            <th className="text-left py-4 px-4 font-semibold" style={{color: '#374151'}}>Lender</th>
-                            <th className="text-center py-4 px-4 font-semibold" style={{color: '#374151'}}>Action</th>
+                          <tr className="border-b border-slate-200">
+                            <th className="text-left py-3 px-4 text-sm font-medium w-2/5" style={{color: '#264653'}}>Term</th>
+                            <th className="text-left py-3 px-4 text-sm font-medium w-1/5" style={{color: '#264653'}}>Rate</th>
+                            <th className="text-center py-3 px-4 text-sm font-medium w-2/5" style={{color: '#264653'}}>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                          {filteredRates.slice(0, 8).map((rate, index) => (
-                            <tr key={index} className="border-b hover:bg-gray-50 transition-colors" style={{borderColor: '#F3F4F6'}}>
+                          {filteredRates.filter(rate => rate.term !== "10 Year").map((rate, index) => (
+                            <tr key={index} className="border-b hover:bg-gray-50 transition-all duration-300 hover:transform hover:scale-105" style={{
+                              borderColor: '#2A9D8F',
+                              backgroundColor: rate.popular ? '#F4F4F4' : 'transparent'
+                            }}>
                               <td className="py-4 px-4">
-                                <div className="font-semibold" style={{color: '#1F2937'}}>{rate.term}</div>
+                                <div className="flex items-center gap-3 mb-2">
+                                  <span className="text-lg font-bold" style={{color: '#222831'}}>{rate.term}</span>
+                                  {rate.popular && (
+                                    <span className="text-white px-2 py-1 rounded-full text-xs font-medium" style={{backgroundColor: '#9B5DE5'}}>
+                                      POPULAR
+                                    </span>
+                                  )}
+                                </div>
+                                <div className="text-sm font-medium" style={{color: '#264653'}}>{rate.type}</div>
                               </td>
                               <td className="py-4 px-4">
-                                <div className="text-2xl font-bold" style={{color: '#059669'}}>{rate.rate}%</div>
-                              </td>
-                              <td className="py-4 px-4">
-                                <div className="text-sm font-medium" style={{color: '#6B7280'}}>{rate.type}</div>
-                              </td>
-                              <td className="py-4 px-4">
-                                <div className="text-sm" style={{color: '#6B7280'}}>{rate.bestFor}</div>
-                              </td>
-                              <td className="py-4 px-4">
-                                <div className="font-medium" style={{color: '#374151'}}>{rate.lender}</div>
-                                <div className="text-xs" style={{color: '#9CA3AF'}}>
-                                  Payment: {rate.payment}
+                                <div className="space-y-1">
+                                  <div className="text-xl font-bold" style={{color: '#264653'}}>{rate.rate}</div>
+                                  <div className="text-sm font-bold" style={{color: '#264653'}}>{rate.lender}</div>
                                 </div>
                               </td>
                               <td className="py-4 px-4 text-center">
-                                <Button
+                                <button
                                   onClick={() => {
                                     setSelectedRate(`${rate.term} - ${rate.rate}`);
                                     setShowLockRate(true);
                                     setLockRateSubmitted(false);
                                   }}
-                                  variant="secondary"
-                                  size="sm"
+                                  className="px-4 py-2 text-sm font-semibold rounded-lg border-2 transition-all duration-200 hover:scale-105"
+                                  style={{borderColor: '#ff8203', color: '#ff8203', backgroundColor: 'transparent'}}
                                 >
                                   Lock Rate
-                                </Button>
+                                </button>
                               </td>
                             </tr>
                           ))}
                         </tbody>
                       </table>
                     </div>
-
-                    {/* Mobile Cards */}
+                    
+                    {/* Mobile/Tablet Layout */}
                     <div className="md:hidden space-y-4">
-                      {filteredRates.slice(0, 6).map((rate, index) => (
-                        <div key={index} className="border rounded-lg p-4 hover:shadow-md transition-shadow" style={{borderColor: '#E5E7EB'}}>
+                      {filteredRates.filter(rate => rate.term !== "10 Year").map((rate, index) => (
+                        <div key={index} className="border border-slate-200 rounded-lg p-4 hover:bg-gray-50 transition-all duration-300" style={{
+                          borderColor: '#2A9D8F',
+                          backgroundColor: rate.popular ? '#F4F4F4' : 'white'
+                        }}>
                           <div className="flex justify-between items-start mb-3">
                             <div>
-                              <div className="font-semibold text-lg" style={{color: '#1F2937'}}>{rate.term}</div>
-                              <div className="text-2xl font-bold" style={{color: '#059669'}}>{rate.rate}%</div>
-                              <div className="text-sm" style={{color: '#6B7280'}}>{rate.type} • {rate.bestFor}</div>
+                              <div className="flex items-center gap-2 mb-1">
+                                <span className="text-xl font-bold" style={{color: '#222831'}}>{rate.term}</span>
+                                {rate.popular && (
+                                  <span className="text-white px-2 py-1 rounded-full text-xs font-medium" style={{backgroundColor: '#9B5DE5'}}>
+                                    POPULAR
+                                  </span>
+                                )}
+                              </div>
+                              <div className="text-sm font-medium" style={{color: '#264653'}}>{rate.type}</div>
+                            </div>
+                            <div className="text-right space-y-1">
+                              <div className="text-2xl font-bold" style={{color: '#264653'}}>{rate.rate}</div>
                               <div className="text-sm font-bold" style={{color: '#264653'}}>{rate.lender}</div>
                             </div>
                           </div>
-                          <Button
+                          <button
                             onClick={() => {
                               setSelectedRate(`${rate.term} - ${rate.rate}`);
                               setShowLockRate(true);
                               setLockRateSubmitted(false);
                             }}
-                            variant="secondary"
-                            size="sm"
-                            className="w-full"
+                            className="w-full px-4 py-2 text-sm font-semibold rounded-lg border-2 transition-all duration-200 hover:scale-105"
+                            style={{borderColor: '#ff8203', color: '#ff8203', backgroundColor: 'transparent'}}
                           >
                             Lock Rate
-                          </Button>
+                          </button>
                         </div>
                       ))}
                     </div>
@@ -287,264 +269,362 @@ export default function OttawaMortgageRates() {
                 )}
               </div>
             )}
-          </div>
-
-          {/* Ottawa-Specific Insights */}
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {[
-              {
-                title: "Federal Employee Benefits",
-                description: "Leverage your government job security and benefits for better mortgage terms and rates.",
-                icon: "🏛️"
-              },
-              {
-                title: "Bilingual Documentation", 
-                description: "Complete mortgage process available in French with bilingual documentation and support.",
-                icon: "🇨🇦"
-              },
-              {
-                title: "Capital Region Markets",
-                description: "Expert knowledge of Ottawa, Gatineau, and surrounding communities' real estate trends.",
-                icon: "🏘️"
-              },
-              {
-                title: "Security Clearance Friendly",
-                description: "Streamlined processes that respect security clearance requirements and timelines.",
-                icon: "🔒"
-              }
-            ].map((insight, index) => (
-              <div key={index} className="group p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                <div className="text-3xl mb-4">{insight.icon}</div>
-                <h3 className="font-semibold mb-2 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent group-hover:from-teal-700 group-hover:to-teal-500 transition-all duration-300">{insight.title}</h3>
-                <p className="text-gray-600 group-hover:text-gray-700 transition-colors">{insight.description}</p>
+              
+            <div className="mt-8">
+              <div className="p-5 bg-white/80 backdrop-blur-sm rounded-xl border border-purple-200/30 shadow-sm text-center relative overflow-hidden" style={{boxShadow: '0 0 20px rgba(147, 51, 234, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1)'}}>
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-purple-500/5 animate-pulse"></div>
+                <div className="relative z-10">
+                  <h4 className="font-semibold text-gray-900 mb-2">📈 Rate Alert</h4>
+                  <p className="text-sm text-muted mb-3">
+                    Get notified when Ottawa rates drop below your target.
+                  </p>
+                  <button 
+                    onClick={() => {
+                      setShowRateAlert(true);
+                      setRateAlertSubmitted(false);
+                    }}
+                    className="text-purple hover:text-purple hover:text-opacity-80 font-medium text-sm transition-all duration-200 hover:transform hover:scale-105"
+                  >
+                    Set Rate Alert
+                  </button>
+                </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
 
-      {/* Ottawa Mortgage Calculator Section */}
-      <section className="py-20 bg-gradient-to-br from-yellow-100/25 via-orange-100/20 via-emerald-100/15 to-violet-100/20">
+      {/* Ottawa Market Insights */}
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Floating Insights Card */}
+          <div className="backdrop-blur-lg bg-white/20 border border-white/30 rounded-3xl p-12 shadow-2xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-heading mb-4" style={{color: '#222831'}}>
+                Ottawa Market Insights
+              </h2>
+              <p className="text-lg" style={{color: '#264653'}}>
+                The details that actually affect your mortgage in the capital region
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                {
+                  title: "Average Home Price",
+                  value: "$720,000",
+                  description: "OREB Q4 2024",
+                  icon: "🏠"
+                },
+                {
+                  title: "Down Payment Required",
+                  value: "$36,000",
+                  description: "5% minimum down payment",
+                  icon: "💰"
+                },
+                {
+                  title: "Land Transfer Tax",
+                  value: "Provincial Only",
+                  description: "No municipal LTT",
+                  icon: "📋"
+                },
+                {
+                  title: "Federal Employee Programs",
+                  value: "Available",
+                  description: "Special government programs",
+                  icon: "🏛️"
+                }
+              ].map((insight, index) => (
+                <div key={index} className="backdrop-blur-md bg-white/30 p-6 rounded-2xl border border-white/40 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+                  <div className="text-3xl mb-3">{insight.icon}</div>
+                  <h3 className="font-semibold mb-2 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent group-hover:from-teal-700 group-hover:to-teal-500 transition-all duration-300">{insight.title}</h3>
+                  <div className="text-2xl font-bold mb-1" style={{color: '#264653'}}>{insight.value}</div>
+                  <p className="text-sm" style={{color: '#264653'}}>{insight.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Ottawa Mortgage Calculator */}
+      <section className="py-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4" style={{color: '#222831'}}>
-              Ottawa Mortgage Payment Calculator
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Ottawa Mortgage Calculator
             </h2>
-            <p className="text-xl max-w-3xl mx-auto" style={{color: '#6B7280'}}>
-              Calculate your mortgage payments with Ottawa-specific property values and down payment scenarios.
+            <p className="text-xl text-gray-600">
+              Calculate your monthly payments with current Ottawa rates and official CMHC rules
             </p>
           </div>
-          
           <MortgageCalculator 
-            onOpenContactForm={() => setIsContactFormOpen(true)}
-            currentRates={filteredRates}
+            onOpenContactForm={() => setIsContactFormOpen(true)} 
+            currentRates={currentRates} 
           />
         </div>
       </section>
 
-      {/* Ottawa Home Buying Programs */}
-      <section className="py-20 bg-white">
+      {/* Ottawa Programs */}
+      <section className="py-20 bg-gradient-to-br from-yellow-100/25 via-orange-100/20 via-emerald-100/15 to-violet-100/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4" style={{color: '#222831'}}>
-              Ottawa First-Time Home Buyer Programs
+            <h2 className="text-3xl font-heading text-gray-900 mb-4">
+              Ottawa Home Buying Programs
             </h2>
-            <p className="text-xl max-w-3xl mx-auto mb-8" style={{color: '#6B7280'}}>
-              Special programs available for Ottawa and National Capital Region residents.
+            <p className="text-lg text-gray-600">
+              Government programs that could save you thousands
             </p>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          
+          <div className="grid lg:grid-cols-2 gap-10">
             {[
               {
-                title: "Federal Employee Programs",
-                description: "Exclusive mortgage programs for federal government employees with flexible qualification criteria."
+                program: "First-Time Home Buyer Incentive",
+                description: "Shared equity loan up to 10% of home price",
+                eligibility: "Household income under $120,000"
               },
               {
-                title: "CMHC Shared Equity",
-                description: "Government assistance program offering up to 10% of home purchase price in major centers like Ottawa."
+                program: "Federal Employee Programs",
+                description: "Exclusive mortgage programs for government employees",
+                eligibility: "Federal government employees"
               },
               {
-                title: "First-Time Home Buyer Tax Credit",
-                description: "Up to $750 tax credit for qualifying first-time home buyers in the Ottawa region."
+                program: "Ontario Down Payment Assistance",
+                description: "Interest-free loan up to $40,000",
+                eligibility: "First-time buyers in select areas"
+              },
+              {
+                program: "CMHC Insurance",
+                description: "Low down payment options (5% minimum)",
+                eligibility: "Purchase price under $1.5M"
               }
             ].map((program, index) => (
-              <div key={index} className="group p-6 bg-gray-50 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300">
-                <h3 className="text-lg font-semibold mb-3 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent group-hover:from-teal-700 group-hover:to-teal-500 transition-all duration-300">{program.title}</h3>
-                <p className="text-gray-600 group-hover:text-gray-700 transition-colors text-sm leading-relaxed">{program.description}</p>
+              <div key={index} className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-professional border border-slate-200/30 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{program.program}</h3>
+                <p className="text-gray-600 mb-4">{program.description}</p>
+                <div className="bg-slate-100 p-3 rounded-lg">
+                  <p className="text-sm text-slate-700">
+                    <strong>Eligibility:</strong> {program.eligibility}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
-
-          <div className="text-center bg-blue-50 rounded-2xl p-8">
-            <h3 className="text-2xl font-bold mb-4" style={{color: '#264653'}}>
-              Need Help with Ottawa Programs?
-            </h3>
+          
+          <div className="text-center mt-12">
             <p className="mb-4" style={{color: '#264653'}}>
               Need help navigating Ottawa's programs? Our experts know the details.
             </p>
-            <Button
+            <button
               onClick={() => setIsContactFormOpen(true)}
-              variant="primary"
-              size="lg"
+              className="px-8 py-4 text-lg font-semibold rounded-lg text-white hover:opacity-90 transition-all duration-200"
+              style={{backgroundColor: '#ff8203'}}
             >
               Get Ottawa Program Help
-            </Button>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Floating FAQ Card */}
+          <div className="backdrop-blur-lg bg-white/20 border border-white/30 rounded-3xl p-12 shadow-2xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-heading text-gray-900 mb-4">
+                Ottawa Mortgage FAQs
+              </h2>
+              <p className="text-lg text-gray-600">
+                The questions Ottawa homebuyers actually ask
+              </p>
+            </div>
+          
+          <div className="space-y-6">
+            <div className="backdrop-blur-md bg-white/30 p-8 rounded-2xl border border-white/40 shadow-lg hover:shadow-xl transition-all duration-300 hover:transform hover:scale-105 group">
+              <h3 className="text-lg font-semibold mb-3 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent group-hover:from-teal-700 group-hover:to-teal-500 transition-all duration-300">
+                Are mortgage rates different across Ontario cities?
+              </h3>
+              <p style={{color: '#264653'}}>
+                No, mortgage rates are the same across Ontario. A 5-year fixed rate in Ottawa is the same as in Toronto or Hamilton. The difference is in qualification requirements due to varying home prices and local market conditions.
+              </p>
+            </div>
+            
+            <div className="backdrop-blur-md bg-white/30 p-8 rounded-2xl border border-white/40 shadow-lg hover:shadow-xl transition-all duration-300 hover:transform hover:scale-105 group">
+              <h3 className="text-lg font-semibold mb-3 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent group-hover:from-teal-700 group-hover:to-teal-500 transition-all duration-300">
+                What are the advantages of buying in Ottawa vs Toronto?
+              </h3>
+              <p style={{color: '#264653'}}>
+                Ottawa offers lower home prices (average $720K vs Toronto's $1.16M), no municipal land transfer tax, and stable government employment. You'll qualify for larger mortgages with the same income, and enjoy shorter commute times.
+              </p>
+            </div>
+            
+            <div className="backdrop-blur-md bg-white/30 p-8 rounded-2xl border border-white/40 shadow-lg hover:shadow-xl transition-all duration-300 hover:transform hover:scale-105 group">
+              <h3 className="text-lg font-semibold mb-3 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent group-hover:from-teal-700 group-hover:to-teal-500 transition-all duration-300">
+                Are there special programs for federal employees?
+              </h3>
+              <p className="text-gray-600 mb-3">
+                <strong>Yes, several programs cater to federal employees:</strong> Some lenders offer preferential rates for government employees, extended amortization periods, and flexible qualification criteria that account for pension benefits and job security.
+              </p>
+              <div className="bg-blue-50 border-l-4 border-blue-400 p-3 mt-3">
+                <p className="text-blue-800 text-sm">
+                  <strong>Government Benefits:</strong> Your defined benefit pension, job security, and consistent income can help you qualify for better mortgage terms and rates.
+                </p>
+              </div>
+            </div>
+          </div>
           </div>
         </div>
       </section>
 
       {/* Rate Alert Modal */}
       {showRateAlert && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl p-8 max-w-md w-full">
-            <div className="text-center">
-              <h3 className="text-2xl font-bold mb-4" style={{color: '#222831'}}>
-                Ottawa Rate Alert
-              </h3>
-              {rateAlertSubmitted ? (
-                <div>
-                  <div className="text-6xl mb-4">✅</div>
-                  <p className="text-lg mb-6" style={{color: '#059669'}}>
-                    Alert set! We'll notify you when Ottawa rates drop.
-                  </p>
-                  <button 
-                    onClick={() => setShowRateAlert(false)}
-                    className="w-full btn-primary py-3 text-center"
-                  >
-                    Close
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={(e) => {
-                  e.preventDefault();
-                  setRateAlertSubmitted(true);
-                }}>
-                  <p className="mb-6 text-gray-600">
-                    Get notified when Ottawa mortgage rates drop below your target.
-                  </p>
-                  <div className="space-y-4 mb-6">
-                    <input
-                      type="email"
-                      placeholder="Your email"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                      required
-                    />
-                    <input
-                      type="text"
-                      placeholder="Target rate (e.g. 4.5%)"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                      required
-                    />
-                    <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                      <option>5 Year Fixed</option>
-                      <option>3 Year Fixed</option>
-                      <option>Variable Rate</option>
-                      <option>1 Year Fixed</option>
-                    </select>
-                  </div>
-                  <Button
-                    type="submit"
-                    variant="primary"
-                    size="md"
-                    className="w-full"
-                  >
-                    Set Alert
-                  </Button>
-                  <p className="text-xs text-gray-500 mt-4 text-center">
-                    We'll email you when rates hit your target. Unsubscribe anytime.
-                  </p>
-                </form>
-              )}
-            </div>
-            
-            {!rateAlertSubmitted && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl p-6 max-w-md w-full">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xl font-bold text-gray-900">Set Rate Alert</h3>
               <button 
                 onClick={() => setShowRateAlert(false)}
-                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+                className="text-gray-400 hover:text-gray-600"
               >
                 ✕
               </button>
+            </div>
+            
+            {!rateAlertSubmitted ? (
+              <>
+                <p className="text-gray-600 mb-4">
+                  Get notified when Ottawa mortgage rates drop to your target level.
+                </p>
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  setRateAlertSubmitted(true);
+                }} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Target Rate (%)</label>
+                    <input 
+                      type="number" 
+                      step="0.01" 
+                      placeholder="3.50"
+                      required
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple focus:border-transparent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                    <input 
+                      type="email" 
+                      placeholder="your@email.com"
+                      required
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple focus:border-transparent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Mortgage Type</label>
+                    <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple focus:border-transparent">
+                      <option>5 Year Fixed</option>
+                      <option>5 Year Variable</option>
+                      <option>3 Year Fixed</option>
+                      <option>1 Year Fixed</option>
+                    </select>
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full px-6 py-3 text-md font-semibold rounded-lg text-white hover:opacity-90 transition-all duration-200"
+                    style={{backgroundColor: '#ff8203'}}
+                  >
+                    Set Alert
+                  </button>
+                </form>
+                <p className="text-xs text-gray-500 mt-4 text-center">
+                  We'll email you when rates hit your target. Unsubscribe anytime.
+                </p>
+              </>
+            ) : (
+              <div className="text-center py-8">
+                <div className="text-6xl mb-4">✅</div>
+                <h4 className="text-xl font-bold text-gray-900 mb-2">Message Received!</h4>
+                <p style={{color: '#264653'}}>
+                  We'll notify you when Ottawa rates hit your target.
+                </p>
+              </div>
             )}
           </div>
         </div>
       )}
 
-      {/* Rate Lock Modal */}
+      {/* Lock Rate Modal */}
       {showLockRate && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl p-8 max-w-md w-full">
-            <div className="text-center">
-              <h3 className="text-2xl font-bold mb-4" style={{color: '#222831'}}>
-                Lock Ottawa Rate: {selectedRate}
-              </h3>
-              {lockRateSubmitted ? (
-                <div>
-                  <div className="text-6xl mb-4">🔒</div>
-                  <p className="text-lg mb-6" style={{color: '#059669'}}>
-                    Rate lock request submitted! We'll contact you within 24 hours.
-                  </p>
-                  <button 
-                    onClick={() => setShowLockRate(false)}
-                    className="w-full btn-primary py-3 text-center"
-                  >
-                    Close
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={(e) => {
-                  e.preventDefault();
-                  setLockRateSubmitted(true);
-                }}>
-                  <p className="mb-6 text-gray-600">
-                    Lock in this rate for your Ottawa mortgage application.
-                  </p>
-                  <div className="space-y-4 mb-6">
-                    <input
-                      type="text"
-                      placeholder="Full name"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                      required
-                    />
-                    <input
-                      type="email"
-                      placeholder="Email"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                      required
-                    />
-                    <input
-                      type="tel"
-                      placeholder="Phone"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                      required
-                    />
-                    <input
-                      type="text"
-                      placeholder="Property price (Ottawa)"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                    />
-                  </div>
-                  <Button
-                    type="submit"
-                    variant="primary"
-                    size="md"
-                    className="w-full"
-                  >
-                    Lock This Rate
-                  </Button>
-                  <p className="text-xs text-gray-500 mt-4 text-center">
-                    Rate lock subject to qualification and approval.
-                  </p>
-                </form>
-              )}
-            </div>
-            
-            {!lockRateSubmitted && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl p-6 max-w-md w-full">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xl font-bold text-gray-900">Lock Rate</h3>
               <button 
                 onClick={() => setShowLockRate(false)}
-                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+                className="text-gray-400 hover:text-gray-600"
               >
                 ✕
               </button>
+            </div>
+            
+            {!lockRateSubmitted ? (
+              <>
+                <p className="text-gray-600 mb-2">
+                  Lock in this rate: <strong className="text-purple">{selectedRate}</strong>
+                </p>
+                <p className="text-gray-600 mb-4">
+                  We'll contact you to complete the rate lock process.
+                </p>
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  setLockRateSubmitted(true);
+                }} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    <input 
+                      type="text" 
+                      placeholder="Your full name"
+                      required
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple focus:border-transparent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                    <input 
+                      type="email" 
+                      placeholder="your@email.com"
+                      required
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple focus:border-transparent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number <span className="text-gray-400">(Optional)</span></label>
+                    <input 
+                      type="tel" 
+                      placeholder="(613) 555-0123"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple focus:border-transparent"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full px-6 py-3 text-md font-semibold rounded-lg text-white hover:opacity-90 transition-all duration-200"
+                    style={{backgroundColor: '#ff8203'}}
+                  >
+                    Lock This Rate
+                  </button>
+                </form>
+                <p className="text-xs text-gray-500 mt-4 text-center">
+                  Rate lock subject to qualification and approval.
+                </p>
+              </>
+            ) : (
+              <div className="text-center py-8">
+                <div className="text-6xl mb-4">✅</div>
+                <h4 className="text-xl font-bold text-gray-900 mb-2">Message Received!</h4>
+                <p style={{color: '#264653'}}>
+                  We'll contact you shortly to complete your rate lock.
+                </p>
+              </div>
             )}
           </div>
         </div>
@@ -561,48 +641,48 @@ export default function OttawaMortgageRates() {
       {/* Sticky CTA Bar */}
       <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t shadow-lg z-40 p-4 lg:hidden">
         <div className="flex justify-center">
-          <Button
+          <a
             href="https://andreina-ford.mtg-app.com/signup?brokerName=andreina.ford&brokerId=7208e0a3-3590-47b7-a99d-4704d9c75268"
-            variant="primary"
-            size="md"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-3 text-md font-semibold rounded-lg text-white hover:opacity-90 transition-all duration-200"
+            style={{backgroundColor: '#ff8203'}}
           >
             Apply for Pre-Approval
-          </Button>
+          </a>
         </div>
       </div>
 
-      {/* Final CTA Section */}
-      <section className="py-20" style={{backgroundColor: '#264653'}}>
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold mb-6" style={{color: '#F4F4F4'}}>
-            Ready to Secure Your Ottawa Mortgage?
+      {/* CTA Section */}
+      <section className="py-20 grain-texture mb-20 lg:mb-0 relative overflow-hidden" style={{background: 'linear-gradient(to bottom right, #264653, #2A9D8F)'}}>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent"></div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h2 className="text-3xl font-bold text-white mb-4">
+            Ready for Expert Ottawa Mortgage Help?
           </h2>
           <p className="text-xl mb-8" style={{color: '#F4F4F4'}}>
-            Take advantage of today's competitive rates and 
+            Our tools give you the details. When you're ready for personalized Ottawa guidance, 
             connect with our Licensed Mortgage Agent specializing in the National Capital Region market.
           </p>
           <div className="flex justify-center">
-            <Button
+            <a
               href="https://andreina-ford.mtg-app.com/signup?brokerName=andreina.ford&brokerId=7208e0a3-3590-47b7-a99d-4704d9c75268"
-              variant="secondary"
-              size="lg"
-              className="text-lg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 text-lg font-semibold rounded-lg text-white hover:opacity-90 transition-all duration-200"
+              style={{backgroundColor: '#ff8203'}}
             >
               Apply Now for Pre-Approval!
-            </Button>
+            </a>
           </div>
           <div className="mt-6 flex items-center justify-center space-x-6 text-sm" style={{color: '#F4F4F4'}}>
             <div className="flex items-center space-x-2">
-              <span>✓</span>
-              <span>Licensed Mortgage Agent</span>
+              <span style={{color: '#2A9D8F'}}>✓</span>
+              <span>Licensed in Ontario</span>
             </div>
             <div className="flex items-center space-x-2">
-              <span>✓</span>
+              <span style={{color: '#2A9D8F'}}>✓</span>
               <span>Ottawa Market Expert</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <span>✓</span>
-              <span>Bilingual Service</span>
             </div>
           </div>
         </div>

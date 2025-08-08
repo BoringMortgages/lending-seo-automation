@@ -691,9 +691,11 @@ export default function MississaugaMortgageRates() {
                 className="mx-auto"
               />
             </div>
+            <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center" style={{color: '#264653'}}>
+              Best Mortgage Rates Mississauga 2025 - Compare 35+ Lenders
+            </h1>
             <p className="text-xl mb-8 leading-relaxed max-w-3xl" style={{color: '#264653'}}>
-              Access Mississauga's most competitive mortgage rates, navigate GTA West market dynamics, and unlock 
-              exclusive Mississauga homebuyer programs. <strong>Skip the bank queues, get pre-approved online.</strong>
+              Get Mississauga's lowest mortgage rates from 35+ top lenders. Average home price $925K with no municipal land transfer tax saves $15K vs Toronto. Licensed Ontario mortgage brokers specializing in GTA West market. <strong>Free pre-approval in 2 minutes.</strong>
             </p>
             
             {/* Key Stats */}
@@ -729,9 +731,9 @@ export default function MississaugaMortgageRates() {
             <div className="rounded-3xl shadow-2xl backdrop-blur-lg bg-white/20 border-2 border-white/30 p-8">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
                 <div>
-                  <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
-                    Live Mississauga Mortgage Rates
-                  </h3>
+                  <h2 className="text-2xl font-bold mb-2 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+                    Live Mississauga Mortgage Rates - Updated Daily
+                  </h2>
                   <p className="text-sm" style={{color: '#264653'}}>
                     {lastUpdated ? `Updated ${lastUpdated}` : 'Current mortgage rates for Mississauga'}
                     {rateDataAge && ` (${rateDataAge} old)`}
@@ -862,7 +864,7 @@ export default function MississaugaMortgageRates() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Mississauga Mortgage Calculator
+              Mississauga Mortgage Calculator - CMHC Rules 2025
             </h2>
             <p className="text-xl text-gray-600">
               Calculate your monthly payments with current Mississauga rates and official CMHC rules
@@ -882,7 +884,7 @@ export default function MississaugaMortgageRates() {
           <div className="backdrop-blur-lg bg-white/20 border border-white/30 rounded-3xl p-12 shadow-2xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-heading mb-4" style={{color: '#222831'}}>
-                Mississauga Market Insights
+                Mississauga Real Estate Market Insights 2025
               </h2>
               <p className="text-lg" style={{color: '#264653'}}>
                 The details that actually affect your mortgage
